@@ -11,9 +11,7 @@ import { UserComponent } from './components/user/user.component';
 
 /** variable declaration */
 const approutes = [
-  {path : '' , component : IndexComponent, pathMatch: 'full' },
   {path : 'home' , component : IndexComponent},
-  {path : 'user' , component : UserComponent},
 ];
 
 @NgModule({

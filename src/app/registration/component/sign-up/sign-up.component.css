@@ -1,0 +1,14 @@
+.p-b-239 {
+    padding-bottom: 50px !important;
+}
+
+.login100-form {
+    width: 50%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 50px 65px 0px !important;
+}

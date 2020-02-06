@@ -3,12 +3,18 @@
 }
 
 .login100-form {
-    width: 50%;
+    width: 100% !important;
     display: -webkit-box;
     display: -webkit-flex;
     display: -moz-box;
     display: -ms-flexbox;
     display: flex;
     flex-wrap: wrap;
-    padding: 70px 65px 0px !important;
+    padding: 0 65px 0px !important;
+}
+
+@media (max-width: 576px) {
+    .login100-form {
+        padding: 65px 24px !important;
+    }
 }

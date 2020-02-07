@@ -1,3 +1,4 @@
+import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { AdminGuard } from './Guards/Admin.guard';
 import { AuthGuard } from './Guards/auth.guard';
 import { NgModule } from '@angular/core';
@@ -16,8 +17,7 @@ import { AdminPanelTemplateComponent } from './template/admin-panel-template/adm
 /** Modules */
 import { StoreModule } from '@ngrx/store';
 import { AppRoutingModule } from './app-routing.module';
-import { simpleReducer } from './StateManager/Reducer/SimpleReducer.reducer';
-import { PostReducer } from './StateManager/Reducer/PostReducer.reducer';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 
 @NgModule({
@@ -35,11 +35,13 @@ import { PostReducer } from './StateManager/Reducer/PostReducer.reducer';
     MatSliderModule,
     // Import Customized Modules here
     AppRoutingModule,
+    NgZorroAntdModule,
+    ScrollingModule,
     // Store Modules
-    StoreModule.forRoot({
-      message: simpleReducer,
-      posts: PostReducer,
-    }),
+    // StoreModule.forRoot({
+    //   message: simpleReducer,
+    //   posts: PostReducer,
+    // }),
   ],
   providers: [AuthGuard, AdminGuard],
   bootstrap: [AppComponent] // Default template to be shown here

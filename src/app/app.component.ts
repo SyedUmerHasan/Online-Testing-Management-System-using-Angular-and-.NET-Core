@@ -1,5 +1,7 @@
+import { Router } from '@angular/router';
 
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from './Services/Authentication/authentication.service';
 
 @Component({
   selector: 'app-root',
@@ -10,10 +12,21 @@ export class AppComponent implements OnInit  {
   title = 'TestingManagementSystem';
   login = false;
 
-  constructor() {
+  constructor(
+    private authenticationService: AuthenticationService,
+    private router: Router,
+    ) {
+    if (this.authenticationService.currentUserValue) {
+      this.router.navigateByUrl('/dashboard/admin');
+    }
    }
 
   ngOnInit() {
+    if (this.authenticationService.currentUserValue) {
+      this.login = true;
+    } else {
+      this.login = false;
+    }
   }
 
 }

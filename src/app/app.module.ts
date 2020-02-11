@@ -5,19 +5,21 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatSliderModule } from '@angular/material/slider';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+
 
 /** Component */
 import { AppComponent } from './app.component';
-import { PageNotFoundComponent } from './Modules/page-not-found/page-not-found.component';
+import { PageNotFoundComponent } from './Modules/page-not-found/component/page-not-found.component';
 
 /** Template */
 import { RegistrationTemplateComponent } from './template/registration-template/registration-template.component';
 import { AdminPanelTemplateComponent } from './template/admin-panel-template/admin-panel-template.component';
 
 /** Modules */
-import { StoreModule } from '@ngrx/store';
 import { AppRoutingModule } from './app-routing.module';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -33,8 +35,9 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     BrowserModule,
     BrowserAnimationsModule,
     MatSliderModule,
+    HttpClientModule,
     // Import Customized Modules here
-    AppRoutingModule,
+    AppRoutingModule,NzIconModule,
     NgZorroAntdModule,
     ScrollingModule,
     // Store Modules

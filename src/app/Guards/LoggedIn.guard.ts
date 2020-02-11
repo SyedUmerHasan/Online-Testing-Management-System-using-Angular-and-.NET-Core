@@ -1,15 +1,18 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot , Router } from '@angular/router';
+import { AuthenticationService } from '../Services/Authentication/authentication.service';
 
 @Injectable()
-export class AuthGuard implements CanActivate {
+export class LoggedInGuard implements CanActivate {
 
-  constructor(private routes: Router) {}
+  constructor(
+    private routes: Router,
+    private authenticationService: AuthenticationService) {}
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean {
-      if (localStorage.getItem('user') != null) {
-        return ;
+      if (this.authenticationService.currentUserValue) {
+        return true;
       } else {
         this.routes.navigate(['/login']);
         return false;
@@ -17,6 +20,6 @@ export class AuthGuard implements CanActivate {
   }
 
   checkLoggedIn(): boolean {
-    return (localStorage.getItem('user') != null);
+    return (this.authenticationService.currentUserValue == null);
   }
 }

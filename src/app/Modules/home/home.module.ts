@@ -8,8 +8,8 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
 /** Components */
-import { IndexComponent } from './components/index/index.component';
-import { UserComponent } from './components/user/user.component';
+import { IndexComponent } from './component/index/index.component';
+import { UserComponent } from './component/user/user.component';
 
 /** variable declaration */
 import { AppModuleRoutes, HomeModuleRoutes } from 'src/app/routes/routes';
@@ -21,7 +21,7 @@ import { AppModuleRoutes, HomeModuleRoutes } from 'src/app/routes/routes';
     UserComponent
   ],
   imports: [
-    RouterModule.forChild(HomeModuleRoutes),
+    RouterModule.forRoot(HomeModuleRoutes),
     ReactiveFormsModule,
     CommonModule
   ],

@@ -31,6 +31,6 @@ import { AppModuleRoutes, HomeModuleRoutes } from 'src/app/routes/routes';
     IndexComponent,
     UserComponent
   ],
-  providers: [AuthGuard, AdminGuard,LoggedInGuard],
+  providers: [AuthGuard, AdminGuard, LoggedInGuard],
 })
 export class HomeModule { }

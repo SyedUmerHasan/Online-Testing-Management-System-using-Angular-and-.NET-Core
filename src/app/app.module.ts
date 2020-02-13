@@ -48,7 +48,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatSliderModule,
     HttpClientModule,
     // Import Customized Modules here
-    AppRoutingModule,NzIconModule,
+    AppRoutingModule,
+    NzIconModule,
     NgZorroAntdModule,
     ScrollingModule,
     // Store Modules

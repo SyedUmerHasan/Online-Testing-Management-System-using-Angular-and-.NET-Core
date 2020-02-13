@@ -1,3 +1,4 @@
+import { LoggedInGuard } from './../../Guards/LoggedIn.guard';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthGuard } from './../../Guards/auth.guard';
 import { AdminGuard } from './../../Guards/Admin.guard';
@@ -33,6 +34,6 @@ import { AuthenticationService } from 'src/app/Services/Authentication/authentic
     AdminBodyComponent,
     AdminFooterComponent,
   ],
-  providers: [AuthGuard, AdminGuard, AuthenticationService]
+  providers: [AuthGuard, AdminGuard, AuthenticationService, LoggedInGuard]
 })
 export class AdminModule {}

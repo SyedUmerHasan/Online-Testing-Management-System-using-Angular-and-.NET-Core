@@ -12,10 +12,16 @@ export class LoggedInGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean {
       if (this.authenticationService.currentUserValue) {
-        return true;
-      } else {
-        this.routes.navigate(['/login']);
+        // Go to admin Routes
+        if (this.authenticationService.isAdmin) {
+          this.routes.navigate(['/admin']);
+        } else {
+        // Go to User Routes
+          this.routes.navigate(['/home']);
+        }
         return false;
+      } else {
+        return true;
       }
   }
 

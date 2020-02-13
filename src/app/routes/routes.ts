@@ -1,3 +1,4 @@
+import { AdminBodyComponent } from './../Modules/admin/component/admin-body/admin-body.component';
 import { Routes } from '@angular/router';
 
 /** Guards */
@@ -18,22 +19,39 @@ const HomeModuleRoutes: Routes = [
 
 // Using ForRoot
 const RegistrationModuleRoutes: Routes = [
-  {path : 'login' , component : LoginComponent },
-  {path : 'signup' , component : SignUpComponent},
-  // {path : '**' ,  redirectTo: '/login', pathMatch: 'full'}
+  {
+    path : 'login',
+    component : LoginComponent,
+    canActivate : [LoggedInGuard]
+  },
+  {
+    path : 'signup',
+    component : SignUpComponent,
+    canActivate : [LoggedInGuard]
+  },
 ];
 
 // Using ForChild
 const AppModuleRoutes: Routes = [
   {
-    path : 'dashboard/home',
-    canActivate : [AuthGuard, LoggedInGuard],
-    component : IndexComponent
+    path : 'home',
+    component : IndexComponent,
+    canActivate : [AuthGuard]
   },
   {
-    path : 'dashboard/admin',
-    canActivate : [AdminGuard, LoggedInGuard],
-    component : IndexComponent
+    path : 'home/dashboard',
+    component : IndexComponent,
+    canActivate : [AuthGuard]
+  },
+  {
+    path : 'admin',
+    component : AdminBodyComponent,
+    canActivate : [AdminGuard]
+  },
+  {
+    path : 'admin/umer',
+    component : AdminBodyComponent,
+    canActivate : [AdminGuard]
   },
 ];
 // Using ForChild

@@ -26,8 +26,11 @@ export class LoginComponent implements OnInit {
     private location: Location
     ) {
     // redirect to home if already logged in
-    if (this.authenticationService.currentUserValue) {
-      this.router.navigateByUrl('/dashboard/home');
+    if (this.authenticationService.isAdmin === true) {
+      this.router.navigateByUrl('/admin');
+    }
+    else {
+      this.router.navigateByUrl('/home');
     }
   }
 

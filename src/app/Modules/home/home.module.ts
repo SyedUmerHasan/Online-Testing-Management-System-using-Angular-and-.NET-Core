@@ -1,3 +1,4 @@
+import { LoggedInGuard } from './../../Guards/LoggedIn.guard';
 import { AdminGuard } from './../../Guards/Admin.guard';
 import { AuthGuard } from './../../Guards/auth.guard';
 import { CommonModule } from '@angular/common';
@@ -30,6 +31,6 @@ import { AppModuleRoutes, HomeModuleRoutes } from 'src/app/routes/routes';
     IndexComponent,
     UserComponent
   ],
-  providers: [AuthGuard, AdminGuard],
+  providers: [AuthGuard, AdminGuard,LoggedInGuard],
 })
 export class HomeModule { }

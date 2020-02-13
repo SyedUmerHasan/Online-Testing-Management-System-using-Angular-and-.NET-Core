@@ -16,9 +16,9 @@ export class AppComponent implements OnInit  {
     private authenticationService: AuthenticationService,
     private router: Router,
     ) {
-    if (this.authenticationService.currentUserValue) {
-      this.router.navigateByUrl('/dashboard/admin');
-    }
+      if (!this.authenticationService.currentUserValue) {
+        this.router.navigateByUrl('/login');
+      }
    }
 
   ngOnInit() {

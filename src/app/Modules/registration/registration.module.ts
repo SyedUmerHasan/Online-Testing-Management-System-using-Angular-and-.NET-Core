@@ -1,3 +1,4 @@
+import { LoggedInGuard } from './../../Guards/LoggedIn.guard';
 import { AdminGuard } from './../../Guards/Admin.guard';
 import { AuthGuard } from './../../Guards/auth.guard';
 import { NgModule } from '@angular/core';
@@ -31,7 +32,8 @@ import { RegistrationModuleRoutes } from 'src/app/routes/routes';
     LoginComponent,
     SignUpComponent
   ],
-  providers: [AuthGuard, AdminGuard],
+  providers: [AuthGuard, AdminGuard, LoggedInGuard],
+
 })
 
 export class RegistrationModule { }

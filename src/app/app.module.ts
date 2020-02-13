@@ -1,3 +1,8 @@
+import { LoggedInGuard } from './Guards/LoggedIn.guard';
+import { AdminSidebarComponent } from './Modules/admin/component/admin-sidebar/admin-sidebar.component';
+import { AdminNavbarComponent } from './Modules/admin/component/admin-navbar/admin-navbar.component';
+import { AdminFooterComponent } from './Modules/admin/component/admin-footer/admin-footer.component';
+import { AdminBodyComponent } from './Modules/admin/component/admin-body/admin-body.component';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { AdminGuard } from './Guards/Admin.guard';
 import { AuthGuard } from './Guards/auth.guard';
@@ -29,7 +34,13 @@ import { HttpClientModule } from '@angular/common/http';
     PageNotFoundComponent,
     // Add Templates in the end
     RegistrationTemplateComponent,
-    AdminPanelTemplateComponent
+    AdminPanelTemplateComponent,
+    // Adding Components
+    AdminBodyComponent,
+    AdminFooterComponent,
+    AdminNavbarComponent,
+    AdminSidebarComponent
+
   ],
   imports: [
     BrowserModule,
@@ -46,7 +57,7 @@ import { HttpClientModule } from '@angular/common/http';
     //   posts: PostReducer,
     // }),
   ],
-  providers: [AuthGuard, AdminGuard],
+  providers: [AuthGuard, AdminGuard, LoggedInGuard],
   bootstrap: [AppComponent] // Default template to be shown here
 })
 export class AppModule { }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import 'src/assets/scripts/main.js';
 
 @Component({
   selector: 'app-admin-panel-template',

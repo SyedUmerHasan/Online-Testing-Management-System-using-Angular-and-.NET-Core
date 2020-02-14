@@ -1,3 +1,4 @@
+import { EditCandidateComponent } from './components/edit-candidate/edit-candidate.component';
 import { LoggedInGuard } from './../../Guards/LoggedIn.guard';
 import { AuthenticationService } from './../../Services/Authentication/authentication.service';
 import { AdminGuard } from './../../Guards/Admin.guard';
@@ -9,8 +10,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CreateCandidateComponent } from './components/create-candidate/create-candidate.component';
 import { ListCandidateComponent } from './components/list-candidate/list-candidate.component';
-import { CandidateModuleRoutes } from 'src/app/routes/routes';
-import { EditCandidateComponent } from './components/edit-candidate/edit-candidate.component';
+import { CandidateModuleRoutes, CategoryModuleRoutes } from 'src/app/routes/routes';
 
 
 
@@ -18,11 +18,11 @@ import { EditCandidateComponent } from './components/edit-candidate/edit-candida
   declarations: [
     CreateCandidateComponent,
     ListCandidateComponent,
-    EditCandidateComponent
+    EditCandidateComponent,
   ],
   imports: [
     HttpClientModule,
-    RouterModule.forRoot(CandidateModuleRoutes),
+    RouterModule.forRoot(CategoryModuleRoutes),
     ReactiveFormsModule,
     FormsModule,
     CommonModule

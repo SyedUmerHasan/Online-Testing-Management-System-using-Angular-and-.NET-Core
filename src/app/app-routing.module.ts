@@ -1,3 +1,4 @@
+import { ExperienceLevelModule } from './Modules/experience-level/experience-level.module';
 import { CandidateModule } from './Modules/candidate/candidate.module';
 import { AdminModule } from './Modules/admin/admin.module';
 import { PageNotFoundModule } from './Modules/page-not-found/page-not-found.module';
@@ -9,6 +10,7 @@ import { RouterModule } from '@angular/router';
 
 /** Routes */
 import { RegistrationModule } from './Modules/registration/registration.module';
+import { CategoryModule } from './Modules/category/category.module';
 
 
 @NgModule({
@@ -18,6 +20,8 @@ import { RegistrationModule } from './Modules/registration/registration.module';
     AdminModule,
     // Include all modules here
     CandidateModule,
+    CategoryModule,
+    ExperienceLevelModule,
     // PageNotFoundModule Must be place at the end
     PageNotFoundModule
   ],

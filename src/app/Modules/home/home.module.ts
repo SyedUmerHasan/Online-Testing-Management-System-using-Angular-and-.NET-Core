@@ -13,8 +13,7 @@ import { IndexComponent } from './component/index/index.component';
 import { UserComponent } from './component/user/user.component';
 
 /** variable declaration */
-import { AppModuleRoutes, HomeModuleRoutes } from 'src/app/routes/routes';
-
+import { HomeModuleRoutes } from 'src/app/routes/routes';
 
 @NgModule({
   declarations: [

@@ -1,3 +1,7 @@
+import { EditCandidateComponent } from './../Modules/candidate/components/edit-candidate/edit-candidate.component';
+import { ListCandidateComponent } from './../Modules/candidate/components/list-candidate/list-candidate.component';
+import { CreateCandidateComponent } from './../Modules/candidate/components/create-candidate/create-candidate.component';
+import { DashboardAnalyticsComponent } from './../Modules/admin/component/dashboard-analytics/dashboard-analytics.component';
 import { AdminBodyComponent } from './../Modules/admin/component/admin-body/admin-body.component';
 import { Routes } from '@angular/router';
 
@@ -31,8 +35,8 @@ const RegistrationModuleRoutes: Routes = [
   },
 ];
 
-// Using ForChild
-const AppModuleRoutes: Routes = [
+// Using ForRoot
+const AdminModuleRoutes: Routes = [
   {
     path : 'home',
     component : IndexComponent,
@@ -45,15 +49,55 @@ const AppModuleRoutes: Routes = [
   },
   {
     path : 'admin',
-    component : AdminBodyComponent,
+    component : DashboardAnalyticsComponent,
     canActivate : [AdminGuard]
   },
   {
     path : 'admin/umer',
-    component : AdminBodyComponent,
+    component : DashboardAnalyticsComponent,
     canActivate : [AdminGuard]
   },
 ];
+
+// Using ForRoot
+const UserModuleRoutes: Routes = [
+  {
+    path : 'home',
+    component : IndexComponent,
+    canActivate : [AuthGuard]
+  },
+  {
+    path : 'home/dashboard',
+    component : IndexComponent,
+    canActivate : [AuthGuard]
+  },
+];
+
+// Using ForRoot
+const CandidateModuleRoutes: Routes = [
+  {
+    path : 'admin/candidate',
+    redirectTo : 'admin/candidate/list',
+    canActivate : [AdminGuard],
+    pathMatch: 'full'
+  },
+  {
+    path : 'admin/candidate/list',
+    component : ListCandidateComponent,
+    canActivate : [AdminGuard]
+  },
+  {
+    path : 'admin/candidate/create',
+    component : CreateCandidateComponent,
+    canActivate : [AdminGuard]
+  },
+  {
+    path : 'admin/candidate/edit',
+    component : EditCandidateComponent,
+    canActivate : [AdminGuard]
+  },
+];
+
 // Using ForChild
 const PagenotFoundModuleRoutes: Routes = [
   {path : '**' , component : PageNotFoundComponent },
@@ -62,6 +106,8 @@ const PagenotFoundModuleRoutes: Routes = [
 export {
   RegistrationModuleRoutes,
   HomeModuleRoutes,
-  AppModuleRoutes,
-  PagenotFoundModuleRoutes
+  AdminModuleRoutes,
+  UserModuleRoutes,
+  PagenotFoundModuleRoutes,
+  CandidateModuleRoutes
 };

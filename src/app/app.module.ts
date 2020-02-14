@@ -25,6 +25,7 @@ import { AdminPanelTemplateComponent } from './template/admin-panel-template/adm
 import { AppRoutingModule } from './app-routing.module';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { HttpClientModule } from '@angular/common/http';
+import { PagenotFoundModuleRoutes } from './routes/routes';
 
 
 @NgModule({
@@ -39,7 +40,7 @@ import { HttpClientModule } from '@angular/common/http';
     AdminBodyComponent,
     AdminFooterComponent,
     AdminNavbarComponent,
-    AdminSidebarComponent
+    AdminSidebarComponent,
 
   ],
   imports: [

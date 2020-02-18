@@ -12,7 +12,7 @@ export class AuthGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean {
       if (this.authenticationService.currentUserValue ) {
-        if (this.authenticationService.isAdmin) {
+        if (this.authenticationService.currentUserRole) {
           this.routes.navigate(['/admin']);
           return false;
         }

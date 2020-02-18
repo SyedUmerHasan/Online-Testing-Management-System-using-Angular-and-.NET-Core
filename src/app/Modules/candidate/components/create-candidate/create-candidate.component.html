@@ -69,32 +69,30 @@
         <div class="main-card mb-3 card" style="width: 100% !important;">
             <div class="card-body">
                 <h5 class="card-title">Create Candidate</h5>
-                <form class="">
+                <form class="" [formGroup]="candidateForm" (ngSubmit)="onSubmit()">
                     <div class="form-row">
                         <div class="col-md-6">
-                            <div class="position-relative form-group"><label for="exampleEmail11" class="">First Name</label><input placeholder="Enter First" type="email" class="form-control "></div>
+                            <div class="position-relative form-group"><label>First Name</label><input placeholder="Enter First Name" formControlName="FirstName" type="text" class="form-control "></div>
                         </div>
                         <div class="col-md-6 ">
-                            <div class="position-relative form-group "><label for="examplePassword11 " class=" ">Last Name</label><input placeholder="Enter LastName" type="password" class="form-control "></div>
+                            <div class="position-relative form-group "><label>Last Name</label><input placeholder="Enter Last Name" formControlName="LastName" type="text" class="form-control "></div>
                         </div>
                     </div>
                     <div class="form-row ">
                         <div class="col-md-6 ">
-                            <div class="position-relative form-group "><label for="exampleEmail11 " class=" ">Email</label><input placeholder="Enter Email " type="email " class="form-control "></div>
+                            <div class="position-relative form-group "><label>Email</label><input placeholder="Enter Email " formControlName="email" type="text" class="form-control "></div>
                         </div>
                         <div class="col-md-6 ">
-                            <div class="position-relative form-group "><label for="examplePassword11 " class=" ">Password</label><input placeholder="Enter Password " type="password " class="form-control "></div>
+                            <div class="position-relative form-group "><label>Current Company</label><input placeholder="Enter Password " formControlName="CurrentCompany" type="text" class="form-control "></div>
                         </div>
                     </div>
-                    <div class="position-relative form-group "><label for="exampleAddress " class=" ">CurrentCompany</label><input placeholder="Enter Current Company " type="text " class="form-control "></div>
-
-                    <div class="position-relative form-group "><label for="exampleAddress " class=" ">CurrentCompany</label>
-                        <select class="mb-2 form-control" aria-placeholder="Enter Tech Stack eg MERN/MEAN/LAMP">
-                        <option>Default Select</option>
-                        <option>Default Select</option>
-                        <option>Default Select</option>
-                        <option>Default Select</option>
-                        <option>Default Select</option>
+                    <div class="position-relative form-group "><label>TechStack</label>
+                        <select class="mb-2 form-control" aria-placeholder="Enter Tech Stack eg MERN/MEAN/LAMP" formControlName="TechStack">
+                          <option selected>Please Select</option>
+                          <option>PHP</option>
+                          <option>.NET</option>
+                        <option>QA</option>
+                        <option>Data Science</option>
                       </select>
                     </div>
                     <div class="position-relative form-check "><input type="checkbox" class="form-check-input "><label for="exampleCheck " class="form-check-label ">Check me out</label></div>

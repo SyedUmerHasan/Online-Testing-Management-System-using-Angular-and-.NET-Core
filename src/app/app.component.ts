@@ -12,20 +12,25 @@ export class AppComponent implements OnInit  {
   title = 'TestingManagementSystem';
   login = false;
 
+
   constructor(
     private authenticationService: AuthenticationService,
     private router: Router,
     ) {
-      if (!this.authenticationService.currentUserValue) {
-        this.router.navigateByUrl('/login');
+      if (this.authenticationService.currentUser != null) {
+        if (!this.authenticationService.currentUserRole) {
+          this.router.navigateByUrl('/login');
+        }
       }
    }
 
   ngOnInit() {
-    if (this.authenticationService.currentUserValue) {
-      this.login = true;
-    } else {
-      this.login = false;
+    if (this.authenticationService.currentUser != null) {
+      if (this.authenticationService.currentUser) {
+        this.login = this.authenticationService.currentUserRole;
+      } else {
+        this.login = this.authenticationService.currentUserRole;
+      }
     }
   }
 

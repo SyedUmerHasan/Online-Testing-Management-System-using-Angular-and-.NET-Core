@@ -1,3 +1,4 @@
+import { JwtInterceptor } from './_helper/jwt.interceptor';
 import { LoggedInGuard } from './Guards/LoggedIn.guard';
 import { AdminSidebarComponent } from './Modules/admin/component/admin-sidebar/admin-sidebar.component';
 import { AdminNavbarComponent } from './Modules/admin/component/admin-navbar/admin-navbar.component';
@@ -24,9 +25,8 @@ import { AdminPanelTemplateComponent } from './template/admin-panel-template/adm
 /** Modules */
 import { AppRoutingModule } from './app-routing.module';
 import { ScrollingModule } from '@angular/cdk/scrolling';
-import { HttpClientModule } from '@angular/common/http';
-import { PagenotFoundModuleRoutes } from './routes/routes';
-
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -45,7 +45,8 @@ import { PagenotFoundModuleRoutes } from './routes/routes';
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot(), // ToastrModule added
     MatSliderModule,
     HttpClientModule,
     // Import Customized Modules here
@@ -53,13 +54,16 @@ import { PagenotFoundModuleRoutes } from './routes/routes';
     NzIconModule,
     NgZorroAntdModule,
     ScrollingModule,
+
     // Store Modules
     // StoreModule.forRoot({
     //   message: simpleReducer,
     //   posts: PostReducer,
     // }),
   ],
-  providers: [AuthGuard, AdminGuard, LoggedInGuard],
+  providers: [AuthGuard, AdminGuard, LoggedInGuard,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent] // Default template to be shown here
 })
 export class AppModule { }

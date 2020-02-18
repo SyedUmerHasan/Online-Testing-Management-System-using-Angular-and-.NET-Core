@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
     private location: Location
     ) {
     // redirect to home if already logged in
-    if (this.authenticationService.isAdmin === true) {
+    if (this.authenticationService.currentUserRole && this.authenticationService.currentUser) {
       this.router.navigateByUrl('/admin');
     } else {
       this.router.navigateByUrl('/home');
@@ -59,14 +59,14 @@ export class LoginComponent implements OnInit {
     this.authenticationService.login(this.f.username.value, this.f.password.value)
       .pipe(first())
       .subscribe(
-          data => {
-            console.log('Successfully logged in');
-            console.log('this.returnUrl' , this.returnUrl);
-            window.location.reload();
-          },
-          error => {
-              console.log('Not Successfully logged in');
-              this.loading = false;
-          });
+        data => {
+          console.log('Successfully logged in');
+          console.log('this.returnUrl' , this.returnUrl);
+          window.location.reload();
+        },
+        error => {
+            console.log('Not Successfully logged in', error);
+            this.loading = false;
+        });
   }
 }

@@ -5,9 +5,6 @@ export class AdminController {
   private router: Router;
   private authenticationService: AuthenticationService;
   constructor() {
-        console.log('I am umer ');
-        if (this.authenticationService.currentUserValue) {
-        }
     }
 
 }

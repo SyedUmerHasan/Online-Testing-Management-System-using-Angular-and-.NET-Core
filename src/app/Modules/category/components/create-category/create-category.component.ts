@@ -1,4 +1,8 @@
+import { CategoryService } from './../../../../Services/Category/category.service';
+import { CandidateService } from './../../../../Services/Candidate/candidate.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-create-category',
@@ -6,10 +10,46 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./create-category.component.css']
 })
 export class CreateCategoryComponent implements OnInit {
-
-  constructor() { }
+  categoryForm: FormGroup;
+  showSuccessStatus =  null;
+  showErrorStatus = null;
+  showSuccessMessage =  null;
+  showErrorMessage = null;
+  submitted = false;
+  constructor(private formBuilder: FormBuilder, private categoryService: CategoryService) {}
 
   ngOnInit() {
+    this.categoryForm = this.formBuilder.group({
+      Name: ['', Validators.required]
+    });
   }
 
+  // convenience getter for easy access to form fields
+  get f() { return this.categoryForm.controls; }
+
+  onSubmit() {
+      this.categoryService.createCategory(this.f.Name.value)
+        .pipe(first())
+        .subscribe(
+          data => {
+            console.log('data', data);
+            this.showSuccessStatus =  true;
+            this.showSuccessMessage = 'Category has been added successfully';
+            this.showErrorStatus =  false;
+            this.categoryForm.reset();
+          },
+          error => {
+              this.showSuccessStatus  = false;
+              this.showErrorStatus  = true;
+              this.showErrorMessage = 'Category has not been added, can be seen in browser console';
+              console.log('Error in creating : ', error);
+          });
+
+  }
+  getshowSuccessStatus() {
+    return this.showSuccessStatus;
+  }
+  getshowErrorStatus() {
+    return this.showErrorStatus;
+  }
 }

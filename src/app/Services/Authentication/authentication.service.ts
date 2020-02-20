@@ -12,9 +12,9 @@ import { map } from 'rxjs/operators';
 export class AuthenticationService {
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
-  private  isAdminSubject: BehaviorSubject<boolean>;
+  private  isAdminSubject: BehaviorSubject<string>;
   public isAdmin = true;
-  public isUserAdmin: Observable<boolean>;
+  public isUserAdmin: Observable<string>;
   helper = new JwtHelperService();
 
   constructor(private http: HttpClient) {
@@ -23,38 +23,45 @@ export class AuthenticationService {
     if (localStorage.getItem('role') == null) {
       this.logout();
     }
-    if(localStorage.getItem('currentUser'))
-    {
-      const decodedToken = this.helper.decodeToken(JSON.parse(localStorage.getItem('currentUser'))["jwtToken"]);
-      console.log(decodedToken);
+    if (localStorage.getItem('currentUser')) {
+      const decodedToken = this.helper.decodeToken(JSON.parse(localStorage.getItem('currentUser')).jwttoken);
     }
-
-    this.isAdminSubject = new BehaviorSubject<boolean>(JSON.parse(localStorage.getItem('role')));
+    console.log('localStorage.getItem(\'role\')', localStorage.getItem('role'));
+    try {
+      console.log('JSON.parse(localStorage.getItem(\'role\'))', JSON.parse(JSON.stringify(localStorage.getItem('role'))));
+    } catch(e) {
+        alert(e); // error in the above string (in this case, yes)!
+    }
+    this.isAdminSubject = new BehaviorSubject<string>( JSON.parse(JSON.stringify(localStorage.getItem('role'))) );
     this.isUserAdmin = this.isAdminSubject.asObservable();
   }
 
   public get currentUserValue(): User {
     return this.currentUserSubject.value;
   }
-  public get currentUserRole(): boolean {
+  public get currentUserRole(): string {
     return this.isAdminSubject.value;
   }
 
   login(username: string, password: string) {
     return this.http.post<any>(environment.apiUrl + `user/login`, { username, password })
         .pipe(map(user => {
-          console.log(user);
             // login successful if there's a jwt token in the response
           if (user.success && user.status === 200) {
+                console.log(user);
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem('currentUser', JSON.stringify(user.data));
-                const decodedToken = this.helper.decodeToken(user.data.jwtToken);
+                console.log(user.data);
+                const decodedToken = this.helper.decodeToken(user.data.jwttoken);
                 if (decodedToken.role === 'SuperAdmin') {
-                  localStorage.setItem('role', 'true');
-                  this.isAdminSubject.next(true);
+                  localStorage.setItem('role', 'SuperAdmin');
+                  this.isAdminSubject.next('SuperAdmin');
+                } else if (decodedToken.role === 'candidate') {
+                  localStorage.setItem('role', 'candidate');
+                  this.isAdminSubject.next('candidate');
                 } else {
-                  this.isAdminSubject.next(false);
-                  localStorage.setItem('role', 'false');
+                  this.isAdminSubject.next('user');
+                  localStorage.setItem('role', 'user');
                 }
                 this.currentUserSubject.next(user.data);
             }
@@ -66,6 +73,7 @@ export class AuthenticationService {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
     localStorage.removeItem('admin');
+    localStorage.removeItem('role');
     this.currentUserSubject.next(null);
   }
 

@@ -26,10 +26,12 @@ export class LoginComponent implements OnInit {
     private location: Location
     ) {
     // redirect to home if already logged in
-    if (this.authenticationService.currentUserRole && this.authenticationService.currentUser) {
-      this.router.navigateByUrl('/admin');
-    } else {
-      this.router.navigateByUrl('/home');
+    if (this.authenticationService.currentUser) {
+      if (this.authenticationService.currentUserRole === 'SuperAdmin') {
+        this.router.navigateByUrl('/admin');
+      } else if (this.authenticationService.currentUserRole === 'candidate') {
+        this.router.navigateByUrl('/starttest');
+      }
     }
   }
 

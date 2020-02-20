@@ -69,6 +69,17 @@
         <div class="main-card mb-3 card" style="width: 100% !important;">
             <div class="card-body">
                 <h5 class="card-title">Create Candidate</h5>
+                <div *ngIf="showSuccessStatus && showSuccessStatus == true">
+                    <div class="alert alert-primary" role="alert">
+                        <strong>{{showSuccessMessage}}</strong>
+                    </div>
+                </div>
+
+                <div *ngIf="showErrorStatus && showErrorStatus == true">
+                    <div class="alert alert-danger" role="alert">
+                        <strong>{{showErrorMessage}}</strong>
+                    </div>
+                </div>
                 <form class="" [formGroup]="candidateForm" (ngSubmit)="onSubmit()">
                     <div class="form-row">
                         <div class="col-md-6">
@@ -83,20 +94,26 @@
                             <div class="position-relative form-group "><label>Email</label><input placeholder="Enter Email " formControlName="email" type="text" class="form-control "></div>
                         </div>
                         <div class="col-md-6 ">
-                            <div class="position-relative form-group "><label>Current Company</label><input placeholder="Enter Password " formControlName="CurrentCompany" type="text" class="form-control "></div>
+                            <div class="position-relative form-group "><label>Current Company</label><input placeholder="Enter Current Company Name " formControlName="CurrentCompany" type="text" class="form-control "></div>
                         </div>
                     </div>
-                    <div class="position-relative form-group "><label>TechStack</label>
-                        <select class="mb-2 form-control" aria-placeholder="Enter Tech Stack eg MERN/MEAN/LAMP" formControlName="TechStack">
-                          <option selected>Please Select</option>
-                          <option>PHP</option>
-                          <option>.NET</option>
-                        <option>QA</option>
-                        <option>Data Science</option>
-                      </select>
+                    <div class="position-relative form-group "><label>Category</label>
+                        <select class="mb-2 form-control" aria-placeholder="Enter Tech Stack eg MERN/MEAN/LAMP" formControlName="CategoryId">
+                        <option selected="selected">Please Select</option>
+                          <option *ngFor="let hero of categoryList; let i = index" value={{hero.categoryId}}>{{hero.name}}</option>
+                    </select>
+
+                    </div>
+                    <div class="col-md-6 ">
+                        <div class="position-relative form-group "><label>Experience Level</label>
+                            <select class="mb-2 form-control" aria-placeholder="Enter Tech Stack eg MERN/MEAN/LAMP" formControlName="ExperienceLevelId">
+                          <option selected="selected">Please Select</option>
+                          <option *ngFor="let hero of ExperienceLevelList;" value={{hero.id}}> {{hero.name}}</option>
+                        </select>
+                        </div>
                     </div>
                     <div class="position-relative form-check "><input type="checkbox" class="form-check-input "><label for="exampleCheck " class="form-check-label ">Check me out</label></div>
-                    <button class="mt-2 btn btn-primary ">Sign in</button>
+                    <button class="mt-2 btn btn-primary ">Submit</button>
                 </form>
             </div>
         </div>

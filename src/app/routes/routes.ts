@@ -1,3 +1,6 @@
+import { ListQuestionsComponent } from './../Modules/questions/list-questions/list-questions.component';
+import { CreateQuestionsComponent } from './../Modules/questions/create-questions/create-questions.component';
+import { EditQuestionsComponent } from './../Modules/questions/edit-questions/edit-questions.component';
 import { ListExperienceComponent } from './../Modules/experience-level/components/list-experience/list-experience.component';
 import { CreateExperienceComponent } from './../Modules/experience-level/components/create-experience/create-experience.component';
 import { EditExperienceComponent } from './../Modules/experience-level/components/edit-experience/edit-experience.component';
@@ -130,6 +133,31 @@ const CandidateModuleRoutes: Routes = [
   },
 ];
 
+// Using ForRoot
+const QuestionsModuleRoutes: Routes = [
+  {
+    path : 'admin/questions',
+    redirectTo : 'admin/questions/list',
+    canActivate : [AdminGuard],
+    pathMatch: 'full'
+  },
+  {
+    path : 'admin/questions/list',
+    component : ListQuestionsComponent,
+    canActivate : [AdminGuard]
+  },
+  {
+    path : 'admin/questions/create',
+    component : CreateQuestionsComponent,
+    canActivate : [AdminGuard]
+  },
+  {
+    path : 'admin/questions/edit',
+    component : EditQuestionsComponent,
+    canActivate : [AdminGuard]
+  },
+];
+
 
 // Using ForRoot
 const ExperienceLevelModuleRoutes: Routes = [
@@ -170,5 +198,6 @@ export {
   PagenotFoundModuleRoutes,
   CandidateModuleRoutes,
   CategoryModuleRoutes,
-  ExperienceLevelModuleRoutes
+  ExperienceLevelModuleRoutes,
+  QuestionsModuleRoutes
 };

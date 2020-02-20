@@ -6,18 +6,12 @@ import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class CandidateService {
+export class CategoryService {
 
   constructor(private http: HttpClient) { }
 
-  createCandidate(FirstName, LastName, email, CurrentCompany, CategoryId, ExperienceLevelId) {
-    return this.http.post<any>(environment.apiUrl + `candidate/create`,
-      {FirstName,
-        LastName,
-        email,
-        CurrentCompany,
-        CategoryId,
-        ExperienceLevelId})
+  createCategory(Name) {
+    return this.http.post<any>(environment.apiUrl + `category/create`, { Name })
         .pipe(map(user => {
           console.log(user);
             // login successful if there's a jwt token in the response
@@ -28,8 +22,8 @@ export class CandidateService {
           return user;
         }));
   }
-  getallCandidate() {
-    return this.http.get<any>(environment.apiUrl + `candidate/getall`, {})
+  getallCategory() {
+    return this.http.get<any>(environment.apiUrl + `category/getall`, {})
         .pipe(map(user => {
           console.log(user);
             // login successful if there's a jwt token in the response

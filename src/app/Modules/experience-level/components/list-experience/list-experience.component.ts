@@ -1,4 +1,6 @@
+import { ExperienceLevelService } from './../../../../Services/ExperienceLevel/experience-level.service';
 import { Component, OnInit } from '@angular/core';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-list-experience',
@@ -6,10 +8,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./list-experience.component.css']
 })
 export class ListExperienceComponent implements OnInit {
+  ExperienceLevelList = [];
 
-  constructor() { }
+  constructor(private experienceLevelService: ExperienceLevelService) { }
 
   ngOnInit() {
+    this.experienceLevelService.getallExperienceLevels()
+        .pipe(first())
+        .subscribe(
+          data => {
+            this.ExperienceLevelList =  data.data.experiences;
+            console.log(this.ExperienceLevelList);
+          },
+          error => {
+            this.ExperienceLevelList = [];
+          });
   }
 
 }

@@ -13,7 +13,6 @@ export class AdminGuard implements CanActivate {
     state: RouterStateSnapshot): boolean {
       if (this.authenticationService.currentUser && this.authenticationService.currentUserRole)  {
         if (!this.authenticationService.currentUserRole) {
-          this.routes.navigate(['/admin/umer']);
           return false;
         }
         return true;

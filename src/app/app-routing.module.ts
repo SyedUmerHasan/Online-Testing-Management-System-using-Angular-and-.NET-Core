@@ -1,3 +1,4 @@
+import { QuestionsModule } from './Modules/questions/questions.module';
 import { ExperienceLevelModule } from './Modules/experience-level/experience-level.module';
 import { CandidateModule } from './Modules/candidate/candidate.module';
 import { AdminModule } from './Modules/admin/admin.module';
@@ -22,6 +23,7 @@ import { CategoryModule } from './Modules/category/category.module';
     CandidateModule,
     CategoryModule,
     ExperienceLevelModule,
+    QuestionsModule,
     // PageNotFoundModule Must be place at the end
     PageNotFoundModule
   ],

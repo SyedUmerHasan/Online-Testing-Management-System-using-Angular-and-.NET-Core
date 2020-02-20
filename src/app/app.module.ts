@@ -26,7 +26,6 @@ import { AdminPanelTemplateComponent } from './template/admin-panel-template/adm
 import { AppRoutingModule } from './app-routing.module';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -46,7 +45,7 @@ import { ToastrModule } from 'ngx-toastr';
   imports: [
     BrowserModule,
     BrowserAnimationsModule, // required animations module
-    ToastrModule.forRoot(), // ToastrModule added
+    // ToastrModule.forRoot(), // ToastrModule added
     MatSliderModule,
     HttpClientModule,
     // Import Customized Modules here

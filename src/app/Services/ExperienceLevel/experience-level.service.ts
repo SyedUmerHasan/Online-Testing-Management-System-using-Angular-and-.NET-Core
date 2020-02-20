@@ -6,30 +6,24 @@ import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class CandidateService {
+export class ExperienceLevelService {
 
   constructor(private http: HttpClient) { }
 
-  createCandidate(FirstName, LastName, email, CurrentCompany, CategoryId, ExperienceLevelId) {
-    return this.http.post<any>(environment.apiUrl + `candidate/create`,
-      {FirstName,
-        LastName,
-        email,
-        CurrentCompany,
-        CategoryId,
-        ExperienceLevelId})
+  createExperienceLevel(Name, MinExp, MaxExp) {
+    return this.http.post<any>(environment.apiUrl + `experiencelevel/create`, { Name, MinExp, MaxExp })
         .pipe(map(user => {
           console.log(user);
             // login successful if there's a jwt token in the response
           if (user.success && user.status === 200) {
-                // store user details and jwt token in local storage to keep user logged in between page refreshes
+              // store user details and jwt token in local storage to keep user logged in between page refreshes
               console.log('i am the respoone ' , user);
             }
           return user;
         }));
   }
-  getallCandidate() {
-    return this.http.get<any>(environment.apiUrl + `candidate/getall`, {})
+  getallExperienceLevels() {
+    return this.http.get<any>(environment.apiUrl + `experiencelevel/getall`, {})
         .pipe(map(user => {
           console.log(user);
             // login successful if there's a jwt token in the response

@@ -1,7 +1,7 @@
 import { AuthenticationService } from './../../Services/Authentication/authentication.service';
 import { AdminGuard } from './../../Guards/Admin.guard';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { CandidateModuleRoutes } from 'src/app/routes/routes';
+import { CandidateModuleRoutes, CategoryModuleRoutes } from 'src/app/routes/routes';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
@@ -22,7 +22,7 @@ import { LoggedInGuard } from 'src/app/Guards/LoggedIn.guard';
   ],
   imports: [
     HttpClientModule,
-    RouterModule.forRoot(CandidateModuleRoutes),
+    RouterModule.forRoot(CategoryModuleRoutes),
     ReactiveFormsModule,
     FormsModule,
     CommonModule,

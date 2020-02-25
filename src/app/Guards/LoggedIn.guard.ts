@@ -17,11 +17,15 @@ export class LoggedInGuard implements CanActivate {
           this.routes.navigate(['/admin']);
         } else if (this.authenticationService.currentUserRole === 'candidate') {
           // Go to User Routes
-          this.routes.navigate(['/home']);
+          this.routes.navigate(['/candidate']);
         } else if (this.authenticationService.currentUserRole === 'user') {
         // Go to User Routes
           this.routes.navigate(['/login']);
         }
+        // else {
+        //   this.authenticationService.logout();
+        //   this.routes.navigateByUrl('/');
+        // }
         return false;
       } else {
         return true;

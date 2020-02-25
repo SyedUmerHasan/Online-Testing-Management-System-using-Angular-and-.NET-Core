@@ -1,3 +1,5 @@
+import { TestScreenComponent } from './../Modules/test/components/test-screen/test-screen.component';
+import { StartTestComponent } from './../Modules/test/components/start-test/start-test.component';
 import { ListQuestionsComponent } from './../Modules/questions/list-questions/list-questions.component';
 import { CreateQuestionsComponent } from './../Modules/questions/create-questions/create-questions.component';
 import { EditQuestionsComponent } from './../Modules/questions/edit-questions/edit-questions.component';
@@ -24,6 +26,7 @@ import { LoginComponent } from '../Modules/registration/component/login/login.co
 import { EditCategoryComponent } from '../Modules/category/components/edit-category/edit-category.component';
 import { CreateCategoryComponent } from '../Modules/category/components/create-category/create-category.component';
 import { ListCategoryComponent } from '../Modules/category/components/list-category/list-category.component';
+import { CreateTestComponent } from '../Modules/test/components/create-test/create-test.component';
 
 // Using ForRoot
 const HomeModuleRoutes: Routes = [
@@ -78,6 +81,31 @@ const UserModuleRoutes: Routes = [
   {
     path : 'home/dashboard',
     component : IndexComponent,
+    canActivate : [AuthGuard]
+  },
+];
+
+
+// Using ForRoot
+const TestModuleRoutes: Routes = [
+  {
+    path : 'admin/createtest',
+    component : StartTestComponent,
+    canActivate : [AdminGuard]
+  },
+  {
+    path : 'candidate',
+    component : CreateTestComponent,
+    canActivate : [AuthGuard]
+  },
+  {
+    path : 'createtest',
+    component : CreateTestComponent,
+    canActivate : [AuthGuard]
+  },
+  {
+    path : 'test',
+    component : TestScreenComponent,
     canActivate : [AuthGuard]
   },
 ];
@@ -199,5 +227,6 @@ export {
   CandidateModuleRoutes,
   CategoryModuleRoutes,
   ExperienceLevelModuleRoutes,
-  QuestionsModuleRoutes
+  QuestionsModuleRoutes,
+  TestModuleRoutes
 };

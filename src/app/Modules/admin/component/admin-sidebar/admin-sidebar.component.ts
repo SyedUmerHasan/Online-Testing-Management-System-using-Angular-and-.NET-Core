@@ -1,3 +1,4 @@
+import { AuthenticationService } from './../../../../Services/Authentication/authentication.service';
 import { Component, OnInit } from '@angular/core';
 import 'src/assets/scripts/main.js';
 
@@ -8,9 +9,13 @@ import 'src/assets/scripts/main.js';
 })
 export class AdminSidebarComponent implements OnInit {
 
-  constructor() { }
+  userRole = '';
+
+  constructor(private authenticationService: AuthenticationService) {
+  }
 
   ngOnInit() {
+    this.userRole = this.authenticationService.currentUserRole;
   }
 
 }

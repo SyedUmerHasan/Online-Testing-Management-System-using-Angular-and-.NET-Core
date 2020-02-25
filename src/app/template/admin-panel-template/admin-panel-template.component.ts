@@ -9,9 +9,11 @@ import 'src/assets/scripts/main.js';
 })
 export class AdminPanelTemplateComponent implements OnInit {
   isCollapsed = false;
+  userRole = '';
   constructor(private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
+    this.userRole = this.authenticationService.currentUserRole
   }
   logout(){
     this.authenticationService.logout();

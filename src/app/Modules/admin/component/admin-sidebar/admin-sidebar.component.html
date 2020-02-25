@@ -1,90 +1,107 @@
 <ul class="vertical-nav-menu">
-    <li class="app-sidebar__heading">Admin Panel</li>
-    <li>
-        <a href="#" class="mm-active">
-            <i class="metismenu-icon pe-7s-rocket"></i> Dashboard
-        </a>
-    </li>
-    <li class="app-sidebar__heading">Create, Update & Delete</li>
-    <li>
-        <a href="/admin/candidate/">
-            <i class="metismenu-icon pe-7s-car"></i> Candidates
-            <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
-        </a>
-        <ul>
-            <li>
-                <a href="/admin/candidate/create">
-                    <i class="metismenu-icon">
+    <div *ngIf="userRole == 'SuperAdmin'">
+        <li class="app-sidebar__heading">Admin Panel</li>
+        <li>
+            <a href="#" class="mm-active">
+                <i class="metismenu-icon pe-7s-rocket"></i> Dashboard
+            </a>
+        </li>
+        <li class="app-sidebar__heading">Create, Update & Delete</li>
+        <li>
+            <a href="/admin/candidate/">
+                <i class="metismenu-icon pe-7s-car"></i> Candidates
+                <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+            </a>
+            <ul>
+                <li>
+                    <a href="/admin/candidate/create">
+                        <i class="metismenu-icon">
                   </i>Create Candidate
-                </a>
-            </li>
-            <li>
-                <a href="/admin/candidate/list">
-                    <i class="metismenu-icon">
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin/candidate/list">
+                        <i class="metismenu-icon">
                   </i>List Candidate
-                </a>
-            </li>
-        </ul>
-    </li>
-    <li>
-        <a href="/admin/category/">
-            <i class="metismenu-icon pe-7s-car"></i> Category
-            <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
-        </a>
-        <ul>
-            <li>
-                <a href="/admin/category/create">
-                    <i class="metismenu-icon">
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="/admin/category/">
+                <i class="metismenu-icon pe-7s-car"></i> Category
+                <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+            </a>
+            <ul>
+                <li>
+                    <a href="/admin/category/create">
+                        <i class="metismenu-icon">
               </i>Create Category
-                </a>
-            </li>
-            <li>
-                <a href="/admin/category/list">
-                    <i class="metismenu-icon">
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin/category/list">
+                        <i class="metismenu-icon">
               </i>List Category
-                </a>
-            </li>
-        </ul>
-    </li>
-    <li>
-        <a href="/admin/questions/">
-            <i class="metismenu-icon pe-7s-car"></i> Questions
-            <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
-        </a>
-        <ul>
-            <li>
-                <a href="/admin/questions/create">
-                    <i class="metismenu-icon">
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="/admin/questions/">
+                <i class="metismenu-icon pe-7s-car"></i> Questions
+                <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+            </a>
+            <ul>
+                <li>
+                    <a href="/admin/questions/create">
+                        <i class="metismenu-icon">
             </i>Create Questions
-                </a>
-            </li>
-            <li>
-                <a href="/admin/questions/list">
-                    <i class="metismenu-icon">
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin/questions/list">
+                        <i class="metismenu-icon">
             </i>List Questions
-                </a>
-            </li>
-        </ul>
-    </li>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="/admin/experiencelevel/list">
+                <i class="metismenu-icon pe-7s-car"></i> Experience Level
+                <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+            </a>
+            <ul>
+                <li>
+                    <a href="/admin/experiencelevel/create">
+                        <i class="metismenu-icon">
+            </i>Create Experience Level
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin/experiencelevel/list">
+                        <i class="metismenu-icon">
+            </i>List Experience Level
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="/admin/createtest">
+                <i class="metismenu-icon pe-7s-car"></i> Create Test
+                <i class="metismenu-state-icon caret-left"></i>
+            </a>
+        </li>
+    </div>
+    <div *ngIf="userRole == 'candidate'">
+        <li class="app-sidebar__heading">Dashboard</li>
+        <li>
+            <a href="/candidate/">
+                <i class="metismenu-icon pe-7s-car"></i> Candidate Test
+                <i class="metismenu-state-icon caret-left"></i>
+            </a>
+        </li>
 
-    <li>
-        <a href="/admin/experiencelevel/list">
-            <i class="metismenu-icon pe-7s-car"></i> Experience Level
-            <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
-        </a>
-        <ul>
-            <li>
-                <a href="/admin/experiencelevel/create">
-                    <i class="metismenu-icon">
-              </i>Create Experience Level
-                </a>
-            </li>
-            <li>
-                <a href="/admin/experiencelevel/list">
-                    <i class="metismenu-icon">
-              </i>List Experience Level
-                </a>
-            </li>
-        </ul>
-    </li>
+    </div>
 </ul>

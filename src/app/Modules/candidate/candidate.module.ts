@@ -22,7 +22,7 @@ import { CandidateModuleRoutes, CategoryModuleRoutes } from 'src/app/routes/rout
   ],
   imports: [
     HttpClientModule,
-    RouterModule.forRoot(CategoryModuleRoutes),
+    RouterModule.forRoot(CandidateModuleRoutes),
     ReactiveFormsModule,
     FormsModule,
     CommonModule

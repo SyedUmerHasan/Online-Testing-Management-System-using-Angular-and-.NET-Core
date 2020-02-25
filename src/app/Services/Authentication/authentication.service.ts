@@ -10,9 +10,9 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private currentUserSubject: BehaviorSubject<User>;
+  public currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
-  private  isAdminSubject: BehaviorSubject<string>;
+  public  isAdminSubject: BehaviorSubject<string>;
   public isAdmin = true;
   public isUserAdmin: Observable<string>;
   helper = new JwtHelperService();
@@ -29,7 +29,7 @@ export class AuthenticationService {
     console.log('localStorage.getItem(\'role\')', localStorage.getItem('role'));
     try {
       console.log('JSON.parse(localStorage.getItem(\'role\'))', JSON.parse(JSON.stringify(localStorage.getItem('role'))));
-    } catch(e) {
+    } catch (e) {
         alert(e); // error in the above string (in this case, yes)!
     }
     this.isAdminSubject = new BehaviorSubject<string>( JSON.parse(JSON.stringify(localStorage.getItem('role'))) );

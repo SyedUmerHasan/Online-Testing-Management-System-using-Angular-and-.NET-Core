@@ -1,32 +1,12 @@
 <!-- else SuperAdminnotShow -->
-<div *ngIf="login === 'SuperAdmin';else SuperAdminnotShow " style="height: 100%;">
-    SuperAdmin is working
+<div *ngIf="login === 'SuperAdmin'" style="height: 100%;">
     <app-admin-panel-template></app-admin-panel-template>
 </div>
 <!-- else candidatenotShow -->
-<div *ngIf="login === 'candidate'; else candidatenotShow" style="height: 100%;">
-    candidate is working
-    <app-registration-template></app-registration-template>
+<div *ngIf="login === 'candidate'" style="height: 100%;">
+    <app-admin-panel-template></app-admin-panel-template>
 </div>
 <!-- else notShow -->
-<div *ngIf="login === 'user';else notShow" style="height: 100%;">
+<div *ngIf="login === 'user'" style="height: 100%;">
     <app-registration-template></app-registration-template>
 </div>
-
-<ng-template #notShow>
-    <p>
-        Show this only if "show" is not true
-    </p>
-</ng-template>
-
-<ng-template #candidatenotShow>
-    <p>
-        Show this only if "show" is not true
-    </p>
-</ng-template>
-
-<ng-template #SuperAdminnotShow>
-    <p>
-        Show this only if "show" is not true
-    </p>
-</ng-template>

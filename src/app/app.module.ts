@@ -1,3 +1,4 @@
+import { QuestionsService } from 'src/app/Services/Questions/questions.service';
 import { JwtInterceptor } from './_helper/jwt.interceptor';
 import { LoggedInGuard } from './Guards/LoggedIn.guard';
 import { AdminSidebarComponent } from './Modules/admin/component/admin-sidebar/admin-sidebar.component';
@@ -60,7 +61,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
     //   posts: PostReducer,
     // }),
   ],
-  providers: [AuthGuard, AdminGuard, LoggedInGuard,
+  providers: [AuthGuard, AdminGuard, LoggedInGuard,QuestionsService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
   ],
   bootstrap: [AppComponent] // Default template to be shown here

@@ -2,12 +2,15 @@ import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { QuestionsService } from 'src/app/Services/Questions/questions.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { AuthenticationService } from './../../../../Services/Authentication/authentication.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { first } from 'rxjs/operators';
 import { stringify } from 'querystring';
 import { Router, NavigationStart } from '@angular/router';
 import { Subscription } from 'rxjs';
-
+import {
+  Directive,
+  HostBinding,
+  HostListener } from '@angular/core';
 @Component({
   selector: 'app-test-screen',
   templateUrl: './test-screen.component.html',
@@ -51,19 +54,48 @@ export class TestScreenComponent implements OnInit {
    // Initialization of Form builder
    ngOnInit() {
       console.log('ngOnInit() called');
-      var unloadEvent = function (e) {
-        var confirmationMessage = "BVhai mat ja please?";
+      // window.addEventListener("beforeunload", (e) => {
+      //     var confirmationMessage = "Are you sure you want to exit your exam?";
+      //     this.authenticationService.logout();
 
-        (e || window.event).returnValue = confirmationMessage; //Gecko + IE
-        return confirmationMessage; //Webkit, Safari, Chrome etc.
-    };
-      window.addEventListener("beforeunload", unloadEvent);
+      //     (e || window.event).returnValue = confirmationMessage; //Gecko + IE
+      //     return confirmationMessage; //Webkit, Safari, Chrome etc.
+      // });
       this.questionsAnswerForm = this.formBuilder.group({
         option : new FormArray([])
       });
 
    }
+   @HostListener('window:beforeunload',  ['$event'])
+    beforeUnload(e): string {
+            // assume that we are dirty
+      const dialogText = 'Dialog text here';
+      e.returnValue = dialogText;
+      return dialogText;
+    }
+    @HostListener('window:unload',  ['$event'])
+    onunload(e) {
+      this.submitTest();
+      this.authenticationService.logout();
+      return 'Logout';
+    }
 
+    @HostListener('window:blur',  ['$event'])
+    onblur(e) {
+      let txt = '';
+      let r = confirm('Alert your test is going to be cancelled in 5 seconds');
+      if (r === true) {
+        this.submitTest();
+        this.authenticationService.logout();
+        this.router.navigate(['/']);
+        txt = 'You pressed OK!';
+      } else {
+        txt = 'You pressed Cancel!';
+      }
+      // this.authenticationService.logout();
+      return 'Logout';
+    }
+    // window.addEventListener("blur", function(event) { document.getElementById('message').innerHTML = "window lost focus"; }, false);
    // Loading Module
    getLoading() {
       return this.isLoading;

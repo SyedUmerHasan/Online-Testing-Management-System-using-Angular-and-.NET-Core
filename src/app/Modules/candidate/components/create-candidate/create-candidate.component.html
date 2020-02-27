@@ -97,22 +97,24 @@
                             <div class="position-relative form-group "><label>Current Company</label><input placeholder="Enter Current Company Name " formControlName="CurrentCompany" type="text" class="form-control "></div>
                         </div>
                     </div>
-                    <div class="position-relative form-group "><label>Category</label>
-                        <select class="mb-2 form-control" aria-placeholder="Enter Tech Stack eg MERN/MEAN/LAMP" formControlName="CategoryId">
-                        <option selected="selected">Please Select</option>
-                          <option *ngFor="let hero of categoryList; let i = index" value={{hero.categoryId}}>{{hero.name}}</option>
-                    </select>
-
-                    </div>
-                    <div class="col-md-6 ">
-                        <div class="position-relative form-group "><label>Experience Level</label>
-                            <select class="mb-2 form-control" aria-placeholder="Enter Tech Stack eg MERN/MEAN/LAMP" formControlName="ExperienceLevelId">
-                          <option selected="selected">Please Select</option>
-                          <option *ngFor="let hero of ExperienceLevelList;" value={{hero.id}}> {{hero.name}}</option>
-                        </select>
+                    <div class="form-row">
+                        <div class="col-md-6 ">
+                            <div class="position-relative form-group "><label>Experience Level</label>
+                                <select class="mb-2 form-control" aria-placeholder="Enter Tech Stack eg MERN/MEAN/LAMP" formControlName="ExperienceLevelId">
+                                  <option>Please Select</option>
+                                  <option *ngFor="let hero of ExperienceLevelList;" value={{hero.id}}> {{hero.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="position-relative form-group "><label>Category</label>
+                                <select class="mb-2 form-control" aria-placeholder="Enter Tech Stack eg MERN/MEAN/LAMP" formControlName="CategoryId">
+                                  <option>Please Select</option>
+                                  <option *ngFor="let hero of categoryList; let i = index" value={{hero.categoryId}}>{{hero.name}}</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
-                    <div class="position-relative form-check "><input type="checkbox" class="form-check-input "><label for="exampleCheck " class="form-check-label ">Check me out</label></div>
                     <button class="mt-2 btn btn-primary ">Submit</button>
                 </form>
             </div>

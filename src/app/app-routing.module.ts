@@ -1,3 +1,4 @@
+import { UserModule } from './Modules/user/user.module';
 import { TestModule } from './Modules/test/test.module';
 import { QuestionsModule } from './Modules/questions/questions.module';
 import { ExperienceLevelModule } from './Modules/experience-level/experience-level.module';
@@ -6,7 +7,6 @@ import { AdminModule } from './Modules/admin/admin.module';
 import { PageNotFoundModule } from './Modules/page-not-found/page-not-found.module';
 import { AdminGuard } from './Guards/Admin.guard';
 import { AuthGuard } from './Guards/auth.guard';
-import { HomeModule } from './Modules/home/home.module';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
@@ -17,7 +17,6 @@ import { CategoryModule } from './Modules/category/category.module';
 
 @NgModule({
   imports: [
-    HomeModule,
     RegistrationModule,
     AdminModule,
     // Include all modules here
@@ -26,6 +25,7 @@ import { CategoryModule } from './Modules/category/category.module';
     ExperienceLevelModule,
     QuestionsModule,
     TestModule,
+    UserModule,
     // PageNotFoundModule Must be place at the end
     PageNotFoundModule
   ],

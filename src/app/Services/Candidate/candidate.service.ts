@@ -55,5 +55,18 @@ export class CandidateService {
           return user;
         }));
   }
+  deletecandidate(candidateId){
+    return this.http.delete<any>(environment.apiUrl +
+      `candidate/delete?id=${candidateId}` , {})
+       .pipe(map(user => {
+         console.log(user);
+           // login successful if there's a jwt token in the response
+         if (user.success && user.status === 200) {
+               // store user details and jwt token in local storage to keep user logged in between page refreshes
+             console.log('i am the respoone ' , user);
+           }
+         return user;
+       }));
+  }
 
 }

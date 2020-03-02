@@ -10,15 +10,17 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 /** Components */
 import { LoginComponent } from './component/login/login.component';
-import { SignUpComponent } from './component/sign-up/sign-up.component';
 
 /** Routes */
 import { RegistrationModuleRoutes } from 'src/app/routes/routes';
+import { ForgotPasswordComponent } from './component/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './component/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
     LoginComponent,
-    SignUpComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     RouterModule.forRoot(RegistrationModuleRoutes),
@@ -29,7 +31,6 @@ import { RegistrationModuleRoutes } from 'src/app/routes/routes';
   exports : [
     RouterModule,
     LoginComponent,
-    SignUpComponent
   ],
   providers: [AuthGuard, AdminGuard, LoggedInGuard],
 

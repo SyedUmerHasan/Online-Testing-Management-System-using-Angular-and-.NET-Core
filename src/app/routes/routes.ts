@@ -1,3 +1,5 @@
+import { ForgotPasswordComponent } from './../Modules/registration/component/forgot-password/forgot-password.component';
+import { ListTestComponent } from './../Modules/test/components/list-test/list-test.component';
 import { CreateUserComponent } from './../Modules/user/components/create-user/create-user.component';
 import { TestScreenComponent } from './../Modules/test/components/test-screen/test-screen.component';
 import { StartTestComponent } from './../Modules/test/components/start-test/start-test.component';
@@ -21,8 +23,6 @@ import { LoggedInGuard } from './../Guards/LoggedIn.guard';
 
 /** Components */
 import { PageNotFoundComponent } from './../Modules/page-not-found/component/page-not-found.component';
-import { IndexComponent } from '../Modules/home/component/index/index.component';
-import { SignUpComponent } from '../Modules/registration/component/sign-up/sign-up.component';
 import { LoginComponent } from '../Modules/registration/component/login/login.component';
 import { EditCategoryComponent } from '../Modules/category/components/edit-category/edit-category.component';
 import { CreateCategoryComponent } from '../Modules/category/components/create-category/create-category.component';
@@ -36,40 +36,25 @@ const HomeModuleRoutes: Routes = [
 
 // Using ForRoot
 const RegistrationModuleRoutes: Routes = [
+  { path: '',   redirectTo: '/login', pathMatch: 'full' },
   {
     path : 'login',
     component : LoginComponent,
     canActivate : [LoggedInGuard]
   },
   {
-    path : 'signup',
-    component : SignUpComponent,
-    canActivate : [LoggedInGuard]
-  },
+    path : 'forgotpassword',
+    component : ForgotPasswordComponent,
+  }
 ];
 
 // Using ForRoot
 const AdminModuleRoutes: Routes = [
-  // {
-  //   path : 'home',
-  //   component : IndexComponent,
-  //   canActivate : [AuthGuard]
-  // },
-  // {
-  //   path : 'home/dashboard',
-  //   component : IndexComponent,
-  //   canActivate : [AuthGuard]
-  // },
   {
     path : 'admin',
     component : DashboardAnalyticsComponent,
     canActivate : [AdminGuard]
-  },
-  {
-    path : 'admin/umer',
-    component : DashboardAnalyticsComponent,
-    canActivate : [AdminGuard]
-  },
+  }
 ];
 
 // Using ForRoot
@@ -78,7 +63,13 @@ const UserModuleRoutes: Routes = [
     path : 'admin/createuser',
     component : CreateUserComponent,
     canActivate : [AdminGuard]
-  }
+  },
+  {
+    path : 'admin/listresults',
+    component : ListTestComponent,
+    canActivate : [AdminGuard]
+  },
+
 ];
 
 

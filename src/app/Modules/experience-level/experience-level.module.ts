@@ -1,3 +1,5 @@
+import { BrowserModule } from '@angular/platform-browser';
+import { DataTablesModule } from 'angular-datatables';
 import { ListExperienceComponent } from './components/list-experience/list-experience.component';
 import { AuthGuard } from './../../Guards/auth.guard';
 import { AdminGuard } from './../../Guards/Admin.guard';
@@ -22,10 +24,13 @@ import { EditExperienceComponent } from './components/edit-experience/edit-exper
   ],
   imports: [
     HttpClientModule,
+    BrowserModule,
     RouterModule.forRoot(ExperienceLevelModuleRoutes),
     ReactiveFormsModule,
     FormsModule,
     CommonModule,
+    DataTablesModule
+
   ],
   exports: [
     RouterModule,

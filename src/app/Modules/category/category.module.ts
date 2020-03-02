@@ -1,3 +1,5 @@
+import { BrowserModule } from '@angular/platform-browser';
+import { DataTablesModule } from 'angular-datatables';
 import { AuthenticationService } from './../../Services/Authentication/authentication.service';
 import { AdminGuard } from './../../Guards/Admin.guard';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -22,10 +24,12 @@ import { LoggedInGuard } from 'src/app/Guards/LoggedIn.guard';
   ],
   imports: [
     HttpClientModule,
+    BrowserModule,
     RouterModule.forRoot(CategoryModuleRoutes),
     ReactiveFormsModule,
     FormsModule,
     CommonModule,
+    DataTablesModule
   ],
   exports: [
     RouterModule,

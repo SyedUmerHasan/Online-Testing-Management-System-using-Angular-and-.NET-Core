@@ -77,5 +77,17 @@ export class AuthenticationService {
     this.currentUserSubject.next(null);
   }
 
+  forgotpassword(email){
+    // http://localhost:55377/user/forgotpassword
+    return this.http.post<any>(environment.apiUrl + `user/forgotpassword`, { email})
+    .pipe(map(user => {
+        // login successful if there's a jwt token in the response
+      if (user.success && user.status === 200) {
+            console.log(user);
+        }
+      return user;
+    }));
+  }
+
 }
 

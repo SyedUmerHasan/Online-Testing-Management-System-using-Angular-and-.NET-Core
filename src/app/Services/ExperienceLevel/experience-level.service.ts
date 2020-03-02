@@ -34,4 +34,21 @@ export class ExperienceLevelService {
           return user;
         }));
   }
+
+
+
+  deleteExperienceLevel(experienceLevelId) {
+    console.log('TCL: CategoryService -> deletecategory -> categoryId', experienceLevelId);
+    return this.http.delete<any>(environment.apiUrl +
+      `experiencelevel/delete?id=${experienceLevelId}` , {})
+       .pipe(map(user => {
+         console.log(user);
+           // login successful if there's a jwt token in the response
+         if (user.success && user.status === 200) {
+               // store user details and jwt token in local storage to keep user logged in between page refreshes
+             console.log('i am the respoone ' , user);
+           }
+         return user;
+       }));
+  }
 }

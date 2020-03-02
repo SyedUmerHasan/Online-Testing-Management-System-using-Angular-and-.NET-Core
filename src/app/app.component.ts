@@ -17,11 +17,11 @@ export class AppComponent implements OnInit  {
     private authenticationService: AuthenticationService,
     private router: Router,
     ) {
-      if (this.authenticationService.currentUser != null) {
-        if (!this.authenticationService.currentUserRole) {
-          this.router.navigateByUrl('/login');
-        }
-      }
+      // if (this.authenticationService.currentUser != null) {
+      //   if (!this.authenticationService.currentUserRole) {
+      //     this.router.navigateByUrl('/login');
+      //   }
+      // }
    }
 
   ngOnInit() {

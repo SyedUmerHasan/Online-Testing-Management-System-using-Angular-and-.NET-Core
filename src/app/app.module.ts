@@ -27,6 +27,7 @@ import { AdminPanelTemplateComponent } from './template/admin-panel-template/adm
 import { AppRoutingModule } from './app-routing.module';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { DataTablesModule } from 'angular-datatables';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
   imports: [
     BrowserModule,
     BrowserAnimationsModule, // required animations module
+    DataTablesModule.forRoot(),
     // ToastrModule.forRoot(), // ToastrModule added
     MatSliderModule,
     HttpClientModule,
@@ -54,7 +56,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
     NzIconModule,
     NgZorroAntdModule,
     ScrollingModule,
-
     // Store Modules
     // StoreModule.forRoot({
     //   message: simpleReducer,

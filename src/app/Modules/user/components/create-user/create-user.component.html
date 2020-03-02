@@ -1,1 +1,64 @@
-<p>create-user works!</p>
+<div class="app-main__inner" style="height: 100% !important;">
+
+
+    <div class="row" style="width: 100% !important;">
+        <div class="main-card mb-3 card" style="width: 100% !important;">
+            <div class="card-body">
+                <h5 class="card-title">Create User</h5>
+                <div *ngIf="showSuccessStatus && showSuccessStatus == true">
+                    <div class="alert alert-primary" role="alert">
+                        <strong>{{showSuccessMessage}}</strong>
+                    </div>
+                </div>
+
+                <div *ngIf="showErrorStatus && showErrorStatus == true">
+                    <div class="alert alert-danger" role="alert">
+                        <strong>{{showErrorMessage}}</strong>
+                    </div>
+                </div>
+                <form class="" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <div class="position-relative form-group"><label>User Name</label><input placeholder="Enter User Name" formControlName="userName" type="text" class="form-control "></div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="position-relative form-group"><label>Email Address</label><input placeholder="Enter Email Address" formControlName="email" type="text" class="form-control "></div>
+                        </div>
+                    </div>
+
+                    <div class="form-row ">
+
+                        <div class="col-md-6">
+                            <div class="position-relative form-group">
+                                <label>Password</label>
+                                <input placeholder="Enter Password" formControlName="password" type="password" class="form-control ">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 ">
+                            <div class="position-relative form-group "><label>Role Name </label>
+                                <select class="mb-2 form-control" formControlName="roleId">
+                                <option *ngFor="let hero of roleList;" value={{hero.id}}> {{hero.name}}</option>
+                              </select>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <div class="position-relative form-group "><label>Category Name</label>
+                                <select class="mb-2 form-control" aria-placeholder="Enter category Name" formControlName="categoryId">
+                                  <option *ngFor="let item of categoryList" value={{item.categoryId}}>{{item.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="mt-2 btn btn-primary ">Submit</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>

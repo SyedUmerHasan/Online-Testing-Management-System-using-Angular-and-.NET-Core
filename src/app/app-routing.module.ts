@@ -13,10 +13,12 @@ import { RouterModule } from '@angular/router';
 /** Routes */
 import { RegistrationModule } from './Modules/registration/registration.module';
 import { CategoryModule } from './Modules/category/category.module';
+import { HomeModuleRoutes } from './routes/routes';
 
 
 @NgModule({
   imports: [
+    RouterModule.forRoot(HomeModuleRoutes),
     RegistrationModule,
     AdminModule,
     // Include all modules here

@@ -34,4 +34,19 @@ export class CategoryService {
           return user;
         }));
   }
+
+  deletecategory(categoryId){
+    console.log("TCL: CategoryService -> deletecategory -> categoryId", categoryId)
+    return this.http.delete<any>(environment.apiUrl +
+      `category/delete?id=${categoryId}` , {})
+       .pipe(map(user => {
+         console.log(user);
+           // login successful if there's a jwt token in the response
+         if (user.success && user.status === 200) {
+               // store user details and jwt token in local storage to keep user logged in between page refreshes
+             console.log('i am the respoone ' , user);
+           }
+         return user;
+       }));
+  }
 }

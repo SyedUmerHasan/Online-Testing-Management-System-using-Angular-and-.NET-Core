@@ -1,3 +1,5 @@
+import { DataTablesModule } from 'angular-datatables';
+import { UserService } from './../../Services/Users/user.service';
 import { QuestionsService } from 'src/app/Services/Questions/questions.service';
 import { LoggedInGuard } from 'src/app/Guards/LoggedIn.guard';
 import { AuthGuard } from 'src/app/Guards/auth.guard';
@@ -10,6 +12,7 @@ import { AdminGuard } from 'src/app/Guards/Admin.guard';
 import { RegistrationModuleRoutes, TestModuleRoutes } from 'src/app/routes/routes';
 import { StartTestComponent } from './components/start-test/start-test.component';
 import { TestScreenComponent } from './components/test-screen/test-screen.component';
+import { ListTestComponent } from './components/list-test/list-test.component';
 
 
 
@@ -17,18 +20,20 @@ import { TestScreenComponent } from './components/test-screen/test-screen.compon
   declarations: [
     CreateTestComponent,
     StartTestComponent,
-    TestScreenComponent
+    TestScreenComponent,
+    ListTestComponent
   ],
   imports: [
     RouterModule.forRoot(TestModuleRoutes),
     ReactiveFormsModule,
     FormsModule,
-    CommonModule
+    CommonModule,
+    DataTablesModule
   ],
   exports : [
     RouterModule,
   ],
-  providers: [AuthGuard, AdminGuard, LoggedInGuard, QuestionsService],
+  providers: [AuthGuard, AdminGuard, LoggedInGuard, QuestionsService, UserService],
 
 })
 export class TestModule { }

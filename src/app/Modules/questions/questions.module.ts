@@ -1,3 +1,5 @@
+import { BrowserModule } from '@angular/platform-browser';
+import { DataTablesModule } from 'angular-datatables';
 import { CandidateModuleRoutes, QuestionsModuleRoutes } from 'src/app/routes/routes';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -16,10 +18,12 @@ import { ListQuestionsComponent } from './list-questions/list-questions.componen
   declarations: [CreateQuestionsComponent, EditQuestionsComponent, ListQuestionsComponent],
   imports: [
     HttpClientModule,
+    BrowserModule,
     RouterModule.forRoot(QuestionsModuleRoutes),
     ReactiveFormsModule,
     FormsModule,
     CommonModule,
+    DataTablesModule
   ],
   exports: [
     RouterModule,

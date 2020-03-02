@@ -36,11 +36,9 @@ export class QuestionsService {
   }
   // Description, Marks, CategoryId, ExperienceLevelId
   deleteQuestion(id) {
-    console.log('id', id);
-    return this.http.delete<any>(environment.apiUrl + `question/delete`, id )
+    return this.http.delete<any>(environment.apiUrl + `question/delete?id=${id}`, )
         .pipe(map(user => {
           console.log('Question Deleted' , user);
-            // login successful if there's a jwt token in the response
           return user;
         }));
   }

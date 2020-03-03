@@ -15,10 +15,25 @@
                         <strong>{{showErrorMessage}}</strong>
                     </div>
                 </div>
-                <form class="" [formGroup]="candidateForm" (ngSubmit)="onSubmit()">
+                <form class="" [formGroup]="startTestForm" (ngSubmit)="onSubmit()">
+                    
+                    
+                    <div *ngIf="startTestForm.controls['CandidateId'].invalid && (startTestForm.controls['CandidateId'].dirty || startTestForm.controls['CandidateId'].touched)" class="alert alert-danger">
+                        <div *ngIf="startTestForm.controls['CandidateId'].errors.required">
+                            CandidateId is required.
+                      </div>
+                    </div>
+                    
+                    <div *ngIf="startTestForm.controls['numberOfQuestion'].invalid && (startTestForm.controls['numberOfQuestion'].dirty || startTestForm.controls['numberOfQuestion'].touched)" class="alert alert-danger">
+                        <div *ngIf="startTestForm.controls['numberOfQuestion'].errors.required">
+                            Number Of Question is required.
+                      </div>
+                    </div>
+
                     <div class="form-row">
                         <div class="col-md-6 ">
-                            <div class="position-relative form-group"><label for="exampleEmail11" class="">Candidate Name</label>
+                            <div class="position-relative form-group">
+                                <label for="exampleEmail11" class="">Candidate Name</label>
                                 <select class="mb-2 form-control" aria-placeholder="Enter Tech Stack eg MERN/MEAN/LAMP" formControlName="CandidateId">
                               <option value=""> Please Select</option>
                               <option *ngFor="let hero of candidateList; let i = index" value={{hero.candidateId}}>{{hero.firstName  + hero.lastName }}</option>
@@ -28,6 +43,7 @@
                         <div class="col-md-6 ">
                             <div class="position-relative form-group"><label for="exampleEmail11" class="">Number of Questions</label>
                                 <select class="mb-2 form-control" aria-placeholder="Enter Tech Stack eg MERN/MEAN/LAMP" formControlName="numberOfQuestion">
+                                <option value="">Please Select</option>
                                 <option> 5</option>
                                 <option> 7</option>
                                 <option> 9</option>

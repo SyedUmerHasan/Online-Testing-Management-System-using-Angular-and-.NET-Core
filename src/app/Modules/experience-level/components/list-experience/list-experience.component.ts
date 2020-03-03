@@ -32,7 +32,6 @@ export class ListExperienceComponent implements OnInit, OnDestroy {
         .subscribe(
           data => {
             this.ExperienceLevelList =  data.data.experiences;
-            console.log(this.ExperienceLevelList);
             this.users$ = data;
             this.dtTrigger.next();
           },
@@ -53,12 +52,10 @@ export class ListExperienceComponent implements OnInit, OnDestroy {
   }
 
   onDelete(experiencelevelId){
-    console.log(experiencelevelId);
     this.experienceLevelService.deleteExperienceLevel(experiencelevelId)
         .pipe(first())
         .subscribe(
           data => {
-            console.log(data);
             if(data.data.experience == true){
               console.log("success");
 
@@ -71,7 +68,6 @@ export class ListExperienceComponent implements OnInit, OnDestroy {
               });
 
             } else {
-              console.log("Fail");
               this.showSuccessStatus  = false;
               this.showErrorStatus  = true;
               this.showErrorMessage = 'ExperienceLevel has not been deleted, can be seen in browser console';

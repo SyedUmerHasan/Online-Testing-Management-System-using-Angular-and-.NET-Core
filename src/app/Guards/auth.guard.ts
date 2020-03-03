@@ -29,18 +29,15 @@ export class AuthGuard implements CanActivate {
           // this.authenticationService.logout();
           // localStorage.setItem('flag', 'true');
           // window.location.reload();
-          console.log('Auth Guard SuperAdmin');
           return false;
         } else if (this.authenticationService.currentUserRole === 'candidate') {
           // Go to User Routes
-          console.log('Auth Guard candidate');
           return true;
         } else if (this.authenticationService.currentUserRole === 'user') {
           // Go to User Routes
           // localStorage.setItem('flag', 'true');
           // this.authenticationService.logout();
           // window.location.reload();
-          console.log('Auth Guard user');
           return false;
         }
         return true;

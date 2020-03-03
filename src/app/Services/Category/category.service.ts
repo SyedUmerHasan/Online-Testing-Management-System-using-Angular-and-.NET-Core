@@ -13,7 +13,6 @@ export class CategoryService {
   createCategory(Name) {
     return this.http.post<any>(environment.apiUrl + `category/create`, { Name })
         .pipe(map(user => {
-          console.log(user);
             // login successful if there's a jwt token in the response
           if (user.success && user.status === 200) {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
@@ -25,7 +24,6 @@ export class CategoryService {
   getallCategory() {
     return this.http.get<any>(environment.apiUrl + `category/getall`, {})
         .pipe(map(user => {
-          console.log(user);
             // login successful if there's a jwt token in the response
           if (user.success && user.status === 200) {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
@@ -35,16 +33,36 @@ export class CategoryService {
         }));
   }
 
-  deletecategory(categoryId){
-    console.log("TCL: CategoryService -> deletecategory -> categoryId", categoryId)
+  deletecategory(categoryId) {
     return this.http.delete<any>(environment.apiUrl +
       `category/delete?id=${categoryId}` , {})
        .pipe(map(user => {
-         console.log(user);
            // login successful if there's a jwt token in the response
          if (user.success && user.status === 200) {
                // store user details and jwt token in local storage to keep user logged in between page refreshes
              console.log('i am the respoone ' , user);
+           }
+         return user;
+       }));
+  }
+
+  updateCategory(candidateId, Name) {
+    return this.http.put<any>(environment.apiUrl + `category/update?id=${candidateId}` , {Name})
+       .pipe(map(user => {
+           // login successful if there's a jwt token in the response
+         if (user.success && user.status === 200) {
+               // store user details and jwt token in local storage to keep user logged in between page refreshes
+           }
+         return user;
+       }));
+  }
+
+  getCategoryById(categoryId) {
+    return this.http.get<any>(environment.apiUrl + `category/getbyid?id=${categoryId}` , {})
+       .pipe(map(user => {
+           // login successful if there's a jwt token in the response
+         if (user.success && user.status === 200) {
+               // store user details and jwt token in local storage to keep user logged in between page refreshes
            }
          return user;
        }));

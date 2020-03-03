@@ -34,7 +34,6 @@ export class ListCandidateComponent implements OnInit {
         .subscribe(
           data => {
             this.candidateList =  data.data['candidates']
-            console.log(this.candidateList);
             this.users$ = data;
             this.dtTrigger.next();
           },
@@ -48,12 +47,10 @@ export class ListCandidateComponent implements OnInit {
         };
   }
   onDelete(CandidateId){
-    console.log(CandidateId);
     this.candidateService.deletecandidate(CandidateId)
         .pipe(first())
         .subscribe(
           data => {
-            console.log(data);
             if(data.data.candidate == true){
               console.log("success");
 
@@ -66,7 +63,6 @@ export class ListCandidateComponent implements OnInit {
               });
 
             } else {
-              console.log("Fail");
               this.showSuccessStatus  = false;
               this.showErrorStatus  = true;
               this.showErrorMessage = 'Candidate has not been deleted, can be seen in browser console';

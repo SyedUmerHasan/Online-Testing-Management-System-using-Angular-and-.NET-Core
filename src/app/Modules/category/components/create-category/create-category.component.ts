@@ -16,6 +16,8 @@ export class CreateCategoryComponent implements OnInit {
   showSuccessMessage =  null;
   showErrorMessage = null;
   submitted = false;
+  formError = false;
+
   constructor(private formBuilder: FormBuilder, private categoryService: CategoryService) {}
 
   ngOnInit() {
@@ -28,11 +30,18 @@ export class CreateCategoryComponent implements OnInit {
   get f() { return this.categoryForm.controls; }
 
   onSubmit() {
-      this.categoryService.createCategory(this.f.Name.value)
+
+    this.submitted = true;
+
+    // stop here if form is invalid
+    if (this.categoryForm.invalid) {
+      this.formError = true;
+      return;
+    }
+    this.categoryService.createCategory(this.f.Name.value)
         .pipe(first())
         .subscribe(
           data => {
-            console.log('data', data);
             this.showSuccessStatus =  true;
             this.showSuccessMessage = 'Category has been added successfully';
             this.showErrorStatus =  false;
@@ -51,5 +60,8 @@ export class CreateCategoryComponent implements OnInit {
   }
   getshowErrorStatus() {
     return this.showErrorStatus;
+  }
+  geterror() {
+    return this.formError;
   }
 }

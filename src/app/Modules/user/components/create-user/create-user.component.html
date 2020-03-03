@@ -17,6 +17,41 @@
                     </div>
                 </div>
                 <form class="" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+                    
+                    
+                    <div *ngIf="userForm.controls['userName'].invalid && (userForm.controls['userName'].dirty || userForm.controls['userName'].touched)" class="alert alert-danger">
+                        <div *ngIf="userForm.controls['userName'].errors.required">
+                            User Name is required.
+                      </div>
+                    </div>
+                    
+                    <div *ngIf="userForm.controls['email'].invalid && (userForm.controls['email'].dirty || userForm.controls['email'].touched)" class="alert alert-danger">
+                        <div *ngIf="userForm.controls['email'].errors.required">
+                            Email Address is required.
+                      </div>
+                    </div>
+
+
+                                        
+                    <div *ngIf="userForm.controls['password'].invalid && (userForm.controls['password'].dirty || userForm.controls['password'].touched)" class="alert alert-danger">
+                        <div *ngIf="userForm.controls['password'].errors.required">
+                            Password is required.
+                      </div>
+                    </div>
+                    
+                    <div *ngIf="userForm.controls['roleId'].invalid && (userForm.controls['roleId'].dirty || userForm.controls['roleId'].touched)" class="alert alert-danger">
+                        <div *ngIf="userForm.controls['roleId'].errors.required">
+                            Role Name is required.
+                      </div>
+                    </div>
+
+                    <div *ngIf="geterror()" class="invalid-feedback">
+                        <div>User Name is required.</div>
+                        <div>Email Address is required.</div>
+                        <div>Password is required.</div>
+                        <div> Role Name is required.</div>
+                    </div>
+
                     <div class="form-row">
                         <div class="col-md-6">
                             <div class="position-relative form-group"><label>User Name</label><input placeholder="Enter User Name" formControlName="userName" type="text" class="form-control "></div>
@@ -38,11 +73,11 @@
                         <div class="col-md-6 ">
                             <div class="position-relative form-group "><label>Role Name </label>
                                 <select class="mb-2 form-control" formControlName="roleId">
-                                <option *ngFor="let hero of roleList;" value={{hero.id}}> {{hero.name}}</option>
-                              </select>
+                                    <option value="">Please Select</option>
+                                    <option *ngFor="let hero of roleList;" value={{hero.id}}> {{hero.name}}</option>
+                                </select>
                             </div>
                         </div>
-
 
                     </div>
 
@@ -50,6 +85,7 @@
                         <div class="col-md-6">
                             <div class="position-relative form-group "><label>Category Name</label>
                                 <select class="mb-2 form-control" aria-placeholder="Enter category Name" formControlName="categoryId">
+                                    <option value="" selected >Please Select</option>
                                   <option *ngFor="let item of categoryList" value={{item.categoryId}}>{{item.name}}</option>
                                 </select>
                             </div>

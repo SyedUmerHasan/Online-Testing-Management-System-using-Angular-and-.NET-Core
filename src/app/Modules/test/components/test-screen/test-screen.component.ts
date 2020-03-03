@@ -53,14 +53,6 @@ export class TestScreenComponent implements OnInit {
    }
    // Initialization of Form builder
    ngOnInit() {
-      console.log('ngOnInit() called');
-      // window.addEventListener("beforeunload", (e) => {
-      //     var confirmationMessage = "Are you sure you want to exit your exam?";
-      //     this.authenticationService.logout();
-
-      //     (e || window.event).returnValue = confirmationMessage; //Gecko + IE
-      //     return confirmationMessage; //Webkit, Safari, Chrome etc.
-      // });
       this.questionsAnswerForm = this.formBuilder.group({
         option : new FormArray([])
       });
@@ -68,7 +60,6 @@ export class TestScreenComponent implements OnInit {
    }
    @HostListener('window:beforeunload',  ['$event'])
     beforeUnload(e): string {
-            // assume that we are dirty
       const dialogText = 'Dialog text here';
       e.returnValue = dialogText;
       return dialogText;
@@ -95,7 +86,6 @@ export class TestScreenComponent implements OnInit {
       // this.authenticationService.logout();
       return 'Logout';
     }
-    // window.addEventListener("blur", function(event) { document.getElementById('message').innerHTML = "window lost focus"; }, false);
    // Loading Module
    getLoading() {
       return this.isLoading;
@@ -157,7 +147,6 @@ export class TestScreenComponent implements OnInit {
         .subscribe(
           data => {
             if (data.success && data.status === 200) {
-              console.log('i am the respoone ' , data);
               if (this.questionCount + 1 >= this.questionList.length ) {
                 this.submitTest();
               } else {
@@ -165,9 +154,6 @@ export class TestScreenComponent implements OnInit {
                 this.updateQuestion();
                 this.updateOptionList();
                 this.changeButtonText();
-                console.log('TCL: TestScreenComponent -> onSubmit -> this.questionList.length', this.questionList.length);
-                console.log('TCL: TestScreenComponent -> onSubmit -> this.questionCount', this.questionCount);
-
               }
 
             }
@@ -183,7 +169,6 @@ export class TestScreenComponent implements OnInit {
         .subscribe(
           data => {
             if (data.success && data.status === 200) {
-              console.log('i am the respoone ' , data);
               if (this.questionCount + 1 >= this.questionList.length ) {
                 this.submitTest();
               } else {
@@ -191,9 +176,6 @@ export class TestScreenComponent implements OnInit {
                 this.updateQuestion();
                 this.updateOptionList();
                 this.changeButtonText();
-                console.log('TCL: TestScreenComponent -> onSubmit -> this.questionList.length', this.questionList.length);
-                console.log('TCL: TestScreenComponent -> onSubmit -> this.questionCount', this.questionCount);
-
               }
 
             }

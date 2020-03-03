@@ -26,12 +26,6 @@ export class AuthenticationService {
     if (localStorage.getItem('currentUser')) {
       const decodedToken = this.helper.decodeToken(JSON.parse(localStorage.getItem('currentUser')).jwttoken);
     }
-    console.log('localStorage.getItem(\'role\')', localStorage.getItem('role'));
-    try {
-      console.log('JSON.parse(localStorage.getItem(\'role\'))', JSON.parse(JSON.stringify(localStorage.getItem('role'))));
-    } catch (e) {
-        alert(e); // error in the above string (in this case, yes)!
-    }
     this.isAdminSubject = new BehaviorSubject<string>( JSON.parse(JSON.stringify(localStorage.getItem('role'))) );
     this.isUserAdmin = this.isAdminSubject.asObservable();
   }
@@ -48,10 +42,8 @@ export class AuthenticationService {
         .pipe(map(user => {
             // login successful if there's a jwt token in the response
           if (user.success && user.status === 200) {
-                console.log(user);
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem('currentUser', JSON.stringify(user.data));
-                console.log(user.data);
                 const decodedToken = this.helper.decodeToken(user.data.jwttoken);
                 if (decodedToken.role === 'SuperAdmin') {
                   localStorage.setItem('role', 'SuperAdmin');
@@ -77,13 +69,23 @@ export class AuthenticationService {
     this.currentUserSubject.next(null);
   }
 
-  forgotpassword(email){
+  forgotpassword(email) {
     // http://localhost:55377/user/forgotpassword
     return this.http.post<any>(environment.apiUrl + `user/forgotpassword`, { email})
     .pipe(map(user => {
         // login successful if there's a jwt token in the response
       if (user.success && user.status === 200) {
-            console.log(user);
+        }
+      return user;
+    }));
+  }
+
+  resetpassword(email, token, password, confirmPassword) {
+    // http://localhost:55377/user/forgotpassword
+    return this.http.post<any>(environment.apiUrl + `resetpassword?email=${email}&token=${token}`, {password, confirmPassword} )
+    .pipe(map(user => {
+        // login successful if there's a jwt token in the response
+      if (user.success && user.status === 200) {
         }
       return user;
     }));

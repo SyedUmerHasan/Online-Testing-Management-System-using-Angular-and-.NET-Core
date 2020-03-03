@@ -11,13 +11,14 @@ import { first } from 'rxjs/operators';
   styleUrls: ['./start-test.component.css']
 })
 export class StartTestComponent implements OnInit {
-  candidateForm: FormGroup;
+  startTestForm: FormGroup;
   showSuccessStatus =  null;
   showErrorStatus = null;
   showSuccessMessage =  null;
   showErrorMessage = null;
   submitted = false;
   helper = new JwtHelperService();
+  formError = false;
 
 
   constructor(private formBuilder: FormBuilder,
@@ -26,7 +27,7 @@ export class StartTestComponent implements OnInit {
   candidateList = [];
 
   ngOnInit() {
-    this.candidateForm = this.formBuilder.group({
+    this.startTestForm = this.formBuilder.group({
       CandidateId: ['', Validators.required],
       numberOfQuestion: ['', Validators.required],
     });
@@ -35,7 +36,6 @@ export class StartTestComponent implements OnInit {
         .subscribe(
           data => {
             this.candidateList =  data.data.candidates;
-            console.log(this.candidateList);
           },
           error => {
             this.candidateList = [];
@@ -43,24 +43,26 @@ export class StartTestComponent implements OnInit {
 
   }
   // convenience getter for easy access to form fields
-  get f() { return this.candidateForm.controls; }
+  get f() { return this.startTestForm.controls; }
 
   onSubmit() {
+    // stop here if form is invalid
+    if (this.startTestForm.invalid) {
+      this.formError = true;
+      return;
+    }
       // Description, Marks, CategoryId, ExperienceLevelId
-      console.log(this.candidateForm.value.CandidateId, this.candidateForm.value.numberOfQuestion);
-      this.candidateService.createtest(this.candidateForm.value.CandidateId, this.candidateForm.value.numberOfQuestion)
+    this.candidateService.createtest(this.startTestForm.value.CandidateId, this.startTestForm.value.numberOfQuestion)
         .pipe(first())
         .subscribe(
           data => {
             if (data.success && data.status === 200) {
-              console.log('data', data);
               this.showSuccessStatus =  true;
               this.showSuccessMessage = 'Candidate Test has been added successfully';
               this.showErrorStatus =  false;
-              this.candidateForm.reset();
+              this.startTestForm.reset();
               this.authenticationService.logout();
               localStorage.setItem('currentUser', JSON.stringify(data.data.jwttoken));
-              console.log(data.data);
               const decodedToken = this.helper.decodeToken(data.data.jwttoken);
               if (decodedToken.role === 'SuperAdmin') {
                   localStorage.setItem('role', 'SuperAdmin');
@@ -94,6 +96,10 @@ export class StartTestComponent implements OnInit {
   }
   getshowErrorStatus() {
     return this.showErrorStatus;
+  }
+
+  geterror() {
+    return this.formError;
   }
 
 }

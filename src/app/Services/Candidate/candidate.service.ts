@@ -19,7 +19,6 @@ export class CandidateService {
         CategoryId,
         ExperienceLevelId})
         .pipe(map(user => {
-          console.log(user);
             // login successful if there's a jwt token in the response
           if (user.success && user.status === 200) {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
@@ -31,7 +30,6 @@ export class CandidateService {
   getallCandidate() {
     return this.http.get<any>(environment.apiUrl + `candidate/getall`, {})
         .pipe(map(user => {
-          console.log(user);
             // login successful if there's a jwt token in the response
           if (user.success && user.status === 200) {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
@@ -42,11 +40,9 @@ export class CandidateService {
   }
 
   createtest(CandidateId, numberOfQuestion) {
-    console.log('CandidateId : ' +  CandidateId , 'numberOfQuestion' + numberOfQuestion);
     return this.http.post<any>(environment.apiUrl +
        `candidate/generatetest?candidateId=${CandidateId}&numberOfQuestion=${numberOfQuestion}` , {})
         .pipe(map(user => {
-          console.log(user);
             // login successful if there's a jwt token in the response
           if (user.success && user.status === 200) {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
@@ -55,15 +51,38 @@ export class CandidateService {
           return user;
         }));
   }
-  deletecandidate(candidateId){
+  deletecandidate(candidateId) {
     return this.http.delete<any>(environment.apiUrl +
       `candidate/delete?id=${candidateId}` , {})
        .pipe(map(user => {
-         console.log(user);
            // login successful if there's a jwt token in the response
          if (user.success && user.status === 200) {
                // store user details and jwt token in local storage to keep user logged in between page refreshes
-             console.log('i am the respoone ' , user);
+           }
+         return user;
+       }));
+  }
+
+  updateCandidate(candidateId,FirstName, LastName, email, CurrentCompany, CategoryId, ExperienceLevelId) {
+    return this.http.put<any>(environment.apiUrl + `candidate/update?id=${candidateId}` ,
+     {FirstName, LastName, email, CurrentCompany, CategoryId, ExperienceLevelId})
+       .pipe(map(user => {
+           // login successful if there's a jwt token in the response
+         if (user.success && user.status === 200) {
+               // store user details and jwt token in local storage to keep user logged in between page refreshes
+           }
+         return user;
+       }));
+  }
+
+
+
+  getCandidateById(candidateId) {
+    return this.http.get<any>(environment.apiUrl + `candidate/getbyid?id=${candidateId}` , {})
+       .pipe(map(user => {
+           // login successful if there's a jwt token in the response
+         if (user.success && user.status === 200) {
+               // store user details and jwt token in local storage to keep user logged in between page refreshes
            }
          return user;
        }));

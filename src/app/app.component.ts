@@ -25,7 +25,6 @@ export class AppComponent implements OnInit  {
    }
 
   ngOnInit() {
-    console.log('this.authenticationService.currentUser', this.authenticationService.currentUser);
     if (this.authenticationService.currentUser != null) {
       // currentUser exist in Localstorage
       if (this.authenticationService.currentUserRole === 'SuperAdmin') {
@@ -35,7 +34,6 @@ export class AppComponent implements OnInit  {
       } else {
         this.login = 'user';
       }
-      console.log('this.login', this.login);
       // currentUser exist in Localstorage
       // this.login = this.authenticationService.currentUserRole;
     } else {

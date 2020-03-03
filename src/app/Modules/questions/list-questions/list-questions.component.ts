@@ -30,7 +30,6 @@ export class ListQuestionsComponent implements OnInit {
         .subscribe(
           data => {
             this.QuestionsList =  data.data.questions;
-            console.log(this.QuestionsList);
             this.users$ = data;
             this.dtTrigger.next();
           },
@@ -39,12 +38,10 @@ export class ListQuestionsComponent implements OnInit {
           });
   }
   delete(questionId) {
-    console.log(questionId);
     this.questionsService.deleteQuestion(questionId)
         .pipe(first())
         .subscribe(
           data => {
-            console.log(data);
             if (data.data.question === true) {
               console.log('Data Deleted');
               this.showSuccessStatus =  true;
@@ -52,11 +49,9 @@ export class ListQuestionsComponent implements OnInit {
               this.showErrorStatus =  false;
 
               this.QuestionsList = this.QuestionsList.filter((value) => {
-                console.log('TCL: ListQuestionsComponent -> delete -> value.questionId', value.questionId);
                 return value.questionId !== questionId;
               });
             } else {
-              console.log('Data deletion Error');
               this.showSuccessStatus  = false;
               this.showErrorStatus  = true;
               this.showErrorMessage = 'Questions has not been deleted, can be seen in browser console';

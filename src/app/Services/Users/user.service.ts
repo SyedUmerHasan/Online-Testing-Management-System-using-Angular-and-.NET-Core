@@ -14,7 +14,6 @@ export class UserService {
   listcategory() {
     return this.http.get<any>(environment.apiUrl + `category/getall`, { })
         .pipe(map(user => {
-          console.log(user);
             // login successful if there's a jwt token in the response
           if (user.success && user.status === 200) {
               // store user details and jwt token in local storage to keep user logged in between page refreshes
@@ -27,7 +26,6 @@ export class UserService {
   listRole() {
     return this.http.get<any>(environment.apiUrl + `user/rolelist`, { })
         .pipe(map(user => {
-          console.log(user);
             // login successful if there's a jwt token in the response
           if (user.success && user.status === 200) {
               // store user details and jwt token in local storage to keep user logged in between page refreshes
@@ -40,7 +38,6 @@ export class UserService {
   createRole(userName, email,password, categoryId, roleId) {
     return this.http.post<any>(environment.apiUrl + `user/register`, { userName, email,password, categoryId, roleId})
         .pipe(map(user => {
-          console.log(user);
             // login successful if there's a jwt token in the response
           if (user.success && user.status === 200) {
               // store user details and jwt token in local storage to keep user logged in between page refreshes

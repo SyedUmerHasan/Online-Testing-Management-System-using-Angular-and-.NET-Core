@@ -9,7 +9,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="d-flex justify-content-end">
-                            <button type="button" [routerLink]="['/admin/questions/list']" class="btn btn-success btn-lg btn">Create</button>
+                            <button type="button" [routerLink]="['/admin/questions/create']" class="btn btn-success btn-lg btn">Create</button>
                         </div>
                     </div>
                 </div>
@@ -37,7 +37,7 @@
                             <th scope="row">{{i +1}}</th>
                             <td>{{hero.question | slice:0:150}}</td>
                             <td>
-                                <button class="mb-2 mr-2 btn btn-success">Edit</button>
+                                <button type="button" class="mb-2 mr-2 btn btn-success" [routerLink]="['/admin/questions/edit',hero.questionId]">Edit</button>
                                 <button class="mb-2 mr-2 btn btn-danger" (click)="delete(hero.questionId)">Delete</button>
                             </td>
                         </tr>

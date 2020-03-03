@@ -19,38 +19,53 @@
                 <form class="" [formGroup]="questionsForm" (ngSubmit)="onSubmit()">
                     <div class="form-row">
                         <div class="col-md-12">
-                            <div class="position-relative form-group"><label>Description</label><input placeholder="Enter Question Description" formControlName="Description" type="text" class="form-control "></div>
+                            <div class="position-relative form-group">
+                                <label>Description</label>
+                                <input placeholder="Enter Question Description" formControlName="Description" type="text" class="form-control " [ngClass]="{ 'is-invalid': submitted && f.Description.errors }">
+                                <div *ngIf="submitted && f.Description.errors" class="invalid-feedback">
+                                    <div *ngIf="f.Description.errors.required">Category Name is required</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="form-row ">
                         <div class="col-md-6 ">
                             <div class="position-relative form-group "><label>Question Marks</label>
-                                <select class="mb-2 form-control" aria-placeholder="Question Marks" formControlName="Marks">
-                                  <option selected="selected"  value="1">Please Select</option>
-                                  <option>1</option>
-                                  <option>2</option>
-                                  <option>3</option>
-                                  <option>4</option>
-                                  <option>5</option>
+                                <select class="mb-2 form-control" aria-placeholder="Question Marks" formControlName="Marks" [ngClass]="{ 'is-invalid': submitted && f.Marks.errors }">
+                                <option selected="selected" value="1">Please Select</option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
                                 </select>
+                                <div *ngIf="submitted && f.Marks.errors" class="invalid-feedback">
+                                    <div *ngIf="f.Marks.errors.required">Marks is required</div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-6 ">
 
                             <div class="position-relative form-group "><label>Category</label>
-                                <select class="mb-2 form-control" aria-placeholder="Enter Tech Stack eg MERN/MEAN/LAMP" formControlName="CategoryId">
-                                  <option selected="selected">Please Select</option>
-                                  <option *ngFor="let hero of categoryList;" value={{hero.categoryId}}> {{hero.name}}</option>
+                                <select class="mb-2 form-control" aria-placeholder="Enter Tech Stack eg MERN/MEAN/LAMP" formControlName="CategoryId" [ngClass]="{ 'is-invalid': submitted && f.CategoryId.errors }">
+                                <option selected="selected">Please Select</option>
+                                <option *ngFor="let hero of categoryList;" value={{hero.categoryId}}> {{hero.name}}</option>
                                 </select>
+                                <div *ngIf="submitted && f.CategoryId.errors" class="invalid-feedback">
+                                    <div *ngIf="f.CategoryId.errors.required">Category Name is required</div>
+                                </div>
                             </div>
                         </div>
 
                         <div class="col-md-6 ">
                             <div class="position-relative form-group "><label>Experience Level</label>
-                                <select class="mb-2 form-control" aria-placeholder="Enter Tech Stack eg MERN/MEAN/LAMP" formControlName="ExperienceLevelId">
+                                <select class="mb-2 form-control" aria-placeholder="Enter Tech Stack eg MERN/MEAN/LAMP" formControlName="ExperienceLevelId" [ngClass]="{ 'is-invalid': submitted && f.ExperienceLevelId.errors }">
                                 <option selected="selected">Please Select</option>
                                 <option *ngFor="let hero of ExperienceLevelList;" value={{hero.id}}> {{hero.name}}</option>
                               </select>
+                                <div *ngIf="submitted && f.ExperienceLevelId.errors" class="invalid-feedback">
+                                    <div *ngIf="f.ExperienceLevelId.errors.required">Experience Level is required</div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-6 ">
@@ -76,11 +91,17 @@
                                     <div [formGroup]="ticket" class="form-row">
                                         <div class="form-group col-1">
                                             <label>Option </label>
-                                            <input type="checkbox" formControlName="IsCorrect" class="form-control" [ngClass]="{ 'is-invalid': submitted && ticket.controls.name.errors }" />
+                                            <input type="checkbox" formControlName="IsCorrect" class="form-control" [ngClass]="{ 'is-invalid': submitted && ticket.errors }" />
+                                            <div *ngIf="submitted && ticket.errors" class="invalid-feedback">
+                                                <div *ngIf="ticket.errors.required">Category Name is required</div>
+                                            </div>
                                         </div>
                                         <div class="form-group col-11">
                                             <label>Option Description</label>
-                                            <input type="text" formControlName="OptionDescription" class="form-control" [ngClass]="{ 'is-invalid': submitted && ticket.controls.email.errors }" />
+                                            <input type="text" formControlName="OptionDescription" class="form-control" [ngClass]="{ 'is-invalid': submitted && ticket.errors }" />
+                                            <div *ngIf="submitted && ticket.errors" class="invalid-feedback">
+                                                <div *ngIf="ticket.errors.required">Category Name is required</div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

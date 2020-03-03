@@ -1,3 +1,4 @@
+import { BrowserModule } from '@angular/platform-browser';
 import { LoggedInGuard } from './../../Guards/LoggedIn.guard';
 import { AdminGuard } from './../../Guards/Admin.guard';
 import { AuthGuard } from './../../Guards/auth.guard';
@@ -24,6 +25,7 @@ import { ResetPasswordComponent } from './component/reset-password/reset-passwor
   ],
   imports: [
     RouterModule.forRoot(RegistrationModuleRoutes),
+    BrowserModule,
     ReactiveFormsModule,
     FormsModule,
     CommonModule

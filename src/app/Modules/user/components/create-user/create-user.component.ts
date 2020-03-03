@@ -19,11 +19,12 @@ export class CreateUserComponent implements OnInit {
   showSuccessMessage =  null;
   showErrorMessage = null;
   submitted = false;
+  categoryList = [];
+  roleList = [];
+  formError = false;
 
   constructor(private formBuilder: FormBuilder,
               private userService: UserService) {}
-  categoryList = [];
-  roleList = [];
 
   ngOnInit() {
     this.userForm = this.formBuilder.group({
@@ -38,7 +39,6 @@ export class CreateUserComponent implements OnInit {
         .subscribe(
           data => {
             this.roleList =  data.data.roles;
-            console.log(this.roleList);
           },
           error => {
             this.roleList = [];
@@ -47,9 +47,7 @@ export class CreateUserComponent implements OnInit {
         .pipe(first())
         .subscribe(
           data => {
-            console.log(data.data);
             this.categoryList =  data.data.categories;
-            console.log(this.categoryList);
           },
           error => {
             this.categoryList = [];
@@ -59,11 +57,12 @@ export class CreateUserComponent implements OnInit {
   get f() { return this.userForm.controls; }
   get t() { return this.f.option as FormArray; }
 
-  onSubmit() {
-
-    console.log(this.userForm.value);
-
-    console.log(this.userForm.value.password);
+  onSubmit() {    
+    // stop here if form is invalid
+    if (this.userForm.invalid) {
+      this.formError = true;
+      return;
+    }
     this.userService.createRole(this.userForm.value.userName,
                                 this.userForm.value.email,
                                 this.userForm.value.password,
@@ -73,7 +72,6 @@ export class CreateUserComponent implements OnInit {
         .subscribe(
           data => {
             if (data.success && data.status === 200) {
-              console.log('data', data);
               this.showSuccessStatus =  true;
               this.showSuccessMessage = 'User registration has been added successfully';
               this.showErrorStatus =  false;
@@ -97,6 +95,9 @@ export class CreateUserComponent implements OnInit {
   }
   getshowErrorStatus() {
     return this.showErrorStatus;
+  }
+  geterror(){
+    return this.formError;
   }
 
 }

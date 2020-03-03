@@ -9,7 +9,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="d-flex justify-content-end">
-                            <button type="button" [routerLink]="['/admin/questions/list']" class="btn btn-success btn-lg btn">Create</button>
+                            <button type="button" [routerLink]="['/admin/category/create']" class="btn btn-success btn-lg btn">Create</button>
                         </div>
                     </div>
                 </div>
@@ -37,7 +37,7 @@
                             <th scope="row">{{i +1}}</th>
                             <td>{{hero.name}}</td>
                             <td>
-                                <button class="mb-2 mr-2 btn btn-success">Edit</button>
+                                <button class="mb-2 mr-2 btn btn-success" [routerLink]="['/admin/category/edit',hero.categoryId ]">Edit</button>
                                 <button class="mb-2 mr-2 btn btn-danger" (click)="onDelete(hero.categoryId)">Delete</button>
                             </td>
                         </tr>

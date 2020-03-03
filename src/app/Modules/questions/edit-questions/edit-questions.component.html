@@ -1,1 +1,93 @@
-<p>edit-questions works!</p>
+<div class="app-main__inner" style="height: 100% !important;">
+
+
+    <div class="row" style="width: 100% !important;">
+        <div class="main-card mb-3 card" style="width: 100% !important;">
+            <div class="card-body">
+                <h5 class="card-title">Edit Question</h5>
+                <div *ngIf="showSuccessStatus && showSuccessStatus == true">
+                    <div class="alert alert-primary" role="alert">
+                        <strong>{{showSuccessMessage}}</strong>
+                    </div>
+                </div>
+
+                <div *ngIf="showErrorStatus && showErrorStatus == true">
+                    <div class="alert alert-danger" role="alert">
+                        <strong>{{showErrorMessage}}</strong>
+                    </div>
+                </div>
+                <form class="" [formGroup]="questionsForm" (ngSubmit)="onSubmit()">
+                    <div class="form-row">
+                        <div class="col-md-12">
+                            <div class="position-relative form-group"><label>Description</label><input placeholder="Enter Question Description" formControlName="Description" type="text" class="form-control "></div>
+                        </div>
+                    </div>
+                    <div class="form-row ">
+                        <!-- <div class="col-md-6 ">
+                            <div class="position-relative form-group "><label>Question Marks</label>
+                                <select class="mb-2 form-control" aria-placeholder="Question Marks" formControlName="Marks">
+                                <option selected="selected"  value="1">Please Select</option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                              </select>
+                            </div>
+                        </div> -->
+                        <div class="col-md-6 ">
+
+                            <div class="position-relative form-group "><label>Category</label>
+                                <select class="mb-2 form-control" aria-placeholder="Enter Tech Stack eg MERN/MEAN/LAMP" formControlName="CategoryId">
+                                <option *ngFor="let hero of categoryList;" value={{hero.categoryId}}> {{hero.name}}</option>
+                              </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 ">
+                            <div class="position-relative form-group "><label>Experience Level</label>
+                                <select class="mb-2 form-control" aria-placeholder="Enter Tech Stack eg MERN/MEAN/LAMP" formControlName="ExperienceLevelId">
+                              <option *ngFor="let hero of ExperienceLevelList;" value={{hero.id}}> {{hero.name}}</option>
+                            </select>
+                            </div>
+                        </div>
+                        <!-- <div class="col-md-6 ">
+
+                            <div class="position-relative form-group "><label>Number of Options</label>
+                                <select class="mb-2 form-control" (change)="onChangeOptions($event)" aria-placeholder="Enter Tech Stack eg MERN/MEAN/LAMP">
+                                <option selected="selected" value="1">Please Select</option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>7</option>
+                                <option>8</option>
+                            </select>
+                            </div>
+                        </div> -->
+                        <div class="col-md-12">
+                            <div *ngFor="let ticket of t.controls; let i = index" class="list-group list-group-flush">
+                                <div class="list-group-item">
+                                    <div [formGroup]="ticket" class="form-row">
+                                        <div class="form-group col-1">
+                                            <label>Option </label>
+                                            <input type="checkbox" formControlName="IsCorrect" class="form-control" [ngClass]="{ 'is-invalid': submitted && ticket.controls.name.errors }" />
+                                        </div>
+                                        <div class="form-group col-11">
+                                            <label>Option Description</label>
+                                            <input type="text" formControlName="OptionDescription" class="form-control" [ngClass]="{ 'is-invalid': submitted && ticket.controls.email.errors }" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="mt-2 btn btn-primary ">Submit</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>

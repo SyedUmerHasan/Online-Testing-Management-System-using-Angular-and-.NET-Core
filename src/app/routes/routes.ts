@@ -1,3 +1,4 @@
+import { ResetPasswordComponent } from './../Modules/registration/component/reset-password/reset-password.component';
 import { ForgotPasswordComponent } from './../Modules/registration/component/forgot-password/forgot-password.component';
 import { ListTestComponent } from './../Modules/test/components/list-test/list-test.component';
 import { CreateUserComponent } from './../Modules/user/components/create-user/create-user.component';
@@ -45,6 +46,10 @@ const RegistrationModuleRoutes: Routes = [
   {
     path : 'forgotpassword',
     component : ForgotPasswordComponent,
+  },
+  {
+    path : 'resetpassword',
+    component : ResetPasswordComponent,
   }
 ];
 
@@ -117,7 +122,7 @@ const CategoryModuleRoutes: Routes = [
     canActivate : [AdminGuard]
   },
   {
-    path : 'admin/category/edit',
+    path : 'admin/category/edit/:id',
     component : EditCategoryComponent,
     canActivate : [AdminGuard]
   },
@@ -143,7 +148,7 @@ const CandidateModuleRoutes: Routes = [
     canActivate : [AdminGuard]
   },
   {
-    path : 'admin/candidate/edit',
+    path : 'admin/candidate/edit/:id',
     component : EditCandidateComponent,
     canActivate : [AdminGuard]
   },
@@ -168,7 +173,7 @@ const QuestionsModuleRoutes: Routes = [
     canActivate : [AdminGuard]
   },
   {
-    path : 'admin/questions/edit',
+    path : 'admin/questions/edit/:id',
     component : EditQuestionsComponent,
     canActivate : [AdminGuard]
   },

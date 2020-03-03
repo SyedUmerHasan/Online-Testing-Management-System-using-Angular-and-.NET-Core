@@ -13,7 +13,6 @@ export class TestService {
   getTestResult() {
     return this.http.get<any>(environment.apiUrl + `test/getall`, { })
         .pipe(map(user => {
-          console.log(user);
             // login successful if there's a jwt token in the response
           if (user.success && user.status === 200) {
               // store user details and jwt token in local storage to keep user logged in between page refreshes

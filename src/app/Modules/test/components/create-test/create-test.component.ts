@@ -22,7 +22,6 @@ export class CreateTestComponent implements OnInit {
 
   starttest() {
     const decodedToken = this.helper.decodeToken(JSON.parse(JSON.stringify(this.authenticationService.currentUserValue)));
-    console.log('decodedToken : ', decodedToken);
     this.questionService.startTest(decodedToken.candidateid, decodedToken.number)
     .pipe(first())
         .subscribe(

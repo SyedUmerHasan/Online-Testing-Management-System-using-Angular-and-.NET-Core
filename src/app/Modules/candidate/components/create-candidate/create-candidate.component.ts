@@ -20,6 +20,7 @@ export class CreateCandidateComponent implements OnInit {
   submitted = false;
   categoryList = [];
   ExperienceLevelList = [];
+  formError = false;
 
   constructor(private formBuilder: FormBuilder,
               private candidateService: CandidateService,
@@ -30,7 +31,7 @@ export class CreateCandidateComponent implements OnInit {
     this.candidateForm = this.formBuilder.group({
       FirstName: ['', Validators.required],
       LastName: ['', Validators.required],
-      email: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       CurrentCompany: ['', Validators.required],
       CategoryId: ['', Validators.required],
       ExperienceLevelId: ['', Validators.required],
@@ -40,8 +41,7 @@ export class CreateCandidateComponent implements OnInit {
         .pipe(first())
         .subscribe(
           data => {
-            this.categoryList =  data.data.categories
-            console.log(this.categoryList);
+            this.categoryList =  data.data.categories;
           },
           error => {
             this.categoryList = [];
@@ -51,7 +51,6 @@ export class CreateCandidateComponent implements OnInit {
         .subscribe(
           data => {
             this.ExperienceLevelList =  data.data.experiences;
-            console.log(this.ExperienceLevelList);
           },
           error => {
             this.ExperienceLevelList = [];
@@ -62,7 +61,14 @@ export class CreateCandidateComponent implements OnInit {
   get f() { return this.candidateForm.controls; }
 
   onSubmit() {
-      this.candidateService.createCandidate(
+    this.submitted = true;
+
+        // stop here if form is invalid
+    if (this.candidateForm.invalid) {
+          this.formError = true;
+          return;
+        }
+    this.candidateService.createCandidate(
         this.f.FirstName.value,
         this.f.LastName.value,
         this.f.email.value,
@@ -72,17 +78,16 @@ export class CreateCandidateComponent implements OnInit {
         .pipe(first())
         .subscribe(
           data => {
-            console.log('data', data);
             this.showSuccessStatus =  true;
             this.showSuccessMessage = 'Candidate has been added successfully';
             this.showErrorStatus =  false;
+            this.submitted = false;
             this.candidateForm.reset();
           },
           error => {
               this.showSuccessStatus  = false;
               this.showErrorStatus  = true;
               this.showErrorMessage = 'Candidate has not been added, can be seen in browser console';
-              console.log('Error in creating : ', error);
           });
 
   }
@@ -91,5 +96,8 @@ export class CreateCandidateComponent implements OnInit {
   }
   getshowErrorStatus() {
     return this.showErrorStatus;
+  }
+  geterror() {
+    return this.formError;
   }
 }

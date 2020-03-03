@@ -13,7 +13,6 @@ export class ExperienceLevelService {
   createExperienceLevel(Name, MinExp, MaxExp) {
     return this.http.post<any>(environment.apiUrl + `experiencelevel/create`, { Name, MinExp, MaxExp })
         .pipe(map(user => {
-          console.log(user);
             // login successful if there's a jwt token in the response
           if (user.success && user.status === 200) {
               // store user details and jwt token in local storage to keep user logged in between page refreshes
@@ -25,7 +24,6 @@ export class ExperienceLevelService {
   getallExperienceLevels() {
     return this.http.get<any>(environment.apiUrl + `experiencelevel/getall`, {})
         .pipe(map(user => {
-          console.log(user);
             // login successful if there's a jwt token in the response
           if (user.success && user.status === 200) {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
@@ -38,11 +36,9 @@ export class ExperienceLevelService {
 
 
   deleteExperienceLevel(experienceLevelId) {
-    console.log('TCL: CategoryService -> deletecategory -> categoryId', experienceLevelId);
     return this.http.delete<any>(environment.apiUrl +
       `experiencelevel/delete?id=${experienceLevelId}` , {})
        .pipe(map(user => {
-         console.log(user);
            // login successful if there's a jwt token in the response
          if (user.success && user.status === 200) {
                // store user details and jwt token in local storage to keep user logged in between page refreshes

@@ -18,6 +18,7 @@ export class CreateQuestionsComponent implements OnInit {
   showSuccessMessage =  null;
   showErrorMessage = null;
   submitted = false;
+  formError = false;
 
   constructor(private formBuilder: FormBuilder,
               private questionsService: QuestionsService,
@@ -39,7 +40,6 @@ export class CreateQuestionsComponent implements OnInit {
         .subscribe(
           data => {
             this.categoryList =  data.data.categories;
-            console.log(this.categoryList);
           },
           error => {
             this.categoryList = [];
@@ -48,9 +48,7 @@ export class CreateQuestionsComponent implements OnInit {
         .pipe(first())
         .subscribe(
           data => {
-            console.log(data.data);
             this.ExperienceLevelList =  data.data.experiences;
-            console.log(this.ExperienceLevelList);
           },
           error => {
             this.ExperienceLevelList = [];
@@ -61,6 +59,16 @@ export class CreateQuestionsComponent implements OnInit {
   get t() { return this.f.option as FormArray; }
 
   onSubmit() {
+
+    this.submitted = true;
+    console.log('CreateQuestionsComponent -> onSubmit -> this.f', this.f);
+    console.log("CreateQuestionsComponent -> onSubmit -> this.t", this.t);
+    // stop here if form is invalid
+    console.log("CreateQuestionsComponent -> onSubmit -> this.t[0].errors", this.t.controls[0])
+    if (this.questionsForm.invalid ) {
+      this.formError = true;
+      return;
+    }
       // Description, Marks, CategoryId, ExperienceLevelId
     const question  =  {
         Description : this.f.Description.value,
@@ -76,7 +84,6 @@ export class CreateQuestionsComponent implements OnInit {
         .subscribe(
           data => {
             if (data.success && data.status === 200) {
-              console.log('data', data);
               this.showSuccessStatus =  true;
               this.showSuccessMessage = 'Questions has been added successfully';
               this.showErrorStatus =  false;
@@ -115,6 +122,6 @@ export class CreateQuestionsComponent implements OnInit {
             this.t.removeAt(i);
         }
     }
-}
+  }
 
 }

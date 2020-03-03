@@ -18,16 +18,15 @@
                 <form class="" [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
                     <div class="form-row">
                         <div class="col-md-6">
-                            <div class="position-relative form-group"><label for="exampleEmail11" class="">Category Name</label><input placeholder="Enter Category Name" formControlName="Name" type="text" class="form-control "></div>
-                        </div>
-                        <div class="col-md-6 ">
-                            <div class="position-relative form-group"><label for="exampleEmail11" class="">Is Active</label>
-                                <select class="mb-2 form-control" aria-placeholder="Enter Tech Stack eg MERN/MEAN/LAMP">
-                                  <option>True</option>
-                                  <option>False</option>
-                                </select>
+                            <div class="position-relative form-group">
+                                <label for="exampleEmail11" class="">Category Name</label>
+                                <input placeholder="Enter Category Name" formControlName="Name" type="text" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.Name.errors }">
+                                <div *ngIf="submitted && f.Name.errors" class="invalid-feedback">
+                                    <div *ngIf="f.Name.errors.required">Category Name is required</div>
+                                </div>
                             </div>
                         </div>
+
                     </div>
                     <button class="mt-2 btn btn-primary ">Submit</button>
                     <span style="padding: 2px;"></span>

@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   loading = false;
   submitted = false;
   returnUrl: string;
+  loginerror =false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -57,22 +58,26 @@ export class LoginComponent implements OnInit {
     this.submitted = true;
 
     // stop here if form is invalid
-    // if (this.loginForm.invalid) {
-    //     return;
-    // }
+    if (this.loginForm.invalid) {
+        this.loginerror = true;
+        
+        return;
+    }
 
     // this.loading = true;
     this.authenticationService.login(this.f.username.value, this.f.password.value)
       .pipe(first())
       .subscribe(
         data => {
-          console.log('Successfully logged in');
-          console.log('this.returnUrl' , this.returnUrl);
           window.location.reload();
         },
         error => {
             console.log('Not Successfully logged in', error);
+            this.loginerror = true;
             this.loading = false;
         });
+  }
+  geterror(){
+    return this.loginerror;
   }
 }

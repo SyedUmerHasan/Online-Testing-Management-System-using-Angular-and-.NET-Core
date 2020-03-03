@@ -1,4 +1,8 @@
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthenticationService } from './../../../../Services/Authentication/authentication.service';
 import { Component, OnInit } from '@angular/core';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-forgot-password',
@@ -12,8 +16,7 @@ export class ForgotPasswordComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: AuthenticationService,
-    private location: Location) {   
+    private authenticationService: AuthenticationService) {
     // redirect to home if already logged in
     if (this.authenticationService.currentUserValue) {
       // Go to admin Routes
@@ -37,7 +40,6 @@ export class ForgotPasswordComponent implements OnInit {
   get f() { return this.forgotpasswordForm.controls; }
 
   onSubmit() {
-    this.submitted = true;
 
     // stop here if form is invalid
     // if (this.loginForm.invalid) {
@@ -50,12 +52,10 @@ export class ForgotPasswordComponent implements OnInit {
       .subscribe(
         data => {
           console.log('Successfully logged in');
-          console.log('this.returnUrl' , this.returnUrl);
           this.router.navigate(['/resetpassword'])
         },
         error => {
             console.log('Not Successfully logged in', error);
-            this.loading = false;
         });
   }
 

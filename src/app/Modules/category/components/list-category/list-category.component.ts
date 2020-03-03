@@ -30,7 +30,6 @@ export class ListCategoryComponent implements OnInit {
         .subscribe(
           data => {
             this.categoryList =  data.data['categories'];
-            console.log(this.categoryList);
             this.users$ = data;
             this.dtTrigger.next();
           },
@@ -45,15 +44,11 @@ export class ListCategoryComponent implements OnInit {
   }
 
   onDelete(CategoryId){
-    console.log(CategoryId);
     this.categoryService.deletecategory(CategoryId)
         .pipe(first())
         .subscribe(
           data => {
-            console.log(data);
             if(data.data.category == true){
-              console.log("success");
-
               this.showSuccessStatus =  true;
               this.showSuccessMessage = 'Category has been deleted successfully';
               this.showErrorStatus =  false;
@@ -63,7 +58,6 @@ export class ListCategoryComponent implements OnInit {
               });
 
             } else {
-              console.log("Fail");
               this.showSuccessStatus  = false;
               this.showErrorStatus  = true;
               this.showErrorMessage = 'Category has not been deleted, can be seen in browser console';

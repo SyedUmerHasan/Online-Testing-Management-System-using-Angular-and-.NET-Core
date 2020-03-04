@@ -30,6 +30,8 @@ export class TestScreenComponent implements OnInit {
   admin = false;
   subscription: Subscription;
   browserRefresh = false;
+  timeLeft= 120;
+  interval = null;
    // getting data from API
   constructor(private authenticationService: AuthenticationService,
               private questionsService: QuestionsService,
@@ -56,6 +58,7 @@ export class TestScreenComponent implements OnInit {
       this.questionsAnswerForm = this.formBuilder.group({
         option : new FormArray([])
       });
+      this.startTimer();
 
    }
    @HostListener('window:beforeunload',  ['$event'])
@@ -200,5 +203,19 @@ export class TestScreenComponent implements OnInit {
               console.log('Error in creating : ', error);
           });
    }
+   startTimer() {
+    this.interval = setInterval(() => {
+      if(this.timeLeft > 0) {
+        this.timeLeft--;
+      } else {
+        if (this.questionCount + 1 >= this.questionList.length ) {
+          this.submitTest();
+        } else {
+          this.onSkip();
+        }
+        this.timeLeft = 120;
+      }
+    },1000)
+  }
 
 }

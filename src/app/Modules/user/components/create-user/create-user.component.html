@@ -25,6 +25,7 @@
                                 <input placeholder="Enter User Name" formControlName="userName" type="text" class="form-control " [ngClass]="{ 'is-invalid': submitted && f.userName.errors }">
                                 <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
                                     <div *ngIf="f.userName.errors.required">User Name is required</div>
+                                    <div *ngIf="f.username.errors.cannotContainSpace">User Name can not contain space.</div>
                                 </div>
                             </div>
                         </div>

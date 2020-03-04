@@ -5,6 +5,7 @@ import { QuestionsService } from './../../../../Services/Questions/questions.ser
 import { Component, OnInit } from '@angular/core';
 import { FormArray, Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { first } from 'rxjs/operators';
+import { UsernameValidator } from 'src/app/_validators/UserName.validator';
 
 @Component({
   selector: 'app-create-user',
@@ -28,7 +29,7 @@ export class CreateUserComponent implements OnInit {
 
   ngOnInit() {
     this.userForm = this.formBuilder.group({
-      userName: ['', Validators.required],
+      userName: ['', [Validators.required, UsernameValidator.cannotContainSpace]],
       email: ['', Validators.required],
       password: ['', Validators.required],
       categoryId: ['', Validators.required],

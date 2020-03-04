@@ -19,6 +19,7 @@ export class CreateQuestionsComponent implements OnInit {
   showErrorMessage = null;
   submitted = false;
   formError = false;
+  options = 0;
 
   constructor(private formBuilder: FormBuilder,
               private questionsService: QuestionsService,
@@ -61,10 +62,6 @@ export class CreateQuestionsComponent implements OnInit {
   onSubmit() {
 
     this.submitted = true;
-    console.log('CreateQuestionsComponent -> onSubmit -> this.f', this.f);
-    console.log("CreateQuestionsComponent -> onSubmit -> this.t", this.t);
-    // stop here if form is invalid
-    console.log("CreateQuestionsComponent -> onSubmit -> this.t[0].errors", this.t.controls[0])
     if (this.questionsForm.invalid ) {
       this.formError = true;
       return;
@@ -79,6 +76,7 @@ export class CreateQuestionsComponent implements OnInit {
         ExperienceLevelId : this.f.ExperienceLevelId.value,
       };
 
+    console.log('CreateQuestionsComponent -> onSubmit -> this.f.option.value', this.f.option.value);
     this.questionsService.createQuestion(question, this.f.option.value)
         .pipe(first())
         .subscribe(
@@ -88,6 +86,8 @@ export class CreateQuestionsComponent implements OnInit {
               this.showSuccessMessage = 'Questions has been added successfully';
               this.showErrorStatus =  false;
               this.submitted = false;
+              this.options = 0;
+              this.clearFormArray(this.t);
               this.questionsForm.reset();
             } else {
               this.showSuccessStatus  = false;
@@ -108,6 +108,11 @@ export class CreateQuestionsComponent implements OnInit {
   }
   getshowErrorStatus() {
     return this.showErrorStatus;
+  }
+  clearFormArray = (formArray: FormArray) => {
+    while (formArray.length !== 0) {
+      formArray.removeAt(0);
+    }
   }
   onChangeOptions(e) {
     const numberOfOptions = e.target.value || 1;

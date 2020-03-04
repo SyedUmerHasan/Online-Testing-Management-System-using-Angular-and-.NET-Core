@@ -41,7 +41,7 @@
                             <td>{{hero.minExp}}</td>
                             <td>{{hero.maxExp}}</td>
                             <td>
-                                <button class="mb-2 mr-2 btn btn-success">Edit</button>
+                                <button class="mb-2 mr-2 btn btn-success" [routerLink]="['/admin/experiencelevel/edit',hero.id ]">Edit</button>
                                 <button class="mb-2 mr-2 btn btn-danger" (click)="onDelete(hero.id)">Delete</button>
                             </td>
                         </tr>

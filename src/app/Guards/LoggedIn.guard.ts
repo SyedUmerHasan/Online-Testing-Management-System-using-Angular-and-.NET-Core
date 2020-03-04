@@ -13,15 +13,21 @@ export class LoggedInGuard implements CanActivate {
     state: RouterStateSnapshot): boolean {
       if (this.authenticationService.currentUserValue) {
         // Go to admin Routes
-        if (this.authenticationService.currentUserRole === 'SuperAdmin') {
+        if (this.authenticationService.currentUserRole === 'SuperAdmin' ||this.authenticationService.currentUserRole === 'admin') {
           this.routes.navigate(['/admin']);
         } else if (this.authenticationService.currentUserRole === 'candidate') {
           // Go to User Routes
           this.routes.navigate(['/candidate']);
+        } else if (this.authenticationService.currentUserRole === 'contributor') {
+          // Go to User Routes
+          this.routes.navigate(['/contributor']);
+        } else if (this.authenticationService.currentUserRole === 'verifier') {
+          // Go to User Routes
+            this.routes.navigate(['/verifier']);
         } else if (this.authenticationService.currentUserRole === 'user') {
-        // Go to User Routes
-          this.routes.navigate(['/login']);
-        }
+          // Go to User Routes
+            this.routes.navigate(['/login']);
+          }
         // else {
         //   this.authenticationService.logout();
         //   this.routes.navigateByUrl('/');

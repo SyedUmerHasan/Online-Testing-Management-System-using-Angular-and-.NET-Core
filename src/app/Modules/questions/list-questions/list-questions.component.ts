@@ -1,3 +1,4 @@
+import { AuthenticationService } from 'src/app/Services/Authentication/authentication.service';
 import { QuestionsService } from 'src/app/Services/Questions/questions.service';
 import { ExperienceLevelService } from './../../../Services/ExperienceLevel/experience-level.service';
 import { Component, OnInit } from '@angular/core';
@@ -16,8 +17,10 @@ export class ListQuestionsComponent implements OnInit {
   showErrorMessage = null;
   QuestionsList = [];
   users$: any[] = [];
+  role = null;
 
-  constructor(private questionsService: QuestionsService) {}
+  constructor(private questionsService: QuestionsService,
+              private authenticationService: AuthenticationService) {}
 
   dtOptions: DataTables.Settings = {
   };
@@ -25,17 +28,34 @@ export class ListQuestionsComponent implements OnInit {
 
 
   ngOnInit() {
-    this.questionsService.getallQuestions()
-        .pipe(first())
-        .subscribe(
-          data => {
-            this.QuestionsList =  data.data.questions;
-            this.users$ = data;
-            this.dtTrigger.next();
-          },
-          error => {
-            this.QuestionsList = [];
-          });
+    if (this.authenticationService.currentUserRole === 'contributor') {
+      this.questionsService.getallQuestionsUsingContributor()
+          .pipe(first())
+          .subscribe(
+            data => {
+              this.QuestionsList =  data.data.questions;
+              this.users$ = data;
+              this.dtTrigger.next();
+            },
+            error => {
+              this.QuestionsList = [];
+            });
+      this.role = 'contributor';
+    } else {
+      this.role = 'admin';
+      this.questionsService.getallQuestions()
+      .pipe(first())
+      .subscribe(
+        data => {
+          this.QuestionsList =  data.data.questions;
+          this.users$ = data;
+          this.dtTrigger.next();
+        },
+        error => {
+          this.QuestionsList = [];
+        });
+
+    }
   }
   delete(questionId) {
     this.questionsService.deleteQuestion(questionId)

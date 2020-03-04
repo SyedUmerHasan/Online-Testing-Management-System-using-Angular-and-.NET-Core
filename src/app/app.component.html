@@ -6,6 +6,14 @@
 <div *ngIf="login === 'candidate'" style="height: 100%;">
     <app-admin-panel-template></app-admin-panel-template>
 </div>
+
+<div *ngIf="login === 'contributor'" style="height: 100%;">
+    <app-admin-panel-template></app-admin-panel-template>
+</div>
+
+<div *ngIf="login === 'verifier'" style="height: 100%;">
+    <app-admin-panel-template></app-admin-panel-template>
+</div>
 <!-- else notShow -->
 <div *ngIf="login === 'user'" style="height: 100%;">
     <app-registration-template></app-registration-template>

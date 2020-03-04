@@ -1,4 +1,4 @@
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryService } from './../../../../Services/Category/category.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
@@ -22,6 +22,7 @@ export class EditCategoryComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private categoryService: CategoryService,
+              private routes: Router,
               private route: ActivatedRoute) {}
 
   ngOnInit() {
@@ -35,13 +36,14 @@ export class EditCategoryComponent implements OnInit {
       // tslint:disable-next-line: no-string-literal
       this.categoryId = params['params']['id'];
 
-
-
       this.categoryService.getCategoryById(this.categoryId)
       .pipe(first())
           .subscribe(
             data => {
               this.currentCategory = data.data.category;
+              if(this.currentCategory == null){
+                this.routes.navigate(['login']);
+              }
               console.log('TCL: EditCandidateComponent -> ngOnInit -> this.currentCandidate', this.currentCategory);
               this.updateRecords(this.currentCategory.name);
             },

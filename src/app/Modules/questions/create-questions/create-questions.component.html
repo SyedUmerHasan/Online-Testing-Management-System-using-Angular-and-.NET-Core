@@ -23,7 +23,7 @@
                                 <label>Description</label>
                                 <input placeholder="Enter Question Description" formControlName="Description" type="text" class="form-control " [ngClass]="{ 'is-invalid': submitted && f.Description.errors }">
                                 <div *ngIf="submitted && f.Description.errors" class="invalid-feedback">
-                                    <div *ngIf="f.Description.errors.required">Category Name is required</div>
+                                    <div *ngIf="f.Description.errors.required">Question Description is required</div>
                                 </div>
                             </div>
                         </div>
@@ -72,15 +72,15 @@
 
                             <div class="position-relative form-group "><label>Number of Options</label>
                                 <select class="mb-2 form-control" (change)="onChangeOptions($event)" aria-placeholder="Enter Tech Stack eg MERN/MEAN/LAMP">
-                                  <option selected="selected" value="1">Please Select</option>
-                                  <option>1</option>
-                                  <option>2</option>
-                                  <option>3</option>
-                                  <option>4</option>
-                                  <option>5</option>
-                                  <option>6</option>
-                                  <option>7</option>
-                                  <option>8</option>
+                                  <option value="">Please Select</option>
+                                  <option value="1">1</option>
+                                  <option value="2">2</option>
+                                  <option value="3">3</option>
+                                  <option value="4">4</option>
+                                  <option value="5">5</option>
+                                  <option value="6">6</option>
+                                  <option value="7">7</option>
+                                  <option value="8">8</option>
                               </select>
                             </div>
                         </div>
@@ -93,14 +93,14 @@
                                             <label>Option </label>
                                             <input type="checkbox" formControlName="IsCorrect" class="form-control" [ngClass]="{ 'is-invalid': submitted && ticket.errors }" />
                                             <div *ngIf="submitted && ticket.errors" class="invalid-feedback">
-                                                <div *ngIf="ticket.errors.required">Category Name is required</div>
+                                                <div *ngIf="ticket.errors.required">Correct is required</div>
                                             </div>
                                         </div>
                                         <div class="form-group col-11">
                                             <label>Option Description</label>
                                             <input type="text" formControlName="OptionDescription" class="form-control" [ngClass]="{ 'is-invalid': submitted && ticket.errors }" />
                                             <div *ngIf="submitted && ticket.errors" class="invalid-feedback">
-                                                <div *ngIf="ticket.errors.required">Category Name is required</div>
+                                                <div *ngIf="ticket.errors.required">Option Description is required</div>
                                             </div>
                                         </div>
                                     </div>

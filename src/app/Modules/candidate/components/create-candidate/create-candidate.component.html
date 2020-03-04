@@ -114,9 +114,9 @@
                                   <option value="">Please Select</option>
                                   <option *ngFor="let hero of categoryList; let i = index" value={{hero.categoryId}}>{{hero.name}}</option>
                                 </select>
-                            </div>
-                            <div *ngIf="submitted && f.CategoryId.errors" class="invalid-feedback">
-                                <div *ngIf="f.CategoryId.errors.required">Current Company is required</div>
+                                <div *ngIf="submitted && f.CategoryId.errors" class="invalid-feedback">
+                                    <div *ngIf="f.CategoryId.errors.required">Category Name is required</div>
+                                </div>
                             </div>
                         </div>
                     </div>

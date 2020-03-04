@@ -48,9 +48,23 @@ export class AuthenticationService {
                 if (decodedToken.role === 'SuperAdmin') {
                   localStorage.setItem('role', 'SuperAdmin');
                   this.isAdminSubject.next('SuperAdmin');
+
+                } else if (decodedToken.role === 'admin') {
+                  localStorage.setItem('role', 'SuperAdmin');
+                  this.isAdminSubject.next('SuperAdmin');
+
                 } else if (decodedToken.role === 'candidate') {
                   localStorage.setItem('role', 'candidate');
                   this.isAdminSubject.next('candidate');
+
+                } else if (decodedToken.role === 'contributor') {
+                  localStorage.setItem('role', 'contributor');
+                  this.isAdminSubject.next('contributor');
+
+                } else if (decodedToken.role === 'verifier') {
+                  localStorage.setItem('role', 'verifier');
+                  this.isAdminSubject.next('verifier');
+
                 } else {
                   this.isAdminSubject.next('user');
                   localStorage.setItem('role', 'user');
@@ -63,10 +77,10 @@ export class AuthenticationService {
 
   logout() {
     // remove user from local storage to log user out
-    localStorage.removeItem('currentUser');
-    localStorage.removeItem('admin');
-    localStorage.removeItem('role');
-    this.currentUserSubject.next(null);
+        localStorage.removeItem('currentUser');
+        localStorage.removeItem('admin');
+        localStorage.removeItem('role');
+        this.currentUserSubject.next(null);
   }
 
   forgotpassword(email) {

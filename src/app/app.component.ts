@@ -27,10 +27,14 @@ export class AppComponent implements OnInit  {
   ngOnInit() {
     if (this.authenticationService.currentUser != null) {
       // currentUser exist in Localstorage
-      if (this.authenticationService.currentUserRole === 'SuperAdmin') {
+      if (this.authenticationService.currentUserRole === 'SuperAdmin' || this.authenticationService.currentUserRole === 'admin' ) {
         this.login = 'SuperAdmin';
       } else if (this.authenticationService.currentUserRole === 'candidate') {
         this.login = 'candidate';
+      } else if (this.authenticationService.currentUserRole === 'contributor') {
+        this.login = 'contributor';
+      } else if (this.authenticationService.currentUserRole === 'verifier') {
+        this.login = 'verifier';
       } else {
         this.login = 'user';
       }
@@ -41,5 +45,6 @@ export class AppComponent implements OnInit  {
       window.location.reload();
     }
   }
+  
 
 }

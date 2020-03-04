@@ -45,6 +45,7 @@ export class CreateCategoryComponent implements OnInit {
             this.showSuccessStatus =  true;
             this.showSuccessMessage = 'Category has been added successfully';
             this.showErrorStatus =  false;
+            this.submitted = false;
             this.categoryForm.reset();
           },
           error => {

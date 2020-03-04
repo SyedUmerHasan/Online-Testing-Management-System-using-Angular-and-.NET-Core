@@ -16,6 +16,8 @@ export class CreateExperienceComponent implements OnInit {
   showSuccessMessage =  null;
   showErrorMessage = null;
   submitted = false;
+  formError = false;
+
   constructor(private formBuilder: FormBuilder, private experiencelevelService: ExperienceLevelService) {}
   // Name, MinExp, MaxExp
   ngOnInit() {
@@ -30,7 +32,18 @@ export class CreateExperienceComponent implements OnInit {
   get f() { return this.experiencelevelForm.controls; }
 
   onSubmit() {
-      this.experiencelevelService.createExperienceLevel(
+
+    this.submitted = true;
+
+    console.log('CreateExperienceComponent -> onSubmit -> this.submitted', this.submitted);
+    console.log('CreateExperienceComponent -> onSubmit -> f.MaxExp.errors', this.f.MaxExp.errors);
+
+    // stop here if form is invalid
+    if (this.experiencelevelForm.invalid) {
+      this.formError = true;
+      return;
+    }
+    this.experiencelevelService.createExperienceLevel(
         this.experiencelevelForm.value.Name,
         this.experiencelevelForm.value.MinExp,
         this.experiencelevelForm.value.MaxExp )
@@ -41,6 +54,7 @@ export class CreateExperienceComponent implements OnInit {
             this.showSuccessStatus =  true;
             this.showSuccessMessage = 'Category has been added successfully';
             this.showErrorStatus =  false;
+            this.submitted = false;
             this.experiencelevelForm.reset();
           },
           error => {

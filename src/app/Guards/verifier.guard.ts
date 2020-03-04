@@ -1,10 +1,12 @@
+import { AuthenticationService } from 'src/app/Services/Authentication/authentication.service';
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot , Router } from '@angular/router';
-import { AuthenticationService } from '../Services/Authentication/authentication.service';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
-@Injectable()
-export class AdminGuard implements CanActivate {
-
+@Injectable({
+  providedIn: 'root'
+})
+export class VerifierGuard implements CanActivate {
   constructor(
     private routes: Router,
     private authenticationService: AuthenticationService) {}
@@ -13,17 +15,15 @@ export class AdminGuard implements CanActivate {
     state: RouterStateSnapshot): boolean {
       if (this.authenticationService.currentUserValue) {
         // Go to admin Routes
-        if (this.authenticationService.currentUserRole === 'SuperAdmin' || this.authenticationService.currentUserRole === 'admin') {
-          return true;
-        } else if (this.authenticationService.currentUserRole === 'candidate') {
-          // Go to User Routes
-          if (localStorage.getItem('allow') === 'true') {
-            this.routes.navigate(['candidate']);
-            return false;
-          } else {
-          }
+        if (this.authenticationService.currentUserRole === 'SuperAdmin' || this.authenticationService.currentUserRole === 'admin' ) {
           // this.authenticationService.logout();
           // localStorage.setItem('flag', 'true');
+          // window.location.reload();
+          return false;
+        } else if (this.authenticationService.currentUserRole === 'candidate') {
+          // Go to User Routes
+          // localStorage.setItem('flag', 'true');
+          // this.authenticationService.logout();
           // window.location.reload();
           return false;
         } else if (this.authenticationService.currentUserRole === 'user') {
@@ -37,14 +37,11 @@ export class AdminGuard implements CanActivate {
           // localStorage.setItem('flag', 'true');
           // this.authenticationService.logout();
           // window.location.reload();
-          return false;
+          return true;
         } else if (this.authenticationService.currentUserRole === 'contributor') {
           // Go to User Routes
-          // localStorage.setItem('flag', 'true');
-          // this.authenticationService.logout();
-          // window.location.reload();
           return false;
-        } else{
+        } else {
           // localStorage.setItem('flag', 'true');
           // this.authenticationService.logout();
           // window.location.reload();
@@ -55,4 +52,5 @@ export class AdminGuard implements CanActivate {
         return false;
       }
   }
+  
 }

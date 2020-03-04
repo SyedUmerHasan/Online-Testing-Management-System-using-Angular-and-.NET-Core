@@ -1,4 +1,5 @@
-import { ActivatedRoute } from '@angular/router';
+import { AuthenticationService } from 'src/app/Services/Authentication/authentication.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { QuestionsService } from 'src/app/Services/Questions/questions.service';
 import { CategoryService } from './../../../Services/Category/category.service';
 import { ExperienceLevelService } from './../../../Services/ExperienceLevel/experience-level.service';
@@ -20,11 +21,14 @@ export class EditQuestionsComponent implements OnInit {
   submitted = false;
   questionId = null;
   currentQuestion = null;
-
+  role = null;
+  formError = false;
   constructor(private formBuilder: FormBuilder,
               private questionsService: QuestionsService,
               private categoryService: CategoryService,
               private route: ActivatedRoute,
+              private routes: Router,
+              private authenticationService: AuthenticationService,
               private experienceLevelService: ExperienceLevelService) {}
   categoryList = [];
   ExperienceLevelList = [];
@@ -39,43 +43,66 @@ export class EditQuestionsComponent implements OnInit {
 
     this.route.paramMap
     .subscribe(params => {
-    console.log('TCL: EditQuestionsComponent -> ngOnInit -> params', params);
+      console.log('TCL: EditQuestionsComponent -> ngOnInit -> params', params);
 
-    // tslint:disable-next-line: no-string-literal
-    this.questionId = params['params']['id'];
+      // tslint:disable-next-line: no-string-literal
+      this.questionId = params['params']['id'];
 
-    this.categoryService.getallCategory()
-            .pipe(first())
-            .subscribe(
-              data => {
-                this.categoryList =  data.data.categories;
-              },
-              error => {
-                this.categoryList = [];
-              });
-    this.experienceLevelService.getallExperienceLevels()
-            .pipe(first())
-            .subscribe(
-              data => {
-                this.ExperienceLevelList =  data.data.experiences;
-              },
-              error => {
-                this.ExperienceLevelList = [];
-              });
+      this.categoryService.getallCategory()
+              .pipe(first())
+              .subscribe(
+                data => {
+                  this.categoryList =  data.data.categories;
+                },
+                error => {
+                  this.categoryList = [];
+                });
+      this.experienceLevelService.getallExperienceLevels()
+              .pipe(first())
+              .subscribe(
+                data => {
+                  this.ExperienceLevelList =  data.data.experiences;
+                },
+                error => {
+                  this.ExperienceLevelList = [];
+                });
+      if (this.authenticationService.currentUserRole === 'contributor') {
+        this.role = 'contributor';
+        this.questionsService.getQuestionsByRole(this.questionId)
+        .pipe(first())
+        .subscribe(
+          data => {
+            this.currentQuestion = data.data.question;
+            if(this.currentQuestion == null){
+              this.routes.navigate(['login']);
+            }
+            this.updateRecords(
+              this.currentQuestion
+            );
+            console.log('TCL: EditQuestionsComponent -> ngOnInit -> this.currentQuestion', this.currentQuestion);
+          },
+          error => {
+          });
 
-    this.questionsService.getQuestionsById(this.questionId)
-            .pipe(first())
-            .subscribe(
-              data => {
-                this.currentQuestion = data.data.question;
-                this.updateRecords(
-                  this.currentQuestion
-                );
-                console.log('TCL: EditQuestionsComponent -> ngOnInit -> this.currentQuestion', this.currentQuestion);
-              },
-              error => {
-              });
+        } else {
+        this.role = 'admin';
+        this.questionsService.getQuestionsById(this.questionId)
+        .pipe(first())
+        .subscribe(
+          data => {
+            this.currentQuestion = data.data.question;
+            if(this.currentQuestion == null){
+              this.routes.navigate(['login']);
+            }
+            this.updateRecords(
+              this.currentQuestion
+            );
+            console.log('TCL: EditQuestionsComponent -> ngOnInit -> this.currentQuestion', this.currentQuestion);
+          },
+          error => {
+          });
 
+      }
     });
   }
 
@@ -98,6 +125,14 @@ export class EditQuestionsComponent implements OnInit {
 
 
   onSubmit() {
+
+
+    this.submitted = true;
+    if (this.questionsForm.invalid ) {
+      this.formError = true;
+      return;
+    }
+
       // Description, Marks, CategoryId, ExperienceLevelId
     const question  =  {
         Description : this.f.Description.value,

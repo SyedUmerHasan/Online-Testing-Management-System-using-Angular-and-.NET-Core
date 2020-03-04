@@ -87,6 +87,7 @@ export class CreateQuestionsComponent implements OnInit {
               this.showSuccessStatus =  true;
               this.showSuccessMessage = 'Questions has been added successfully';
               this.showErrorStatus =  false;
+              this.submitted = false;
               this.questionsForm.reset();
             } else {
               this.showSuccessStatus  = false;

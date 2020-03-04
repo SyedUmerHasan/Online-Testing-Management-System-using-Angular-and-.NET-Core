@@ -8,7 +8,10 @@
                         <h5 class="card-title">List Test Questions</h5>
                     </div>
                     <div class="col-md-6">
-                        <div class="d-flex justify-content-end">
+                        <div class="d-flex justify-content-end" *ngIf="role == 'contributor'">
+                            <button type="button" [routerLink]="['/contributor/create']" class="btn btn-success btn-lg btn">Create</button>
+                        </div>
+                        <div class="d-flex justify-content-end" *ngIf="role == 'admin'">
                             <button type="button" [routerLink]="['/admin/questions/create']" class="btn btn-success btn-lg btn">Create</button>
                         </div>
                     </div>
@@ -37,7 +40,8 @@
                             <th scope="row">{{i +1}}</th>
                             <td>{{hero.question | slice:0:150}}</td>
                             <td>
-                                <button type="button" class="mb-2 mr-2 btn btn-success" [routerLink]="['/admin/questions/edit',hero.questionId]">Edit</button>
+                                <button type="button" class="mb-2 mr-2 btn btn-success" *ngIf="role == 'admin'" [routerLink]="['/admin/questions/edit',hero.questionId]">Edit</button>
+                                <button type="button" class="mb-2 mr-2 btn btn-success" *ngIf="role == 'contributor'" [routerLink]="['/contributor/edit',hero.questionId]">Edit</button>
                                 <button class="mb-2 mr-2 btn btn-danger" (click)="delete(hero.questionId)">Delete</button>
                             </td>
                         </tr>

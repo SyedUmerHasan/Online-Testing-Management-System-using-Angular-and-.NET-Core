@@ -9,10 +9,10 @@
   </span>
 
     <div *ngIf="loginForm.controls['username'].invalid && (loginForm.controls['username'].dirty || loginForm.controls['username'].touched)" class="invalid-feedback">
-        <div *ngIf="angForm.controls['username'].errors.required">Username is required</div>
+        <div *ngIf="loginForm.controls['username'].errors.required">Username is required</div>
     </div>
     <div *ngIf="loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)" class="invalid-feedback">
-        <div *ngIf="angForm.controls['password'].errors.required">Password is required</div>
+        <div *ngIf="loginForm.controls['password'].errors.required">Password is required</div>
     </div>
 
     <div *ngIf="geterror()" class="invalid-feedback">
@@ -27,7 +27,7 @@
         <span class="focus-input100 "></span>
     </div>
     <div class="wrap-input100 rs2-wrap-input100 validate-input m-b-20 " data-validate="Type password ">
-        <input class="input100 " type="password " formControlName="password" placeholder="Password " [ngClass]="{ 'is-invalid': submitted && f.password.errors } " />
+        <input class="input100" type="password" formControlName="password" placeholder="Password" [ngClass]="{ 'is-invalid': submitted && f.password.errors } " />
         <span class="focus-input100 "></span>
     </div>
     <div class="container-login100-form-btn ">

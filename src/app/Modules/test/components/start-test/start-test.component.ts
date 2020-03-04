@@ -60,6 +60,7 @@ export class StartTestComponent implements OnInit {
               this.showSuccessStatus =  true;
               this.showSuccessMessage = 'Candidate Test has been added successfully';
               this.showErrorStatus =  false;
+              this.submitted = false;
               this.startTestForm.reset();
               this.authenticationService.logout();
               localStorage.setItem('currentUser', JSON.stringify(data.data.jwttoken));

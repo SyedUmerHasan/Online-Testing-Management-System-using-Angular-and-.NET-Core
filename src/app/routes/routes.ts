@@ -1,3 +1,5 @@
+import { VerifierGuard } from './../Guards/verifier.guard';
+import { ContributorGuard } from './../Guards/contributor.guard';
 import { ResetPasswordComponent } from './../Modules/registration/component/reset-password/reset-password.component';
 import { ForgotPasswordComponent } from './../Modules/registration/component/forgot-password/forgot-password.component';
 import { ListTestComponent } from './../Modules/test/components/list-test/list-test.component';
@@ -73,6 +75,11 @@ const UserModuleRoutes: Routes = [
     path : 'admin/listresults',
     component : ListTestComponent,
     canActivate : [AdminGuard]
+  },
+  {
+    path : 'verifier',
+    component : ListTestComponent,
+    canActivate : [VerifierGuard]
   },
 
 ];
@@ -177,6 +184,28 @@ const QuestionsModuleRoutes: Routes = [
     component : EditQuestionsComponent,
     canActivate : [AdminGuard]
   },
+  {
+    path : 'contributor',
+    redirectTo : 'contributor/list',
+    canActivate : [ContributorGuard],
+    pathMatch: 'full'
+  },
+  {
+    path : 'contributor/list',
+    component : ListQuestionsComponent,
+    canActivate : [ContributorGuard]
+  },
+  {
+    path : 'contributor/create',
+    component : CreateQuestionsComponent,
+    canActivate : [ContributorGuard]
+  },
+  {
+    path : 'contributor/edit/:id',
+    component : EditQuestionsComponent,
+    canActivate : [ContributorGuard]
+  },
+  // contributor
 ];
 
 
@@ -199,7 +228,7 @@ const ExperienceLevelModuleRoutes: Routes = [
     canActivate : [AdminGuard]
   },
   {
-    path : 'admin/experiencelevel/edit',
+    path : 'admin/experiencelevel/edit/:id',
     component : EditExperienceComponent,
     canActivate : [AdminGuard]
   },

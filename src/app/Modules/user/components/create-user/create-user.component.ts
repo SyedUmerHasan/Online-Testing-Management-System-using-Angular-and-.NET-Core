@@ -55,9 +55,10 @@ export class CreateUserComponent implements OnInit {
   }
   // convenience getter for easy access to form fields
   get f() { return this.userForm.controls; }
-  get t() { return this.f.option as FormArray; }
 
-  onSubmit() {    
+  onSubmit() {
+
+    this.submitted = true;
     // stop here if form is invalid
     if (this.userForm.invalid) {
       this.formError = true;
@@ -75,6 +76,7 @@ export class CreateUserComponent implements OnInit {
               this.showSuccessStatus =  true;
               this.showSuccessMessage = 'User registration has been added successfully';
               this.showErrorStatus =  false;
+              this.submitted = false;
               this.userForm.reset();
             } else {
               this.showSuccessStatus  = false;
@@ -86,7 +88,7 @@ export class CreateUserComponent implements OnInit {
           error => {
               this.showSuccessStatus  = false;
               this.showErrorStatus  = true;
-              this.showErrorMessage = 'Questions has not been added, can be seen in browser console';
+              this.showErrorMessage = 'User registration has not been completed, can be seen in browser console';
               console.log('Error in creating : ', error);
           });
   }

@@ -34,6 +34,12 @@ export class LoginComponent implements OnInit {
       } else if (this.authenticationService.currentUserRole === 'candidate') {
         // Go to User Routes
         this.router.navigateByUrl('/candidate');
+      } else if (this.authenticationService.currentUserRole === 'contributor') {
+        // Go to User Routes
+        this.router.navigateByUrl('/contributor');
+      } else if (this.authenticationService.currentUserRole === 'verifier') {
+        // Go to User Routes
+        this.router.navigateByUrl('/verifier');
       } else if (this.authenticationService.currentUserRole === 'user') {
       // Go to User Routes
       }

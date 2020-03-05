@@ -1,3 +1,4 @@
+import { DashboardService } from './../../Services/Dashboard/dashboard.service';
 import { DashboardAnalyticsComponent } from './component/dashboard-analytics/dashboard-analytics.component';
 import { LoggedInGuard } from './../../Guards/LoggedIn.guard';
 import { HttpClientModule } from '@angular/common/http';
@@ -25,6 +26,6 @@ import { AuthenticationService } from 'src/app/Services/Authentication/authentic
     RouterModule,
     DashboardAnalyticsComponent
   ],
-  providers: [AuthGuard, AdminGuard, AuthenticationService, LoggedInGuard]
+  providers: [AuthGuard, AdminGuard, AuthenticationService, LoggedInGuard, DashboardService]
 })
 export class AdminModule {}

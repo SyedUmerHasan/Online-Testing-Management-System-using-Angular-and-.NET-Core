@@ -7,6 +7,7 @@ import { first } from 'rxjs/operators';
 import { stringify } from 'querystring';
 import { Router, NavigationStart } from '@angular/router';
 import { Subscription } from 'rxjs';
+
 import {
   Directive,
   HostBinding,
@@ -17,7 +18,6 @@ import {
   styleUrls: ['./test-screen.component.css']
 })
 export class TestScreenComponent implements OnInit {
-
   helper = new JwtHelperService();
   QuestionDescription = '';
   questionsAnswerForm: FormGroup;
@@ -30,8 +30,10 @@ export class TestScreenComponent implements OnInit {
   admin = false;
   subscription: Subscription;
   browserRefresh = false;
-  timeLeft= 120;
+  timeLeft= 10*60;
   interval = null;
+  minutes = 0
+  seconds = 0
    // getting data from API
   constructor(private authenticationService: AuthenticationService,
               private questionsService: QuestionsService,
@@ -61,34 +63,34 @@ export class TestScreenComponent implements OnInit {
       this.startTimer();
 
    }
-   @HostListener('window:beforeunload',  ['$event'])
-    beforeUnload(e): string {
-      const dialogText = 'Dialog text here';
-      e.returnValue = dialogText;
-      return dialogText;
-    }
-    @HostListener('window:unload',  ['$event'])
-    onunload(e) {
-      this.submitTest();
-      this.authenticationService.logout();
-      return 'Logout';
-    }
+  //  @HostListener('window:beforeunload',  ['$event'])
+  //   beforeUnload(e): string {
+  //     const dialogText = 'Dialog text here';
+  //     e.returnValue = dialogText;
+  //     return dialogText;
+  //   }
+  //   @HostListener('window:unload',  ['$event'])
+  //   onunload(e) {
+  //     this.submitTest();
+  //     this.authenticationService.logout();
+  //     return 'Logout';
+  //   }
 
-    @HostListener('window:blur',  ['$event'])
-    onblur(e) {
-      let txt = '';
-      let r = confirm('Alert your test is going to be cancelled in 5 seconds');
-      if (r === true) {
-        this.submitTest();
-        this.authenticationService.logout();
-        this.router.navigate(['/']);
-        txt = 'You pressed OK!';
-      } else {
-        txt = 'You pressed Cancel!';
-      }
-      // this.authenticationService.logout();
-      return 'Logout';
-    }
+  //   @HostListener('window:blur',  ['$event'])
+  //   onblur(e) {
+  //     let txt = '';
+  //     let r = confirm('Alert your test is going to be cancelled in 5 seconds');
+  //     if (r === true) {
+  //       this.submitTest();
+  //       this.authenticationService.logout();
+  //       this.router.navigate(['/']);
+  //       txt = 'You pressed OK!';
+  //     } else {
+  //       txt = 'You pressed Cancel!';
+  //     }
+  //     // this.authenticationService.logout();
+  //     return 'Logout';
+  //   }
    // Loading Module
    getLoading() {
       return this.isLoading;
@@ -195,8 +197,9 @@ export class TestScreenComponent implements OnInit {
         .subscribe(
           data => {
             if (data.success && data.status === 200) {
-
-              this.router.navigate(['/']);
+              localStorage.setItem('flag', 'true');
+              this.authenticationService.logout();
+              this.router.navigate(['/thankyou']);
             }
           },
           error => {
@@ -207,11 +210,13 @@ export class TestScreenComponent implements OnInit {
     this.interval = setInterval(() => {
       if(this.timeLeft > 0) {
         this.timeLeft--;
+        this.minutes = Math.floor( this.timeLeft / 60);
+        this.seconds = this.timeLeft % 60;
       } else {
         if (this.questionCount + 1 >= this.questionList.length ) {
           this.submitTest();
         } else {
-          this.onSkip();
+          this.submitTest();
         }
         this.timeLeft = 120;
       }

@@ -1,3 +1,4 @@
+import { ThankyouPageComponent } from './../Modules/test/components/thankyou-page/thankyou-page.component';
 import { VerifierGuard } from './../Guards/verifier.guard';
 import { ContributorGuard } from './../Guards/contributor.guard';
 import { ResetPasswordComponent } from './../Modules/registration/component/reset-password/reset-password.component';
@@ -106,6 +107,10 @@ const TestModuleRoutes: Routes = [
     path : 'test',
     component : TestScreenComponent,
     canActivate : [AuthGuard]
+  },
+  {
+    path : 'thankyou',
+    component : ThankyouPageComponent
   },
 ];
 

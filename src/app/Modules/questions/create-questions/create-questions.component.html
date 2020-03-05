@@ -21,7 +21,8 @@
                         <div class="col-md-12">
                             <div class="position-relative form-group">
                                 <label>Description</label>
-                                <input placeholder="Enter Question Description" formControlName="Description" type="text" class="form-control " [ngClass]="{ 'is-invalid': submitted && f.Description.errors }">
+                                <ckeditor [editor]="Editor" data="<p>Enter your question here</p>" placeholder="Enter Question Description" formControlName="Description" type="text"  [ngClass]="{ 'is-invalid': submitted && f.Description.errors }" (ready)="onReady($event)"></ckeditor>
+
                                 <div *ngIf="submitted && f.Description.errors" class="invalid-feedback">
                                     <div *ngIf="f.Description.errors.required">Question Description is required</div>
                                 </div>

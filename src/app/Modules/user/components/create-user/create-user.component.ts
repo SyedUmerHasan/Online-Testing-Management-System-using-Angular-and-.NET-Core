@@ -99,7 +99,7 @@ export class CreateUserComponent implements OnInit {
   getshowErrorStatus() {
     return this.showErrorStatus;
   }
-  geterror(){
+  geterror() {
     return this.formError;
   }
 

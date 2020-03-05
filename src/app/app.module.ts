@@ -1,3 +1,4 @@
+import { DashboardService } from './Services/Dashboard/dashboard.service';
 import { QuestionsService } from 'src/app/Services/Questions/questions.service';
 import { JwtInterceptor } from './_helper/jwt.interceptor';
 import { LoggedInGuard } from './Guards/LoggedIn.guard';
@@ -13,6 +14,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { MatSliderModule } from '@angular/material/slider';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 
 /** Component */
@@ -46,6 +48,7 @@ import { DataTablesModule } from 'angular-datatables';
   ],
   imports: [
     BrowserModule,
+    CKEditorModule,
     BrowserAnimationsModule, // required animations module
     DataTablesModule.forRoot(),
     // ToastrModule.forRoot(), // ToastrModule added
@@ -64,6 +67,7 @@ import { DataTablesModule } from 'angular-datatables';
   ],
   providers: [AuthGuard, AdminGuard, LoggedInGuard,QuestionsService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    DashboardService
   ],
   bootstrap: [AppComponent] // Default template to be shown here
 })

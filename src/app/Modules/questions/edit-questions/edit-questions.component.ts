@@ -6,6 +6,7 @@ import { ExperienceLevelService } from './../../../Services/ExperienceLevel/expe
 import { Validators, FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
+import * as DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
 
 @Component({
   selector: 'app-edit-questions',
@@ -23,6 +24,16 @@ export class EditQuestionsComponent implements OnInit {
   currentQuestion = null;
   role = null;
   formError = false;
+  public Editor = DecoupledEditor;
+
+  public onReady( editor ) {
+      editor.ui.getEditableElement().parentElement.insertBefore(
+          editor.ui.view.toolbar.element,
+          editor.ui.getEditableElement()
+      );
+  }
+
+
   constructor(private formBuilder: FormBuilder,
               private questionsService: QuestionsService,
               private categoryService: CategoryService,

@@ -13,6 +13,7 @@ import { RegistrationModuleRoutes, TestModuleRoutes } from 'src/app/routes/route
 import { StartTestComponent } from './components/start-test/start-test.component';
 import { TestScreenComponent } from './components/test-screen/test-screen.component';
 import { ListTestComponent } from './components/list-test/list-test.component';
+import { ThankyouPageComponent } from './components/thankyou-page/thankyou-page.component';
 
 
 
@@ -21,7 +22,8 @@ import { ListTestComponent } from './components/list-test/list-test.component';
     CreateTestComponent,
     StartTestComponent,
     TestScreenComponent,
-    ListTestComponent
+    ListTestComponent,
+    ThankyouPageComponent
   ],
   imports: [
     RouterModule.forRoot(TestModuleRoutes),

@@ -8,12 +8,15 @@
                 <div *ngIf="getLoading(); else elseBlock">Loading...</div>
                 <ng-template #elseBlock>
 
-                    <!-- <form class="" [formGroup]="questionsAnswerForm" (ngSubmit)="onSubmit()"> -->
-                    <div class="form-row">
-                        
-                        <div class="pull-right">
-                            <p>{{timeLeft}} Seconds Left</p> 
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="pull-right" style="color: red; font-weight: bold;">
+                                <h2>Time Left : {{minutes}}:{{seconds}}</h2>
+                            </div>
                         </div>
+                    </div>
+
+                    <div class="form-row">
                         <div class="col-md-12">
                             <div class="position-relative form-group">
                                 <h3>Q{{questionCount +1}}){{getQuestion()}}</h3>
@@ -37,8 +40,10 @@
                         <button class="btn btn-danger btn-lg" style="margin-right: 8px;" *ngIf="questionList.length != questionCount+1 " (click)="onSubmit()">Skip Question</button>
                         <button class="btn btn-primary btn-lg" (click)="onSubmit()">{{buttonText}}</button>
                     </div>
-                    <!-- </form> -->
 
                 </ng-template>
 
             </div>
+        </div>
+    </div>
+</div>

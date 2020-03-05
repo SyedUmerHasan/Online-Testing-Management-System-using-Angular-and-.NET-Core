@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 import { CreateQuestionsComponent } from './create-questions/create-questions.component';
 import { EditQuestionsComponent } from './edit-questions/edit-questions.component';
 import { ListQuestionsComponent } from './list-questions/list-questions.component';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 @NgModule({
   declarations: [CreateQuestionsComponent, EditQuestionsComponent, ListQuestionsComponent],
@@ -23,7 +24,8 @@ import { ListQuestionsComponent } from './list-questions/list-questions.componen
     ReactiveFormsModule,
     FormsModule,
     CommonModule,
-    DataTablesModule
+    DataTablesModule,
+    CKEditorModule
   ],
   exports: [
     RouterModule,

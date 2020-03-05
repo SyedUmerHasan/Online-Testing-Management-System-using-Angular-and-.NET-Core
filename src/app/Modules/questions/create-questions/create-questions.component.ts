@@ -43,6 +43,7 @@ export class CreateQuestionsComponent implements OnInit {
       Marks: ['', Validators.required],
       CategoryId: ['', Validators.required],
       ExperienceLevelId: ['', Validators.required],
+      Time: [0, Validators.required],
       option : new FormArray([])
     });
     this.categoryService.getallCategory()
@@ -80,7 +81,7 @@ export class CreateQuestionsComponent implements OnInit {
         Description : this.f.Description.value,
         Marks : this.f.Marks.value,
         Type: 'ASP.NET',
-        Time: '5-2-2020',
+        Time: this.f.Time.value,
         CategoryId : this.f.CategoryId.value,
         ExperienceLevelId : this.f.ExperienceLevelId.value,
       };

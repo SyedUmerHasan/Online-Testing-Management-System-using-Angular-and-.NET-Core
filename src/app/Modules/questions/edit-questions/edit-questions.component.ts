@@ -48,6 +48,7 @@ export class EditQuestionsComponent implements OnInit {
     this.questionsForm = this.formBuilder.group({
       Description: ['', Validators.required],
       option : new FormArray([]),
+      Time: [0, Validators.required],
       CategoryId: ['', Validators.required],
       ExperienceLevelId: ['', Validators.required],
     });
@@ -128,7 +129,8 @@ export class EditQuestionsComponent implements OnInit {
     this.questionsForm.patchValue({
       Description: currentQuestions.question,
       CategoryId: currentQuestions.categoryId,
-      ExperienceLevelId: currentQuestions.experienceLevelId
+      ExperienceLevelId: currentQuestions.experienceLevelId,
+      Time: currentQuestions.time
     });
     this.PatchOptionsValue(currentQuestions.option);
   }
@@ -136,7 +138,6 @@ export class EditQuestionsComponent implements OnInit {
 
 
   onSubmit() {
-
 
     this.submitted = true;
     if (this.questionsForm.invalid ) {
@@ -149,7 +150,7 @@ export class EditQuestionsComponent implements OnInit {
         Description : this.f.Description.value,
         Marks : '1',
         Type: 'ASP.NET',
-        Time: '5-2-2020',
+        Time:  this.f.Time.value,
         CategoryId : this.f.CategoryId.value,
         ExperienceLevelId : this.f.ExperienceLevelId.value,
       };

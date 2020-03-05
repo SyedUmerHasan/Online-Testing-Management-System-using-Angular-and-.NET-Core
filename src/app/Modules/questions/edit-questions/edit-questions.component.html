@@ -54,6 +54,26 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="col-md-12 ">
+                            <div class="position-relative form-group "><label>Time in Minutes Per Question</label>
+                                <select class="mb-2 form-control" formControlName="Time">
+                            <option value="0">Please Select</option>
+                            <option value="1">1 Minute</option>
+                            <option value="2">2 Minute</option>
+                            <option value="3">3 Minute</option>
+                            <option value="4">4 Minute</option>
+                            <option value="5">5 Minute</option>
+                            <option value="6">6 Minute</option>
+                            <option value="7">7 Minute</option>
+                            <option value="8">8 Minute</option>
+                        </select>
+
+                                <div *ngIf="submitted && f.ExperienceLevelId.errors" class="invalid-feedback">
+                                    <div *ngIf="f.ExperienceLevelId.errors.required">Experience Level is required</div>
+                                </div>
+                            </div>
+                        </div>
                         <h5 class="card-title">Create Options</h5>
                         <div class="col-md-12">
                             <div *ngFor="let ticket of t.controls; let i = index" class="list-group list-group-flush">

@@ -45,6 +45,7 @@ export class TestScreenComponent implements OnInit {
     .pipe(first())
         .subscribe(
           data => {
+            console.log("TestScreenComponent -> data.data.questions", data.data.questions)
             this.updateQuestionList(data.data.questions);
             this.updateQuestion();
             this.updateOptionList();

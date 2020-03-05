@@ -32,9 +32,9 @@ export class QuestionsService {
           return user;
         }));
   }
-  
+
   getallQuestionsUsingContributor() {
-    
+
     // http://localhost:55377/question/getquesbyrole
     return this.http.get<any>(environment.apiUrl + `question/getquesbyrole`, {})
         .pipe(map(user => {

@@ -46,6 +46,7 @@ export class TestScreenComponent implements OnInit {
         .subscribe(
           data => {
             this.updateQuestionList(data.data.questions);
+            this.timeLeft =this.questionList[this.questionIteration].time * 60;
             this.updateQuestion();
             this.updateOptionList();
             this.changeButtonText();
@@ -97,7 +98,7 @@ export class TestScreenComponent implements OnInit {
    }
    // Updating the question
    updateQuestion() {
-      this.timeLeft =this.questionList[this.questionIteration].time;
+      this.timeLeft =this.questionList[this.questionIteration].time * 60;
       this.setQuestion(this.questionList[this.questionIteration].question);
    }
   // Updating the question
@@ -215,11 +216,11 @@ export class TestScreenComponent implements OnInit {
         this.seconds = this.timeLeft % 60;
       } else {
         if (this.questionCount + 1 >= this.questionList.length ) {
-          this.submitTest();
+          this.onSkip();
         } else {
-          this.submitTest();
+          this.onSubmit();
         }
-        this.timeLeft = 120;
+        this.timeLeft = this.questionList[this.questionIteration].time * 60;
       }
     },1000)
   }

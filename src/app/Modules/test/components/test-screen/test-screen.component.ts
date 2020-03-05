@@ -30,7 +30,7 @@ export class TestScreenComponent implements OnInit {
   admin = false;
   subscription: Subscription;
   browserRefresh = false;
-  timeLeft= 10*60;
+  timeLeft= 0;
   interval = null;
   minutes = 0
   seconds = 0
@@ -45,7 +45,6 @@ export class TestScreenComponent implements OnInit {
     .pipe(first())
         .subscribe(
           data => {
-            console.log("TestScreenComponent -> data.data.questions", data.data.questions)
             this.updateQuestionList(data.data.questions);
             this.updateQuestion();
             this.updateOptionList();
@@ -98,6 +97,7 @@ export class TestScreenComponent implements OnInit {
    }
    // Updating the question
    updateQuestion() {
+      this.timeLeft =this.questionList[this.questionIteration].time;
       this.setQuestion(this.questionList[this.questionIteration].question);
    }
   // Updating the question

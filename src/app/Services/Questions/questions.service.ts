@@ -65,8 +65,8 @@ export class QuestionsService {
           return user;
         }));
   }
-  submitQuestionAnswer(CandidateId, QuestionId, SelectedOptionId) {
-    return this.http.post<any>(environment.apiUrl + `testdetail/create` , {CandidateId, QuestionId, SelectedOptionId})
+  submitQuestionAnswer(CandidateId, QuestionId, SelectedOptionId,AttemptedInDuration) {
+    return this.http.post<any>(environment.apiUrl + `testdetail/create` , {CandidateId, QuestionId, SelectedOptionId, AttemptedInDuration})
         .pipe(map(user => {
             // login successful if there's a jwt token in the response
           if (user.success && user.status === 200) {

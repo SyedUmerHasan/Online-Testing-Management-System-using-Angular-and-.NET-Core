@@ -34,6 +34,7 @@ export class TestScreenComponent implements OnInit {
   interval = null;
   minutes = 0
   seconds = 0
+  TOTALTIME = 0;
    // getting data from API
   constructor(private authenticationService: AuthenticationService,
               private questionsService: QuestionsService,
@@ -46,6 +47,7 @@ export class TestScreenComponent implements OnInit {
         .subscribe(
           data => {
             this.updateQuestionList(data.data.questions);
+            this.TOTALTIME =this.questionList[this.questionIteration].time * 60;
             this.timeLeft =this.questionList[this.questionIteration].time * 60;
             this.updateQuestion();
             this.updateOptionList();
@@ -98,6 +100,7 @@ export class TestScreenComponent implements OnInit {
    }
    // Updating the question
    updateQuestion() {
+      this.TOTALTIME =this.questionList[this.questionIteration].time * 60;
       this.timeLeft =this.questionList[this.questionIteration].time * 60;
       this.setQuestion(this.questionList[this.questionIteration].question);
    }
@@ -149,7 +152,7 @@ export class TestScreenComponent implements OnInit {
       }
       return data;
     });
-    this.questionsService.submitQuestionAnswer(decodedToken.candidateid, this.getCurrentQuestionId(), SelectedOptionId.join())
+    this.questionsService.submitQuestionAnswer(decodedToken.candidateid, this.getCurrentQuestionId(), SelectedOptionId.join(),this.TOTALTIME - this.timeLeft)
     .pipe(first())
         .subscribe(
           data => {
@@ -171,7 +174,7 @@ export class TestScreenComponent implements OnInit {
    }
    onSkip() {
     const decodedToken = this.helper.decodeToken(JSON.parse(JSON.stringify(this.authenticationService.currentUserValue)));
-    this.questionsService.submitQuestionAnswer(decodedToken.candidateid, this.getCurrentQuestionId(), '')
+    this.questionsService.submitQuestionAnswer(decodedToken.candidateid, this.getCurrentQuestionId(), '', this.TOTALTIME - this.timeLeft)
     .pipe(first())
         .subscribe(
           data => {

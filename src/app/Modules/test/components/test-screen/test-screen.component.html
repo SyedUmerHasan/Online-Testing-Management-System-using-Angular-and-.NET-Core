@@ -20,7 +20,7 @@
                         <div class="col-md-12">
                             <div class="position-relative form-group">
                                 <h5>
-                                    <div>Question # {{questionCount +1}}) </div>
+                                    <div style="color: black;">Question # {{questionCount +1}}) </div>
                                     <span [innerHTML]=getQuestion() style="color: black;"></span>
                                 </h5>
                             </div>
@@ -31,8 +31,10 @@
                         <div class="col-md-12">
                             <div *ngFor="let item of options;" class="list-group list-group-flush">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" [(ngModel)]="item.selected" value={{item.optionId}}>
-                                    <p>{{item.option}}</p>
+                                    <h6>
+                                        <input class="form-check-input" type="checkbox" [(ngModel)]="item.selected" value={{item.optionId}}>
+                                        <p style="color: black;">{{item.option}}</p>
+                                    </h6>
                                 </div>
                             </div>
                         </div>

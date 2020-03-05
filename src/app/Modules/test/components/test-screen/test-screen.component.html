@@ -19,7 +19,7 @@
                     <div class="form-row">
                         <div class="col-md-12">
                             <div class="position-relative form-group">
-                                <h3> 
+                                <h3>
                                     <div>Question # {{questionCount +1}}) </div>
                                     <span [innerHTML]=getQuestion()></span>
                                 </h3>
@@ -33,7 +33,7 @@
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" [(ngModel)]="item.selected" value={{item.optionId}}>
                                     <label class="form-check-label" for="defaultCheck1">
-                                            {{item.option}}
+                                      <p>{{item.option}}</p>
                                           </label>
                                 </div>
                             </div>

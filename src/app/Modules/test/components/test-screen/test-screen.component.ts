@@ -1,12 +1,14 @@
+import { NgxSpinnerService } from 'ngx-spinner';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { QuestionsService } from 'src/app/Services/Questions/questions.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { AuthenticationService } from './../../../../Services/Authentication/authentication.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { first } from 'rxjs/operators';
 import { stringify } from 'querystring';
 import { Router, NavigationStart } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { DOCUMENT } from '@angular/common';
 
 import {
   Directive,
@@ -38,10 +40,14 @@ export class TestScreenComponent implements OnInit {
   JWTtimeFlag = false;
   lastRemainingTime = 0;
   temporaryTime = 0;
+  elem;
+
    // getting data from API
   constructor(private authenticationService: AuthenticationService,
               private questionsService: QuestionsService,
               private router: Router,
+              private spinner: NgxSpinnerService,
+              @Inject(DOCUMENT) private document: any,
               private formBuilder: FormBuilder) {
 
     const decodedToken = this.helper.decodeToken(JSON.parse(JSON.stringify(this.authenticationService.currentUserValue)));
@@ -50,10 +56,10 @@ export class TestScreenComponent implements OnInit {
     .pipe(first())
         .subscribe(
           data => {
-            console.log("TestScreenComponent -> decodedToken", decodedToken)
+            console.log('TestScreenComponent -> decodedToken', decodedToken);
             this.updateQuestionList(data.data.questions);
             if (decodedToken.time == 0 || decodedToken.time == null) {
-              console.log("Ia m working");
+              console.log('Ia m working');
               this.TOTALTIME = this.questionList[this.questionIteration].time * 60;
               this.remainingTimeLeft = this.questionList[this.questionIteration].time * 60;
               this.JWTtimeFlag = false;
@@ -76,9 +82,26 @@ export class TestScreenComponent implements OnInit {
       this.questionsAnswerForm = this.formBuilder.group({
         option : new FormArray([])
       });
+      this.elem = document.documentElement;
       this.startTimer();
+      this.openFullscreen();
 
    }
+
+   openFullscreen() {
+    if (this.elem.requestFullscreen) {
+      this.elem.requestFullscreen();
+    } else if (this.elem.mozRequestFullScreen) {
+      /* Firefox */
+      this.elem.mozRequestFullScreen();
+    } else if (this.elem.webkitRequestFullscreen) {
+      /* Chrome, Safari and Opera */
+      this.elem.webkitRequestFullscreen();
+    } else if (this.elem.msRequestFullscreen) {
+      /* IE/Edge */
+      this.elem.msRequestFullscreen();
+    }
+  }
   //  @HostListener('window:beforeunload',  ['$event'])
   //   beforeUnload(e): string {
   //     const dialogText = 'Dialog text here';
@@ -161,6 +184,7 @@ export class TestScreenComponent implements OnInit {
    }
 
    onSubmit() {
+    this.spinner.show();
     const decodedToken = this.helper.decodeToken(JSON.parse(JSON.stringify(this.authenticationService.currentUserValue)));
     const SelectedOptionId = [];
     this.options.map((data) => {
@@ -184,7 +208,7 @@ export class TestScreenComponent implements OnInit {
     console.log('TestScreenComponent -> onSubmit -> this.TOTALTIME', this.TOTALTIME);
     console.log('TestScreenComponent -> onSubmit -> this.remainingTimeLeft', this.remainingTimeLeft);
     console.log('TestScreenComponent -> onSubmit -> this.lastRemainingTime', this.lastRemainingTime);
-    console.log("TestScreenComponent -> onSubmit -> testTime", testTime)
+    console.log('TestScreenComponent -> onSubmit -> testTime', testTime);
 
     this.questionsService.submitQuestionAnswer(decodedToken.candidateid,
                                               this.getCurrentQuestionId(),
@@ -208,8 +232,11 @@ export class TestScreenComponent implements OnInit {
           error => {
               console.log('Error in creating : ', error);
           });
+    this.spinner.hide();
+
    }
    onSkip() {
+    this.spinner.show();
     const decodedToken = this.helper.decodeToken(JSON.parse(JSON.stringify(this.authenticationService.currentUserValue)));
     let testTime = null;
     if (this.JWTtimeFlag) {
@@ -243,9 +270,11 @@ export class TestScreenComponent implements OnInit {
           error => {
               console.log('Error in creating : ', error);
           });
+    this.spinner.hide();
    }
 
    submitTest() {
+    this.spinner.show();
     const decodedToken = this.helper.decodeToken(JSON.parse(JSON.stringify(this.authenticationService.currentUserValue)));
     this.questionsService.submitTest(decodedToken.candidateid)
     .pipe(first())
@@ -260,6 +289,7 @@ export class TestScreenComponent implements OnInit {
           error => {
               console.log('Error in creating : ', error);
           });
+    this.spinner.show();
    }
    startTimer() {
     this.interval = setInterval(() => {

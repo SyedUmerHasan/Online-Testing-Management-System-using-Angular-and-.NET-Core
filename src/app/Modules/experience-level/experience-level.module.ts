@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CandidateModuleRoutes, ExperienceLevelModuleRoutes } from 'src/app/routes/routes';
 import { CreateExperienceComponent } from './components/create-experience/create-experience.component';
 import { EditExperienceComponent } from './components/edit-experience/edit-experience.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 
@@ -29,8 +30,8 @@ import { EditExperienceComponent } from './components/edit-experience/edit-exper
     ReactiveFormsModule,
     FormsModule,
     CommonModule,
-    DataTablesModule
-
+    DataTablesModule,
+    NgxSpinnerModule
   ],
   exports: [
     RouterModule,

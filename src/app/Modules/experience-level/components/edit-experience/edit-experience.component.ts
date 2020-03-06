@@ -4,6 +4,7 @@ import { ExperienceLevelService } from './../../../../Services/ExperienceLevel/e
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-edit-experience',
@@ -25,6 +26,7 @@ export class EditExperienceComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private experiencelevelService: ExperienceLevelService,
               private routes: Router,
+              private spinner: NgxSpinnerService,
               private route: ActivatedRoute) {}
 
   ngOnInit() {
@@ -45,8 +47,8 @@ export class EditExperienceComponent implements OnInit {
           .subscribe(
             data => {
               this.currentExpLevel = data.data.experience;
-              console.log("EditExperienceComponent -> ngOnInit -> this.currentExpLevel", this.currentExpLevel)
-              if (this.currentExpLevel == null){
+              console.log('EditExperienceComponent -> ngOnInit -> this.currentExpLevel', this.currentExpLevel);
+              if (this.currentExpLevel == null) {
                 this.routes.navigate(['login']);
               }
               console.log('TCL: EditCandidateComponent -> ngOnInit -> this.currentCandidate', this.currentExpLevel);
@@ -64,7 +66,7 @@ export class EditExperienceComponent implements OnInit {
 
 
   updateRecords(Expname, min, max) {
-    console.log("EditExperienceComponent -> updateRecords -> Expname, min, max", Expname, min, max)
+    console.log('EditExperienceComponent -> updateRecords -> Expname, min, max', Expname, min, max);
     this.experiencelevelForm.patchValue({
       Name: Expname,
       MinExp: min,
@@ -73,11 +75,14 @@ export class EditExperienceComponent implements OnInit {
   }
 
   onSubmit() {
+    this.spinner.show();
     this.submitted = true;
 
     // stop here if form is invalid
     if (this.experiencelevelForm.invalid) {
       this.formError = true;
+      this.spinner.hide();
+
       return;
     }
 
@@ -98,6 +103,8 @@ export class EditExperienceComponent implements OnInit {
               this.showErrorMessage = 'Experience Level has not been Updated, can be seen in browser console';
               console.log('Error in creating : ', error);
           });
+    this.spinner.hide();
+
   }
   getshowSuccessStatus() {
     return this.showSuccessStatus;

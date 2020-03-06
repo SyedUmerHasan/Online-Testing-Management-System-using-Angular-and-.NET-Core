@@ -1,3 +1,4 @@
+import { NgxSpinnerService } from 'ngx-spinner';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { AuthenticationService } from 'src/app/Services/Authentication/authentication.service';
 import { CandidateService } from './../../../../Services/Candidate/candidate.service';
@@ -24,6 +25,7 @@ export class StartTestComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private candidateService: CandidateService,
+              private spinner: NgxSpinnerService,
               private authenticationService: AuthenticationService) {}
   candidateList = [];
 
@@ -52,11 +54,14 @@ export class StartTestComponent implements OnInit {
   }
 
   onSubmit() {
+    this.spinner.show();
+
     // stop here if form is invalid
     this.submitted = true;
 
     if (this.startTestForm.invalid) {
       this.formError = true;
+      this.spinner.hide();
       return;
     }
     let tempTestNumber = 0;
@@ -109,6 +114,8 @@ export class StartTestComponent implements OnInit {
               this.showErrorMessage = 'Questions has not been added, can be seen in browser console';
               console.log('Error in creating : ', error);
           });
+    this.spinner.hide();
+
   }
   getshowSuccessStatus() {
     return this.showSuccessStatus;

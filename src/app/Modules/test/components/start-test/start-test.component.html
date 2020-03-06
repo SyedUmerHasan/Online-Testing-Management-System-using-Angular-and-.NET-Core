@@ -36,7 +36,10 @@
                                 <label for="exampleEmail11" class="">Candidate Name</label>
                                 <select class="mb-2 form-control" aria-placeholder="Enter Tech Stack eg MERN/MEAN/LAMP" formControlName="CandidateId">
                                   <option value=""> Please Select</option>
-                                  <option *ngFor="let hero of candidateList; let i = index" value={{hero.candidateId}}>{{hero.firstName  + hero.lastName }}</option>
+                                  <option *ngFor="let hero of candidateList; let i = index" value={{hero.candidateId}}>
+                                    {{ hero.firstName | titlecase  }}
+                                    {{ hero.lastName | titlecase }}
+                                  </option>
                               </select>
                             </div>
                         </div>

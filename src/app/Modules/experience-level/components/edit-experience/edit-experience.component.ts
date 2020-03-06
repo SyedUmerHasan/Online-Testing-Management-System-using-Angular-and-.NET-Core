@@ -53,7 +53,7 @@ export class EditExperienceComponent implements OnInit {
               this.updateRecords(this.currentExpLevel.name, this.currentExpLevel.MinExp, this.currentExpLevel.MaxExp);
             },
             error => {
-              
+
       });
 
     });

@@ -1,3 +1,4 @@
+import { ViewTestComponent } from './../Modules/test/components/view-test/view-test.component';
 import { ThankyouPageComponent } from './../Modules/test/components/thankyou-page/thankyou-page.component';
 import { VerifierGuard } from './../Guards/verifier.guard';
 import { ContributorGuard } from './../Guards/contributor.guard';
@@ -75,6 +76,11 @@ const UserModuleRoutes: Routes = [
   {
     path : 'admin/listresults',
     component : ListTestComponent,
+    canActivate : [AdminGuard]
+  },
+  {
+    path : 'admin/viewresults/:id',
+    component : ViewTestComponent,
     canActivate : [AdminGuard]
   },
   {

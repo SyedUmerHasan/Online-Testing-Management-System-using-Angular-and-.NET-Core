@@ -25,7 +25,7 @@
                             <td>{{hero.testStatus}}</td>
                             <td>{{hero.percentage}}</td>
                             <td>
-                                <button class="mb-2 mr-2 btn btn-primary">View</button>
+                                <button class="mb-2 mr-2 btn btn-primary" [routerLink]="[ '/admin/viewresults', hero.candidateId ]">View</button>
                             </td>
                         </tr>
                     </tbody>

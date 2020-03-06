@@ -30,11 +30,14 @@ export class TestScreenComponent implements OnInit {
   admin = false;
   subscription: Subscription;
   browserRefresh = false;
-  timeLeft= 0;
+  remainingTimeLeft = 0;
   interval = null;
-  minutes = 0
-  seconds = 0
+  minutes = 0;
+  seconds = 0;
   TOTALTIME = 0;
+  JWTtimeFlag = false;
+  lastRemainingTime = 0;
+  temporaryTime = 0;
    // getting data from API
   constructor(private authenticationService: AuthenticationService,
               private questionsService: QuestionsService,
@@ -42,13 +45,23 @@ export class TestScreenComponent implements OnInit {
               private formBuilder: FormBuilder) {
 
     const decodedToken = this.helper.decodeToken(JSON.parse(JSON.stringify(this.authenticationService.currentUserValue)));
+
     this.questionsService.startTest(decodedToken.candidateid, decodedToken.number)
     .pipe(first())
         .subscribe(
           data => {
+            console.log("TestScreenComponent -> decodedToken", decodedToken)
             this.updateQuestionList(data.data.questions);
-            this.TOTALTIME =this.questionList[this.questionIteration].time * 60;
-            this.timeLeft =this.questionList[this.questionIteration].time * 60;
+            if (decodedToken.time == 0 || decodedToken.time == null) {
+              console.log("Ia m working");
+              this.TOTALTIME = this.questionList[this.questionIteration].time * 60;
+              this.remainingTimeLeft = this.questionList[this.questionIteration].time * 60;
+              this.JWTtimeFlag = false;
+            } else {
+              this.TOTALTIME = decodedToken.time * 60;
+              this.remainingTimeLeft = decodedToken.time * 60;
+              this.JWTtimeFlag = true;
+            }
             this.updateQuestion();
             this.updateOptionList();
             this.changeButtonText();
@@ -98,12 +111,16 @@ export class TestScreenComponent implements OnInit {
    getLoading() {
       return this.isLoading;
    }
-   // Updating the question
-   updateQuestion() {
-      this.TOTALTIME =this.questionList[this.questionIteration].time * 60;
-      this.timeLeft =this.questionList[this.questionIteration].time * 60;
+    // Updating the question
+    updateQuestion() {
+      if (!this.JWTtimeFlag) {
+        this.TOTALTIME = this.questionList[this.questionIteration].time * 60;
+        this.remainingTimeLeft = this.questionList[this.questionIteration].time * 60;
+      } else {
+        this.lastRemainingTime = this.remainingTimeLeft;
+      }
       this.setQuestion(this.questionList[this.questionIteration].question);
-   }
+    }
   // Updating the question
    updateQuestionList(questionList) {
     this.questionList = JSON.parse(JSON.stringify(questionList));
@@ -152,7 +169,27 @@ export class TestScreenComponent implements OnInit {
       }
       return data;
     });
-    this.questionsService.submitQuestionAnswer(decodedToken.candidateid, this.getCurrentQuestionId(), SelectedOptionId.join(),this.TOTALTIME - this.timeLeft)
+    let testTime = null;
+    if (this.JWTtimeFlag) {
+      // Working on Per test
+      this.lastRemainingTime = this.TOTALTIME - this.remainingTimeLeft;
+      testTime = this.lastRemainingTime - this.temporaryTime;
+      this.temporaryTime = this.lastRemainingTime;
+    } else {
+      // Working on Per question
+      testTime = this.TOTALTIME - this.remainingTimeLeft - this.lastRemainingTime;
+    }
+
+    console.log('TestScreenComponent -> onSubmit -> this.JWTtimeFlag', this.JWTtimeFlag);
+    console.log('TestScreenComponent -> onSubmit -> this.TOTALTIME', this.TOTALTIME);
+    console.log('TestScreenComponent -> onSubmit -> this.remainingTimeLeft', this.remainingTimeLeft);
+    console.log('TestScreenComponent -> onSubmit -> this.lastRemainingTime', this.lastRemainingTime);
+    console.log("TestScreenComponent -> onSubmit -> testTime", testTime)
+
+    this.questionsService.submitQuestionAnswer(decodedToken.candidateid,
+                                              this.getCurrentQuestionId(),
+                                              SelectedOptionId.join(),
+                                              testTime)
     .pipe(first())
         .subscribe(
           data => {
@@ -174,7 +211,20 @@ export class TestScreenComponent implements OnInit {
    }
    onSkip() {
     const decodedToken = this.helper.decodeToken(JSON.parse(JSON.stringify(this.authenticationService.currentUserValue)));
-    this.questionsService.submitQuestionAnswer(decodedToken.candidateid, this.getCurrentQuestionId(), '', this.TOTALTIME - this.timeLeft)
+    let testTime = null;
+    if (this.JWTtimeFlag) {
+      // Working on Per test
+      this.lastRemainingTime = this.TOTALTIME - this.remainingTimeLeft;
+      testTime = this.lastRemainingTime - this.temporaryTime;
+      this.temporaryTime = this.lastRemainingTime;
+    } else {
+      // Working on Per question
+      testTime = this.TOTALTIME - this.remainingTimeLeft - this.lastRemainingTime;
+    }
+    this.questionsService.submitQuestionAnswer(decodedToken.candidateid,
+      this.getCurrentQuestionId(),
+      '',
+      testTime)
     .pipe(first())
         .subscribe(
           data => {
@@ -213,19 +263,19 @@ export class TestScreenComponent implements OnInit {
    }
    startTimer() {
     this.interval = setInterval(() => {
-      if(this.timeLeft > 0) {
-        this.timeLeft--;
-        this.minutes = Math.floor( this.timeLeft / 60);
-        this.seconds = this.timeLeft % 60;
+      if (this.remainingTimeLeft > 0) {
+        this.remainingTimeLeft--;
+        this.minutes = Math.floor( this.remainingTimeLeft / 60);
+        this.seconds = this.remainingTimeLeft % 60;
       } else {
         if (this.questionCount + 1 >= this.questionList.length ) {
           this.onSkip();
         } else {
           this.onSubmit();
         }
-        this.timeLeft = this.questionList[this.questionIteration].time * 60;
+        this.remainingTimeLeft = this.questionList[this.questionIteration].time * 60;
       }
-    },1000)
+    }, 1000);
   }
 
 }

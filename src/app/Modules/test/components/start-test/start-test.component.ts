@@ -19,6 +19,7 @@ export class StartTestComponent implements OnInit {
   submitted = false;
   helper = new JwtHelperService();
   formError = false;
+  showTime = true;
 
 
   constructor(private formBuilder: FormBuilder,
@@ -30,6 +31,8 @@ export class StartTestComponent implements OnInit {
     this.startTestForm = this.formBuilder.group({
       CandidateId: ['', Validators.required],
       numberOfQuestion: ['', Validators.required],
+      testTime: [0],
+      testType: ['', Validators.required],
     });
     this.candidateService.getallCandidate()
         .pipe(first())
@@ -40,19 +43,34 @@ export class StartTestComponent implements OnInit {
           error => {
             this.candidateList = [];
           });
-
   }
   // convenience getter for easy access to form fields
   get f() { return this.startTestForm.controls; }
 
+  onChangeTestType(e) {
+    console.log(e);
+  }
+
   onSubmit() {
     // stop here if form is invalid
+    this.submitted = true;
+
     if (this.startTestForm.invalid) {
       this.formError = true;
       return;
     }
+    let tempTestNumber = 0;
+    if (this.startTestForm.value.testType == true || this.startTestForm.value.testType == 'true') {
+      tempTestNumber = 0;
+    } else {
+      tempTestNumber = this.startTestForm.value.testTime;
+    }
+    console.log("StartTestComponent -> onSubmit -> tempTestNumber", tempTestNumber)
+
       // Description, Marks, CategoryId, ExperienceLevelId
-    this.candidateService.createtest(this.startTestForm.value.CandidateId, this.startTestForm.value.numberOfQuestion)
+    this.candidateService.createtest(this.startTestForm.value.CandidateId,
+      this.startTestForm.value.numberOfQuestion,
+      tempTestNumber)
         .pipe(first())
         .subscribe(
           data => {
@@ -97,6 +115,14 @@ export class StartTestComponent implements OnInit {
   }
   getshowErrorStatus() {
     return this.showErrorStatus;
+  }
+
+  onChange(event) {
+    console.log(event);
+    this.showTime = event;
+  }
+  getShowTime() {
+    return this.showTime;
   }
 
   geterror() {

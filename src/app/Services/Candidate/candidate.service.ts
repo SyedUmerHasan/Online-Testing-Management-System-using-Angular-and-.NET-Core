@@ -39,9 +39,9 @@ export class CandidateService {
         }));
   }
 
-  createtest(CandidateId, numberOfQuestion) {
+  createtest(CandidateId, numberOfQuestion, time) {
     return this.http.post<any>(environment.apiUrl +
-       `candidate/generatetest?candidateId=${CandidateId}&numberOfQuestion=${numberOfQuestion}` , {})
+       `candidate/generatetest?candidateId=${CandidateId}&numberOfQuestion=${numberOfQuestion}&time=${time}` , {})
         .pipe(map(user => {
             // login successful if there's a jwt token in the response
           if (user.success && user.status === 200) {

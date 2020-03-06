@@ -134,8 +134,8 @@ export class EditCandidateComponent implements OnInit {
           error => {
               this.showSuccessStatus  = false;
               this.showErrorStatus  = true;
-              this.showErrorMessage = 'Candidate has not been added, can be seen in browser console';
-              console.log('Error in creating : ', error);
+              this.showErrorMessage = 'Candidate has not been Updated, can be seen in browser console';
+              console.log('Error in Updating : ', error);
           });
 
   }

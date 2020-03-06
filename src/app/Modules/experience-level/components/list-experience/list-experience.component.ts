@@ -60,7 +60,7 @@ export class ListExperienceComponent implements OnInit, OnDestroy {
               console.log("success");
 
               this.showSuccessStatus =  true;
-              this.showSuccessMessage = 'ExperienceLevel has been deleted successfully';
+              this.showSuccessMessage = 'Experience Level has been deleted successfully';
               this.showErrorStatus =  false;
 
               this.ExperienceLevelList = this.ExperienceLevelList.filter((value) => {
@@ -70,7 +70,7 @@ export class ListExperienceComponent implements OnInit, OnDestroy {
             } else {
               this.showSuccessStatus  = false;
               this.showErrorStatus  = true;
-              this.showErrorMessage = 'ExperienceLevel has not been deleted, can be seen in browser console';
+              this.showErrorMessage = 'Experience Level has not been deleted, can be seen in browser console';
               console.log('Error in creating Question');
             }
           },

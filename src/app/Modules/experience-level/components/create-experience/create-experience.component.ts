@@ -52,7 +52,7 @@ export class CreateExperienceComponent implements OnInit {
           data => {
             console.log('data', data);
             this.showSuccessStatus =  true;
-            this.showSuccessMessage = 'Category has been added successfully';
+            this.showSuccessMessage = 'Experience Level has been added successfully';
             this.showErrorStatus =  false;
             this.submitted = false;
             this.experiencelevelForm.reset();
@@ -60,7 +60,7 @@ export class CreateExperienceComponent implements OnInit {
           error => {
               this.showSuccessStatus  = false;
               this.showErrorStatus  = true;
-              this.showErrorMessage = 'Category has not been added, can be seen in browser console';
+              this.showErrorMessage = 'Experience Level has not been added, can be seen in browser console';
               console.log('Error in creating : ', error);
           });
 

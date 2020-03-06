@@ -24,7 +24,7 @@ export class ExperienceLevelService {
 
   updateExperienceLevel(ExpId, Name, MinExp, MaxExp) {
     // http://localhost:55377/experiencelevel/update?id=24
-    return this.http.post<any>(environment.apiUrl + `experiencelevel/update?id=${ExpId}`, { Name, MinExp, MaxExp })
+    return this.http.put<any>(environment.apiUrl + `experiencelevel/update?id=${ExpId}`, { Name, MinExp, MaxExp })
         .pipe(map(user => {
             // login successful if there's a jwt token in the response
           if (user.success && user.status === 200) {

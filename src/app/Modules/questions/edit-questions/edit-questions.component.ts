@@ -161,12 +161,12 @@ export class EditQuestionsComponent implements OnInit {
           data => {
             if (data.success && data.status === 200) {
               this.showSuccessStatus =  true;
-              this.showSuccessMessage = 'Questions has been added successfully';
+              this.showSuccessMessage = 'Questions has been Updated successfully';
               this.showErrorStatus =  false;
             } else {
               this.showSuccessStatus  = false;
               this.showErrorStatus  = true;
-              this.showErrorMessage = 'Questions has not been added, can be seen in browser console';
+              this.showErrorMessage = 'Questions has not been Updated, can be seen in browser console';
               console.log('Error in creating Question');
             }
           },

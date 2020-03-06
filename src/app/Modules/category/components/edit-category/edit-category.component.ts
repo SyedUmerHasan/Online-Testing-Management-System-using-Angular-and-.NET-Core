@@ -81,13 +81,13 @@ export class EditCategoryComponent implements OnInit {
         .subscribe(
           data => {
             this.showSuccessStatus =  true;
-            this.showSuccessMessage = 'Category has been added successfully';
+            this.showSuccessMessage = 'Category has been Updated successfully';
             this.showErrorStatus =  false;
           },
           error => {
               this.showSuccessStatus  = false;
               this.showErrorStatus  = true;
-              this.showErrorMessage = 'Category has not been added, can be seen in browser console';
+              this.showErrorMessage = 'Category has not been Updated, can be seen in browser console';
               console.log('Error in creating : ', error);
           });
   }

@@ -50,31 +50,25 @@ export class EditExperienceComponent implements OnInit {
                 this.routes.navigate(['login']);
               }
               console.log('TCL: EditCandidateComponent -> ngOnInit -> this.currentCandidate', this.currentExpLevel);
-              this.updateRecords(this.currentExpLevel.name, this.currentExpLevel.MinExp, this.currentExpLevel.MaxExp);
+              this.updateRecords(this.currentExpLevel.name, this.currentExpLevel.minExp, this.currentExpLevel.maxExp);
             },
             error => {
 
-      });
+            });
 
-    });
-
-  }
+        });
+      }
 
   // convenience getter for easy access to form fields
   get f() { return this.experiencelevelForm.controls; }
 
 
   updateRecords(Expname, min, max) {
+    console.log("EditExperienceComponent -> updateRecords -> Expname, min, max", Expname, min, max)
     this.experiencelevelForm.patchValue({
       Name: Expname,
       MinExp: min,
       MaxExp: max
-    });
-
-    this.experiencelevelForm = this.formBuilder.group({
-      Name: ['', Validators.required],
-      MinExp: ['', Validators.required],
-      MaxExp: ['', Validators.required]
     });
   }
 
@@ -95,13 +89,13 @@ export class EditExperienceComponent implements OnInit {
         .subscribe(
           data => {
             this.showSuccessStatus =  true;
-            this.showSuccessMessage = 'Category has been added successfully';
+            this.showSuccessMessage = 'Experience Level has been Updated successfully';
             this.showErrorStatus =  false;
           },
           error => {
               this.showSuccessStatus  = false;
               this.showErrorStatus  = true;
-              this.showErrorMessage = 'Category has not been added, can be seen in browser console';
+              this.showErrorMessage = 'Experience Level has not been Updated, can be seen in browser console';
               console.log('Error in creating : ', error);
           });
   }

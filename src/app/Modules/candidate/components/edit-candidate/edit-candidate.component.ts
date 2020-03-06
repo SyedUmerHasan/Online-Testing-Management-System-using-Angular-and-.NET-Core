@@ -1,3 +1,4 @@
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ActivatedRoute } from '@angular/router';
 import { ExperienceLevelService } from './../../../../Services/ExperienceLevel/experience-level.service';
 import { CategoryService } from './../../../../Services/Category/category.service';
@@ -24,11 +25,12 @@ export class EditCandidateComponent implements OnInit {
   ExperienceLevelList = [];
   candidateId = 0;
   currentCandidate = null;
-  formError =false;
+  formError = false;
 
   constructor(private formBuilder: FormBuilder,
               private candidateService: CandidateService,
               private route: ActivatedRoute,
+              private spinner: NgxSpinnerService,
               private categoryService: CategoryService,
               private experienceLevelService: ExperienceLevelService ) {}
 
@@ -108,11 +110,15 @@ export class EditCandidateComponent implements OnInit {
   get f() { return this.candidateForm.controls; }
 
   onSubmit() {
+    this.spinner.show();
+
     this.submitted = true;
 
         // stop here if form is invalid
     if (this.candidateForm.invalid) {
           this.formError = true;
+          this.spinner.hide();
+
           return;
         }
     this.candidateService.updateCandidate(
@@ -137,7 +143,7 @@ export class EditCandidateComponent implements OnInit {
               this.showErrorMessage = 'Candidate has not been Updated, can be seen in browser console';
               console.log('Error in Updating : ', error);
           });
-
+    this.spinner.hide();
   }
   getshowSuccessStatus() {
     return this.showSuccessStatus;
@@ -145,7 +151,7 @@ export class EditCandidateComponent implements OnInit {
   getshowErrorStatus() {
     return this.showErrorStatus;
   }
-  geterror(){
+  geterror() {
     return this.formError;
   }
 

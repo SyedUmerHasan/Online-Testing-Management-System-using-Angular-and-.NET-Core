@@ -1,3 +1,4 @@
+import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserModule } from '@angular/platform-browser';
 import { DataTablesModule } from 'angular-datatables';
 import { CandidateModuleRoutes, QuestionsModuleRoutes } from 'src/app/routes/routes';
@@ -25,7 +26,8 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     FormsModule,
     CommonModule,
     DataTablesModule,
-    CKEditorModule
+    CKEditorModule,
+    NgxSpinnerModule
   ],
   exports: [
     RouterModule,

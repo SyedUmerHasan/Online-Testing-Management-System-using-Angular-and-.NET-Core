@@ -1,3 +1,4 @@
+import { NgxSpinnerModule } from 'ngx-spinner';
 import { DataTablesModule } from 'angular-datatables';
 import { UserService } from './../../Services/Users/user.service';
 import { QuestionsService } from 'src/app/Services/Questions/questions.service';
@@ -30,9 +31,11 @@ import { ViewTestComponent } from './components/view-test/view-test.component';
   imports: [
     RouterModule.forRoot(TestModuleRoutes),
     ReactiveFormsModule,
+    NgxSpinnerModule,
     FormsModule,
     CommonModule,
-    DataTablesModule
+    DataTablesModule,
+    NgxSpinnerModule
   ],
   exports : [
     RouterModule,

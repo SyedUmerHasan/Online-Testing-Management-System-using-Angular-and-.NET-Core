@@ -1,3 +1,4 @@
+import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserModule } from '@angular/platform-browser';
 import { DataTablesModule } from 'angular-datatables';
 import { EditCandidateComponent } from './components/edit-candidate/edit-candidate.component';
@@ -29,7 +30,9 @@ import { CandidateModuleRoutes, CategoryModuleRoutes } from 'src/app/routes/rout
     ReactiveFormsModule,
     FormsModule,
     CommonModule,
-    DataTablesModule
+    DataTablesModule,
+    NgxSpinnerModule
+
 
   ],
   exports: [

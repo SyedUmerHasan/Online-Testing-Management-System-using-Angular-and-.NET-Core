@@ -1,3 +1,4 @@
+import { NgxSpinnerModule } from 'ngx-spinner';
 import { TestModuleRoutes, UserModuleRoutes } from 'src/app/routes/routes';
 import { UserService } from './../../Services/Users/user.service';
 import { QuestionsService } from './../../Services/Questions/questions.service';
@@ -20,7 +21,8 @@ import { RouterModule } from '@angular/router';
     RouterModule.forRoot(UserModuleRoutes),
     ReactiveFormsModule,
     FormsModule,
-    CommonModule
+    CommonModule,
+    NgxSpinnerModule
   ],
   exports : [
     RouterModule,

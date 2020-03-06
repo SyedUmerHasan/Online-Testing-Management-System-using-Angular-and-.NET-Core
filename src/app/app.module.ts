@@ -1,3 +1,4 @@
+import { NgxSpinnerModule } from 'ngx-spinner';
 import { DashboardService } from './Services/Dashboard/dashboard.service';
 import { QuestionsService } from 'src/app/Services/Questions/questions.service';
 import { JwtInterceptor } from './_helper/jwt.interceptor';
@@ -59,6 +60,8 @@ import { DataTablesModule } from 'angular-datatables';
     NzIconModule,
     NgZorroAntdModule,
     ScrollingModule,
+    NgxSpinnerModule
+
     // Store Modules
     // StoreModule.forRoot({
     //   message: simpleReducer,

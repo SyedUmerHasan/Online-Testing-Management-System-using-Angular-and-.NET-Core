@@ -6,17 +6,6 @@
                 <h5 class="card-title">Create Test</h5>
 
                 <form class="" [formGroup]="startTestForm" (ngSubmit)="onSubmit()">
-                    <div *ngIf="startTestForm.controls['CandidateId'].invalid && (startTestForm.controls['CandidateId'].dirty || startTestForm.controls['CandidateId'].touched)" class="alert alert-danger">
-                        <div *ngIf="startTestForm.controls['CandidateId'].errors.required">
-                            CandidateId is required.
-                        </div>
-                    </div>
-
-                    <div *ngIf="startTestForm.controls['numberOfQuestion'].invalid && (startTestForm.controls['numberOfQuestion'].dirty || startTestForm.controls['numberOfQuestion'].touched)" class="alert alert-danger">
-                        <div *ngIf="startTestForm.controls['numberOfQuestion'].errors.required">
-                            Number Of Question is required.
-                        </div>
-                    </div>
 
                     <div class="form-row">
                         <div class="col-md-6 ">

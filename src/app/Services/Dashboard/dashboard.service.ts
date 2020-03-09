@@ -83,5 +83,16 @@ export class DashboardService {
           return user;
         }));
   }
-
+  // http://localhost:55377/test/top10per
+  getTopTenCandidates() {
+    return this.http.get<any>(environment.apiUrl + `test/top10per`, {})
+        .pipe(map(user => {
+            // login successful if there's a jwt token in the response
+          if (user.success && user.status === 200) {
+                // store user details and jwt token in local storage to keep user logged in between page refreshes
+              console.log('i am the respoone ' , user);
+            }
+          return user;
+        }));
+  }
 }

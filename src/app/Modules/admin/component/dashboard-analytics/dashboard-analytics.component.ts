@@ -14,6 +14,7 @@ export class DashboardAnalyticsComponent implements OnInit {
   questionCount = 0;
   testCount = 0;
   userCount = 0;
+  topTenCandidates = [];
 
 
   constructor(private dashboardService: DashboardService) { }
@@ -84,6 +85,16 @@ export class DashboardAnalyticsComponent implements OnInit {
       error => {
         this.userCount = 0;
       });
+
+    this.dashboardService.getTopTenCandidates()
+    .pipe(first())
+    .subscribe(
+    data => {
+      this.topTenCandidates =  data.data.result;
+    },
+    error => {
+      this.topTenCandidates = [];
+    });
 
     }
 

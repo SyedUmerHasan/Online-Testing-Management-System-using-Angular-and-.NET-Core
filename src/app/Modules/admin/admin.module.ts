@@ -1,3 +1,4 @@
+import { NgxSpinnerModule } from 'ngx-spinner';
 import { DashboardService } from './../../Services/Dashboard/dashboard.service';
 import { DashboardAnalyticsComponent } from './component/dashboard-analytics/dashboard-analytics.component';
 import { LoggedInGuard } from './../../Guards/LoggedIn.guard';
@@ -20,7 +21,8 @@ import { AuthenticationService } from 'src/app/Services/Authentication/authentic
     RouterModule.forRoot(AdminModuleRoutes),
     ReactiveFormsModule,
     FormsModule,
-    CommonModule
+    CommonModule,
+    NgxSpinnerModule
   ],
   exports: [
     RouterModule,

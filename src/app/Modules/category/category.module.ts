@@ -1,3 +1,4 @@
+import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserModule } from '@angular/platform-browser';
 import { DataTablesModule } from 'angular-datatables';
 import { AuthenticationService } from './../../Services/Authentication/authentication.service';
@@ -29,7 +30,9 @@ import { LoggedInGuard } from 'src/app/Guards/LoggedIn.guard';
     ReactiveFormsModule,
     FormsModule,
     CommonModule,
-    DataTablesModule
+    DataTablesModule,
+    NgxSpinnerModule
+
   ],
   exports: [
     RouterModule,

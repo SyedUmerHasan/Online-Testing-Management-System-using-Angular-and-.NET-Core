@@ -1,3 +1,4 @@
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ExperienceLevelService } from './../../../../Services/ExperienceLevel/experience-level.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
@@ -18,7 +19,9 @@ export class CreateExperienceComponent implements OnInit {
   submitted = false;
   formError = false;
 
-  constructor(private formBuilder: FormBuilder, private experiencelevelService: ExperienceLevelService) {}
+  constructor(private formBuilder: FormBuilder,
+              private spinner: NgxSpinnerService,
+              private experiencelevelService: ExperienceLevelService) {}
   // Name, MinExp, MaxExp
   ngOnInit() {
     this.experiencelevelForm = this.formBuilder.group({
@@ -32,7 +35,7 @@ export class CreateExperienceComponent implements OnInit {
   get f() { return this.experiencelevelForm.controls; }
 
   onSubmit() {
-
+    this.spinner.show();
     this.submitted = true;
 
     console.log('CreateExperienceComponent -> onSubmit -> this.submitted', this.submitted);
@@ -41,6 +44,8 @@ export class CreateExperienceComponent implements OnInit {
     // stop here if form is invalid
     if (this.experiencelevelForm.invalid) {
       this.formError = true;
+      this.spinner.hide();
+
       return;
     }
     this.experiencelevelService.createExperienceLevel(
@@ -52,7 +57,7 @@ export class CreateExperienceComponent implements OnInit {
           data => {
             console.log('data', data);
             this.showSuccessStatus =  true;
-            this.showSuccessMessage = 'Category has been added successfully';
+            this.showSuccessMessage = 'Experience Level has been added successfully';
             this.showErrorStatus =  false;
             this.submitted = false;
             this.experiencelevelForm.reset();
@@ -60,9 +65,10 @@ export class CreateExperienceComponent implements OnInit {
           error => {
               this.showSuccessStatus  = false;
               this.showErrorStatus  = true;
-              this.showErrorMessage = 'Category has not been added, can be seen in browser console';
+              this.showErrorMessage = 'Experience Level has not been added, can be seen in browser console';
               console.log('Error in creating : ', error);
           });
+          this.spinner.hide();
 
   }
   getshowSuccessStatus() {

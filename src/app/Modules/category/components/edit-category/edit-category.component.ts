@@ -1,3 +1,4 @@
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryService } from './../../../../Services/Category/category.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -22,6 +23,7 @@ export class EditCategoryComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private categoryService: CategoryService,
+              private spinner: NgxSpinnerService,
               private routes: Router,
               private route: ActivatedRoute) {}
 
@@ -41,7 +43,7 @@ export class EditCategoryComponent implements OnInit {
           .subscribe(
             data => {
               this.currentCategory = data.data.category;
-              if(this.currentCategory == null){
+              if (this.currentCategory == null) {
                 this.routes.navigate(['login']);
               }
               console.log('TCL: EditCandidateComponent -> ngOnInit -> this.currentCandidate', this.currentCategory);
@@ -81,13 +83,13 @@ export class EditCategoryComponent implements OnInit {
         .subscribe(
           data => {
             this.showSuccessStatus =  true;
-            this.showSuccessMessage = 'Category has been added successfully';
+            this.showSuccessMessage = 'Category has been Updated successfully';
             this.showErrorStatus =  false;
           },
           error => {
               this.showSuccessStatus  = false;
               this.showErrorStatus  = true;
-              this.showErrorMessage = 'Category has not been added, can be seen in browser console';
+              this.showErrorMessage = 'Category has not been Updated, can be seen in browser console';
               console.log('Error in creating : ', error);
           });
   }

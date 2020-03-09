@@ -1,3 +1,4 @@
+import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthenticationService } from 'src/app/Services/Authentication/authentication.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { QuestionsService } from 'src/app/Services/Questions/questions.service';
@@ -14,6 +15,21 @@ import * as DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
   styleUrls: ['./edit-questions.component.css']
 })
 export class EditQuestionsComponent implements OnInit {
+
+
+  constructor(private formBuilder: FormBuilder,
+              private questionsService: QuestionsService,
+              private categoryService: CategoryService,
+              private route: ActivatedRoute,
+              private routes: Router,
+              private spinner: NgxSpinnerService,
+              private authenticationService: AuthenticationService,
+              private experienceLevelService: ExperienceLevelService) {}
+
+
+  // convenience getter for easy access to form fields
+  get f() { return this.questionsForm.controls; }
+  get t() { return this.f.option as FormArray; }
   questionsForm: FormGroup;
   showSuccessStatus =  null;
   showErrorStatus = null;
@@ -25,6 +41,8 @@ export class EditQuestionsComponent implements OnInit {
   role = null;
   formError = false;
   public Editor = DecoupledEditor;
+  categoryList = [];
+  ExperienceLevelList = [];
 
   public onReady( editor ) {
       editor.ui.getEditableElement().parentElement.insertBefore(
@@ -32,17 +50,6 @@ export class EditQuestionsComponent implements OnInit {
           editor.ui.getEditableElement()
       );
   }
-
-
-  constructor(private formBuilder: FormBuilder,
-              private questionsService: QuestionsService,
-              private categoryService: CategoryService,
-              private route: ActivatedRoute,
-              private routes: Router,
-              private authenticationService: AuthenticationService,
-              private experienceLevelService: ExperienceLevelService) {}
-  categoryList = [];
-  ExperienceLevelList = [];
 
   ngOnInit() {
     this.questionsForm = this.formBuilder.group({
@@ -85,7 +92,7 @@ export class EditQuestionsComponent implements OnInit {
         .subscribe(
           data => {
             this.currentQuestion = data.data.question;
-            if(this.currentQuestion == null){
+            if (this.currentQuestion == null) {
               this.routes.navigate(['login']);
             }
             this.updateRecords(
@@ -103,7 +110,7 @@ export class EditQuestionsComponent implements OnInit {
         .subscribe(
           data => {
             this.currentQuestion = data.data.question;
-            if(this.currentQuestion == null){
+            if (this.currentQuestion == null) {
               this.routes.navigate(['login']);
             }
             this.updateRecords(
@@ -117,11 +124,6 @@ export class EditQuestionsComponent implements OnInit {
       }
     });
   }
-
-
-  // convenience getter for easy access to form fields
-  get f() { return this.questionsForm.controls; }
-  get t() { return this.f.option as FormArray; }
 
 
 
@@ -138,10 +140,13 @@ export class EditQuestionsComponent implements OnInit {
 
 
   onSubmit() {
-
+    this.spinner.show();
     this.submitted = true;
+
     if (this.questionsForm.invalid ) {
       this.formError = true;
+      this.spinner.hide();
+
       return;
     }
 
@@ -161,12 +166,12 @@ export class EditQuestionsComponent implements OnInit {
           data => {
             if (data.success && data.status === 200) {
               this.showSuccessStatus =  true;
-              this.showSuccessMessage = 'Questions has been added successfully';
+              this.showSuccessMessage = 'Questions has been Updated successfully';
               this.showErrorStatus =  false;
             } else {
               this.showSuccessStatus  = false;
               this.showErrorStatus  = true;
-              this.showErrorMessage = 'Questions has not been added, can be seen in browser console';
+              this.showErrorMessage = 'Questions has not been Updated, can be seen in browser console';
               console.log('Error in creating Question');
             }
           },
@@ -176,6 +181,8 @@ export class EditQuestionsComponent implements OnInit {
               this.showErrorMessage = 'Questions has not been added, can be seen in browser console';
               console.log('Error in creating : ', error);
           });
+    this.spinner.hide();
+
   }
   getshowSuccessStatus() {
     return this.showSuccessStatus;

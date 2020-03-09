@@ -79,9 +79,9 @@ export class ResetPasswordComponent implements OnInit {
   onSubmit() {
     this.spinner.show();
     this.submitted = true;
-    console.log("this.submitted" + this.submitted)
-    console.log("ResetPasswordComponent -> onSubmit -> this.f", this.f.password)
-    console.log("ResetPasswordComponent -> onSubmit -> this.f", this.f.confirmPassword)
+    // console.log("this.submitted" + this.submitted)
+    // console.log("ResetPasswordComponent -> onSubmit -> this.f", this.f.password)
+    // console.log("ResetPasswordComponent -> onSubmit -> this.f", this.f.confirmPassword)
     // stop here if form is invalid
 
     if (this.resetpasswordForm.invalid) {

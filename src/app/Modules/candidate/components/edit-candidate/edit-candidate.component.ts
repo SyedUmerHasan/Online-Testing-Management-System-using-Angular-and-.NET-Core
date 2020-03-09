@@ -57,7 +57,7 @@ export class EditCandidateComponent implements OnInit {
           .subscribe(
             data => {
               this.categoryList =  data.data.categories;
-              console.log('TCL: EditCandidateComponent -> ngOnInit -> categoryList', this.categoryList);
+              // console.log('TCL: EditCandidateComponent -> ngOnInit -> categoryList', this.categoryList);
             },
             error => {
               this.categoryList = [];
@@ -67,7 +67,7 @@ export class EditCandidateComponent implements OnInit {
           .subscribe(
             data => {
               this.ExperienceLevelList =  data.data.experiences;
-              console.log('TCL: EditCandidateComponent -> ngOnInit -> this.ExperienceLevelList', this.ExperienceLevelList);
+              // console.log('TCL: EditCandidateComponent -> ngOnInit -> this.ExperienceLevelList', this.ExperienceLevelList);
             },
             error => {
               this.ExperienceLevelList = [];
@@ -78,7 +78,7 @@ export class EditCandidateComponent implements OnInit {
           .subscribe(
             data => {
               this.currentCandidate = data.data.candidate;
-              console.log('TCL: EditCandidateComponent -> ngOnInit -> this.currentCandidate', this.currentCandidate);
+              // console.log('TCL: EditCandidateComponent -> ngOnInit -> this.currentCandidate', this.currentCandidate);
               this.updateRecords(this.currentCandidate.firstName,
                 this.currentCandidate.lastName,
                 this.currentCandidate.email,

@@ -86,7 +86,7 @@ export class CreateQuestionsComponent implements OnInit {
         ExperienceLevelId : this.f.ExperienceLevelId.value,
       };
 
-    console.log('CreateQuestionsComponent -> onSubmit -> this.f.option.value', this.f.option.value);
+    // console.log('CreateQuestionsComponent -> onSubmit -> this.f.option.value', this.f.option.value);
     this.questionsService.createQuestion(question, this.f.option.value)
         .pipe(first())
         .subscribe(

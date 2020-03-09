@@ -26,7 +26,7 @@ export class CreateTestComponent implements OnInit {
     .pipe(first())
         .subscribe(
           data => {
-            console.log('data', data);
+            // console.log('data', data);
           },
           error => {
               console.log('Error in creating : ', error);

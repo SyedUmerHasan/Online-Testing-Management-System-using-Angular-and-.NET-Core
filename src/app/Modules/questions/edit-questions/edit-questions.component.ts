@@ -62,7 +62,7 @@ export class EditQuestionsComponent implements OnInit {
 
     this.route.paramMap
     .subscribe(params => {
-      console.log('TCL: EditQuestionsComponent -> ngOnInit -> params', params);
+      // console.log('TCL: EditQuestionsComponent -> ngOnInit -> params', params);
 
       // tslint:disable-next-line: no-string-literal
       this.questionId = params['params']['id'];
@@ -98,7 +98,7 @@ export class EditQuestionsComponent implements OnInit {
             this.updateRecords(
               this.currentQuestion
             );
-            console.log('TCL: EditQuestionsComponent -> ngOnInit -> this.currentQuestion', this.currentQuestion);
+            // console.log('TCL: EditQuestionsComponent -> ngOnInit -> this.currentQuestion', this.currentQuestion);
           },
           error => {
           });
@@ -116,7 +116,7 @@ export class EditQuestionsComponent implements OnInit {
             this.updateRecords(
               this.currentQuestion
             );
-            console.log('TCL: EditQuestionsComponent -> ngOnInit -> this.currentQuestion', this.currentQuestion);
+            // console.log('TCL: EditQuestionsComponent -> ngOnInit -> this.currentQuestion', this.currentQuestion);
           },
           error => {
           });

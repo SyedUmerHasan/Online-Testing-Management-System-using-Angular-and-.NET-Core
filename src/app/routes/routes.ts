@@ -1,3 +1,4 @@
+import { ViewQuestionComponent } from './../Modules/test/components/view-question/view-question.component';
 import { ViewTestComponent } from './../Modules/test/components/view-test/view-test.component';
 import { ThankyouPageComponent } from './../Modules/test/components/thankyou-page/thankyou-page.component';
 import { VerifierGuard } from './../Guards/verifier.guard';
@@ -84,9 +85,24 @@ const UserModuleRoutes: Routes = [
     canActivate : [AdminGuard]
   },
   {
+    path : 'admin/viewquestions/:id',
+    component : ViewQuestionComponent,
+    canActivate : [AdminGuard]
+  },
+  {
     path : 'verifier',
     component : ListTestComponent,
     canActivate : [VerifierGuard]
+  },
+  {
+    path : 'verifier/viewresults/:id',
+    component : ViewTestComponent,
+    canActivate : [AdminGuard]
+  },
+  {
+    path : 'verifier/viewquestions/:id',
+    component : ViewQuestionComponent,
+    canActivate : [AdminGuard]
   },
 
 ];

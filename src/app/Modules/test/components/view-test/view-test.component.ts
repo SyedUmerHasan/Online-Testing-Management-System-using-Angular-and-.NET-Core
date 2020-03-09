@@ -82,6 +82,10 @@ export class ViewTestComponent implements OnInit {
       });
   }
 
+    // convenience getter for easy access to form fields
+    get f() { return this.questionsForm.controls; }
+    get t() { return this.f.option as FormArray; }
+
 
   updateRecords(records) {
     this.testForm.patchValue({

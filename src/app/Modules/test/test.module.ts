@@ -16,6 +16,7 @@ import { TestScreenComponent } from './components/test-screen/test-screen.compon
 import { ListTestComponent } from './components/list-test/list-test.component';
 import { ThankyouPageComponent } from './components/thankyou-page/thankyou-page.component';
 import { ViewTestComponent } from './components/view-test/view-test.component';
+import { ViewQuestionComponent } from './components/view-question/view-question.component';
 
 
 
@@ -26,7 +27,8 @@ import { ViewTestComponent } from './components/view-test/view-test.component';
     TestScreenComponent,
     ListTestComponent,
     ThankyouPageComponent,
-    ViewTestComponent
+    ViewTestComponent,
+    ViewQuestionComponent
   ],
   imports: [
     RouterModule.forRoot(TestModuleRoutes),

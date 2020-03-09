@@ -16,7 +16,7 @@ export class CategoryService {
             // login successful if there's a jwt token in the response
           if (user.success && user.status === 200) {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
-              console.log('i am the respoone ' , user);
+              // console.log('i am the respoone ' , user);
             }
           return user;
         }));
@@ -27,7 +27,7 @@ export class CategoryService {
             // login successful if there's a jwt token in the response
           if (user.success && user.status === 200) {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
-              console.log('i am the respoone ' , user);
+              // console.log('i am the respoone ' , user);
             }
           return user;
         }));
@@ -40,7 +40,7 @@ export class CategoryService {
            // login successful if there's a jwt token in the response
          if (user.success && user.status === 200) {
                // store user details and jwt token in local storage to keep user logged in between page refreshes
-             console.log('i am the respoone ' , user);
+            //  console.log('i am the respoone ' , user);
            }
          return user;
        }));

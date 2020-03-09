@@ -70,7 +70,7 @@ export class StartTestComponent implements OnInit {
     } else {
       tempTestNumber = this.startTestForm.value.testTime;
     }
-    console.log("StartTestComponent -> onSubmit -> tempTestNumber", tempTestNumber)
+    // console.log("StartTestComponent -> onSubmit -> tempTestNumber", tempTestNumber)
 
       // Description, Marks, CategoryId, ExperienceLevelId
     this.candidateService.createtest(this.startTestForm.value.CandidateId,

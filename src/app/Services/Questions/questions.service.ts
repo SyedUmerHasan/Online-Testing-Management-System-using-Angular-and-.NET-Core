@@ -16,7 +16,7 @@ export class QuestionsService {
             // login successful if there's a jwt token in the response
           if (user.success && user.status === 200) {
               // store user details and jwt token in local storage to keep user logged in between page refreshes
-              console.log('i am the respoone ' , user);
+              // console.log('i am the respoone ' , user);
             }
           return user;
         }));
@@ -27,7 +27,7 @@ export class QuestionsService {
             // login successful if there's a jwt token in the response
           if (user.success && user.status === 200) {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
-              console.log('i am the respoone ' , user);
+              // console.log('i am the respoone ' , user);
             }
           return user;
         }));
@@ -41,7 +41,7 @@ export class QuestionsService {
             // login successful if there's a jwt token in the response
           if (user.success && user.status === 200) {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
-              console.log('i am the respoone ' , user);
+              // console.log('i am the respoone ' , user);
             }
           return user;
         }));
@@ -50,7 +50,7 @@ export class QuestionsService {
   deleteQuestion(id) {
     return this.http.delete<any>(environment.apiUrl + `question/delete?id=${id}`, )
         .pipe(map(user => {
-          console.log('Question Deleted' , user);
+          // console.log('Question Deleted' , user);
           return user;
         }));
   }
@@ -60,7 +60,7 @@ export class QuestionsService {
             // login successful if there's a jwt token in the response
           if (user.success && user.status === 200) {
               // store user details and jwt token in local storage to keep user logged in between page refreshes
-              console.log('i am the respoone ' , user);
+              // console.log('i am the respoone ' , user);
             }
           return user;
         }));
@@ -71,7 +71,7 @@ export class QuestionsService {
             // login successful if there's a jwt token in the response
           if (user.success && user.status === 200) {
               // store user details and jwt token in local storage to keep user logged in between page refreshes
-              console.log('i am the respoone ' , user);
+              // console.log('i am the respoone ' , user);
             }
           return user;
         }));
@@ -83,7 +83,7 @@ export class QuestionsService {
             // login successful if there's a jwt token in the response
           if (user.success && user.status === 200) {
               // store user details and jwt token in local storage to keep user logged in between page refreshes
-              console.log('i am the respoone ' , user);
+              // console.log('i am the respoone ' , user);
             }
           return user;
         }));
@@ -104,7 +104,7 @@ export class QuestionsService {
   getQuestionsById(questionId) {
     return this.http.get<any>(environment.apiUrl + `question/getquesbyid?id=${questionId}` , {})
        .pipe(map(user => {
-       console.log('TCL: QuestionsService -> getQuestionsById -> user', user);
+      //  console.log('TCL: QuestionsService -> getQuestionsById -> user', user);
            // login successful if there's a jwt token in the response
        if (user.success && user.status === 200) {
                // store user details and jwt token in local storage to keep user logged in between page refreshes
@@ -116,7 +116,7 @@ export class QuestionsService {
   getQuestionsByRole(questionId) {
     return this.http.get<any>(environment.apiUrl + `question/getquestbyroleandid?id=${questionId}` , {})
        .pipe(map(user => {
-       console.log('TCL: QuestionsService -> getQuestionsById -> user', user);
+      //  console.log('TCL: QuestionsService -> getQuestionsById -> user', user);
            // login successful if there's a jwt token in the response
        if (user.success && user.status === 200) {
                // store user details and jwt token in local storage to keep user logged in between page refreshes

@@ -47,11 +47,11 @@ export class EditExperienceComponent implements OnInit {
           .subscribe(
             data => {
               this.currentExpLevel = data.data.experience;
-              console.log('EditExperienceComponent -> ngOnInit -> this.currentExpLevel', this.currentExpLevel);
+              // console.log('EditExperienceComponent -> ngOnInit -> this.currentExpLevel', this.currentExpLevel);
               if (this.currentExpLevel == null) {
                 this.routes.navigate(['login']);
               }
-              console.log('TCL: EditCandidateComponent -> ngOnInit -> this.currentCandidate', this.currentExpLevel);
+              // console.log('TCL: EditCandidateComponent -> ngOnInit -> this.currentCandidate', this.currentExpLevel);
               this.updateRecords(this.currentExpLevel.name, this.currentExpLevel.minExp, this.currentExpLevel.maxExp);
             },
             error => {
@@ -66,7 +66,7 @@ export class EditExperienceComponent implements OnInit {
 
 
   updateRecords(Expname, min, max) {
-    console.log('EditExperienceComponent -> updateRecords -> Expname, min, max', Expname, min, max);
+    // console.log('EditExperienceComponent -> updateRecords -> Expname, min, max', Expname, min, max);
     this.experiencelevelForm.patchValue({
       Name: Expname,
       MinExp: min,

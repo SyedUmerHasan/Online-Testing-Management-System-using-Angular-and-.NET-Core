@@ -30,7 +30,7 @@ export class ListTestComponent implements OnInit {
       .subscribe(
         data => {
           this.resultList =  data.data.result;
-          console.log(this.resultList);
+          // console.log(this.resultList);
           this.users$ = data;
           this.dtTrigger.next();
         },
@@ -43,7 +43,7 @@ export class ListTestComponent implements OnInit {
       .subscribe(
         data => {
           this.resultList =  data.data.result;
-          console.log(this.resultList);
+          // console.log(this.resultList);
           this.users$ = data;
           this.dtTrigger.next();
         },

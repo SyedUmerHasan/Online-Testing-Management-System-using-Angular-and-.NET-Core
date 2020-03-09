@@ -46,7 +46,7 @@ export class EditCategoryComponent implements OnInit {
               if (this.currentCategory == null) {
                 this.routes.navigate(['login']);
               }
-              console.log('TCL: EditCandidateComponent -> ngOnInit -> this.currentCandidate', this.currentCategory);
+              // console.log('TCL: EditCandidateComponent -> ngOnInit -> this.currentCandidate', this.currentCategory);
               this.updateRecords(this.currentCategory.name);
             },
             error => {

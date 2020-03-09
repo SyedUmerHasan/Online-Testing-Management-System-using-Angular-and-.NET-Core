@@ -66,7 +66,7 @@ export class ViewTestComponent implements OnInit {
           .subscribe(
             data => {
               this.resultTest =  data.data.result;
-              console.log("ViewTestComponent -> ngOnInit -> data.data.result", data.data.result)
+              // console.log("ViewTestComponent -> ngOnInit -> data.data.result", data.data.result)
               if(this.resultTest == null){
                 this.routes.navigate(['login']);
               }

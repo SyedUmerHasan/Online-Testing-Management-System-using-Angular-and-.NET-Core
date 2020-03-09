@@ -56,7 +56,7 @@ export class TestScreenComponent implements OnInit {
     .pipe(first())
         .subscribe(
           data => {
-            console.log('TestScreenComponent -> decodedToken', decodedToken);
+            // console.log('TestScreenComponent -> decodedToken', decodedToken);
             this.updateQuestionList(data.data.questions);
             if (decodedToken.time == 0 || decodedToken.time == null) {
               console.log('Ia m working');
@@ -204,11 +204,11 @@ export class TestScreenComponent implements OnInit {
       testTime = this.TOTALTIME - this.remainingTimeLeft - this.lastRemainingTime;
     }
 
-    console.log('TestScreenComponent -> onSubmit -> this.JWTtimeFlag', this.JWTtimeFlag);
-    console.log('TestScreenComponent -> onSubmit -> this.TOTALTIME', this.TOTALTIME);
-    console.log('TestScreenComponent -> onSubmit -> this.remainingTimeLeft', this.remainingTimeLeft);
-    console.log('TestScreenComponent -> onSubmit -> this.lastRemainingTime', this.lastRemainingTime);
-    console.log('TestScreenComponent -> onSubmit -> testTime', testTime);
+    // console.log('TestScreenComponent -> onSubmit -> this.JWTtimeFlag', this.JWTtimeFlag);
+    // console.log('TestScreenComponent -> onSubmit -> this.TOTALTIME', this.TOTALTIME);
+    // console.log('TestScreenComponent -> onSubmit -> this.remainingTimeLeft', this.remainingTimeLeft);
+    // console.log('TestScreenComponent -> onSubmit -> this.lastRemainingTime', this.lastRemainingTime);
+    // console.log('TestScreenComponent -> onSubmit -> testTime', testTime);
 
     this.questionsService.submitQuestionAnswer(decodedToken.candidateid,
                                               this.getCurrentQuestionId(),

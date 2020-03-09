@@ -55,7 +55,7 @@ export class CreateExperienceComponent implements OnInit {
         .pipe(first())
         .subscribe(
           data => {
-            console.log('data', data);
+            // console.log('data', data);
             this.showSuccessStatus =  true;
             this.showSuccessMessage = 'Experience Level has been added successfully';
             this.showErrorStatus =  false;

@@ -1,3 +1,4 @@
+import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserModule } from '@angular/platform-browser';
 import { LoggedInGuard } from './../../Guards/LoggedIn.guard';
 import { AdminGuard } from './../../Guards/Admin.guard';
@@ -28,7 +29,8 @@ import { ResetPasswordComponent } from './component/reset-password/reset-passwor
     BrowserModule,
     ReactiveFormsModule,
     FormsModule,
-    CommonModule
+    CommonModule,
+    NgxSpinnerModule
   ],
   exports : [
     RouterModule,

@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   loading = false;
   submitted = false;
   returnUrl: string;
-  loginerror =false;
+  loginerror = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -65,8 +65,7 @@ export class LoginComponent implements OnInit {
 
     // stop here if form is invalid
     if (this.loginForm.invalid) {
-        this.loginerror = true;
-
+        this.loginerror = false;
         return;
     }
 

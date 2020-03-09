@@ -42,7 +42,7 @@
                             <td>{{hero.email}}</td>
                             <td>{{hero.currentCompany}}</td>
                             <td>
-                                <button class="mb-2 mr-2 btn btn-warning" [routerLink]="['/admin/candidate/edit',hero.candidateId ]" routerLinkActive="router-link-active" style="color: white !important;">Edit</button>
+                                <button class="mb-2 mr-2 btn btn-success" [routerLink]="['/admin/candidate/edit',hero.candidateId ]" routerLinkActive="router-link-active" style="color: white !important;">Edit</button>
                                 <button class="mb-2 mr-2 btn btn-danger" (click)="onDelete(hero.candidateId)">Delete</button>
                             </td>
                         </tr>

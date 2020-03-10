@@ -1,3 +1,6 @@
+import { DatatableQuestionsComponent } from './../Modules/questions/datatable-questions/datatable-questions.component';
+import { DatatableCategoryComponent } from './../Modules/category/components/datatable-category/datatable-category.component';
+import { ViewQuestionComponent } from './../Modules/test/components/view-question/view-question.component';
 import { ViewTestComponent } from './../Modules/test/components/view-test/view-test.component';
 import { ThankyouPageComponent } from './../Modules/test/components/thankyou-page/thankyou-page.component';
 import { VerifierGuard } from './../Guards/verifier.guard';
@@ -96,9 +99,24 @@ const UserModuleRoutes: Routes = [
     canActivate : [AdminGuard]
   },
   {
+    path : 'admin/viewquestions/:id',
+    component : ViewQuestionComponent,
+    canActivate : [AdminGuard]
+  },
+  {
     path : 'verifier',
     component : ListTestComponent,
     canActivate : [VerifierGuard]
+  },
+  {
+    path : 'verifier/viewresults/:id',
+    component : ViewTestComponent,
+    canActivate : [AdminGuard]
+  },
+  {
+    path : 'verifier/viewquestions/:id',
+    component : ViewQuestionComponent,
+    canActivate : [AdminGuard]
   },
 
 ];
@@ -143,7 +161,7 @@ const CategoryModuleRoutes: Routes = [
   },
   {
     path : 'admin/category/list',
-    component : ListCategoryComponent,
+    component : DatatableCategoryComponent,
     canActivate : [AdminGuard]
   },
   {
@@ -194,7 +212,7 @@ const QuestionsModuleRoutes: Routes = [
   },
   {
     path : 'admin/questions/list',
-    component : ListQuestionsComponent,
+    component : DatatableQuestionsComponent,
     canActivate : [AdminGuard]
   },
   {

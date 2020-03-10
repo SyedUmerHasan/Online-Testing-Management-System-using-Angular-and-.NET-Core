@@ -14,6 +14,8 @@ import { EditCategoryComponent } from './components/edit-category/edit-category.
 import { ListCategoryComponent } from './components/list-category/list-category.component';
 import { AuthGuard } from 'src/app/Guards/auth.guard';
 import { LoggedInGuard } from 'src/app/Guards/LoggedIn.guard';
+import { DatatableCategoryComponent } from './components/datatable-category/datatable-category.component';
+import {TableModule} from 'primeng/table';
 
 
 
@@ -21,7 +23,8 @@ import { LoggedInGuard } from 'src/app/Guards/LoggedIn.guard';
   declarations: [
     CreateCategoryComponent,
     EditCategoryComponent,
-    ListCategoryComponent
+    ListCategoryComponent,
+    DatatableCategoryComponent
   ],
   imports: [
     HttpClientModule,
@@ -29,6 +32,7 @@ import { LoggedInGuard } from 'src/app/Guards/LoggedIn.guard';
     RouterModule.forRoot(CategoryModuleRoutes),
     ReactiveFormsModule,
     FormsModule,
+    TableModule,
     CommonModule,
     DataTablesModule,
     NgxSpinnerModule

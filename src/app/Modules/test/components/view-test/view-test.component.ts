@@ -1,4 +1,4 @@
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { AuthenticationService } from 'src/app/Services/Authentication/authentication.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -77,10 +77,12 @@ export class ViewTestComponent implements OnInit {
             });
         }
 
-
-
       });
   }
+
+    // convenience getter for easy access to form fields
+    get f() { return this.testForm.controls; }
+    get t() { return this.f.option as FormArray; }
 
 
   updateRecords(records) {

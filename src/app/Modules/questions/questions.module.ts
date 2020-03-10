@@ -1,3 +1,6 @@
+import { DropdownModule } from 'primeng/dropdown';
+import { DialogModule } from 'primeng/dialog';
+import { TableModule } from 'primeng/table';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserModule } from '@angular/platform-browser';
 import { DataTablesModule } from 'angular-datatables';
@@ -15,9 +18,10 @@ import { CreateQuestionsComponent } from './create-questions/create-questions.co
 import { EditQuestionsComponent } from './edit-questions/edit-questions.component';
 import { ListQuestionsComponent } from './list-questions/list-questions.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
-
+import { DatatableQuestionsComponent } from './datatable-questions/datatable-questions.component';
+import {MultiSelectModule} from 'primeng/multiselect';
 @NgModule({
-  declarations: [CreateQuestionsComponent, EditQuestionsComponent, ListQuestionsComponent],
+  declarations: [CreateQuestionsComponent, EditQuestionsComponent, ListQuestionsComponent, DatatableQuestionsComponent],
   imports: [
     HttpClientModule,
     BrowserModule,
@@ -27,7 +31,11 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     CommonModule,
     DataTablesModule,
     CKEditorModule,
-    NgxSpinnerModule
+    TableModule,
+    NgxSpinnerModule,
+    DialogModule,
+    MultiSelectModule,
+    DropdownModule
   ],
   exports: [
     RouterModule,

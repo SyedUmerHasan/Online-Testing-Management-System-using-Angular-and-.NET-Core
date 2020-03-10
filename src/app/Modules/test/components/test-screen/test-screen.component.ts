@@ -59,7 +59,7 @@ export class TestScreenComponent implements OnInit {
             // console.log('TestScreenComponent -> decodedToken', decodedToken);
             this.updateQuestionList(data.data.questions);
             if (decodedToken.time == 0 || decodedToken.time == null) {
-              console.log('Ia m working');
+              // console.log('Ia m working');
               this.TOTALTIME = this.questionList[this.questionIteration].time * 60;
               this.remainingTimeLeft = this.questionList[this.questionIteration].time * 60;
               this.JWTtimeFlag = false;

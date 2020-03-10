@@ -27,7 +27,7 @@
                 <table class="mb-0 table" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
                     <thead>
                         <tr>
-                            <th>#</th>
+                            <!-- <th>#</th> -->
                             <th>Experience Name</th>
                             <th>Minimum Experience</th>
                             <th>Maximum Experience</th>
@@ -36,7 +36,7 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let hero of ExperienceLevelList; let i = index">
-                            <th scope="row">{{i +1}}</th>
+                            <!-- <th scope="row">{{i +1}}</th> -->
                             <td>{{hero.name}}</td>
                             <td>{{hero.minExp}}</td>
                             <td>{{hero.maxExp}}</td>

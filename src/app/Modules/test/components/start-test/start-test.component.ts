@@ -125,7 +125,7 @@ export class StartTestComponent implements OnInit {
   }
 
   onChange(event) {
-    console.log(event);
+    // console.log(event);
     this.showTime = event;
   }
   getShowTime() {

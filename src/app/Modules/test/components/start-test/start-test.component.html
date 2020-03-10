@@ -12,7 +12,7 @@
                             <div class="position-relative form-group">
                                 <label for="exampleEmail11" class="">Candidate Name</label>
                                 <select class="mb-2 form-control" formControlName="CandidateId" [ngClass]="{ 'is-invalid': submitted && f.CandidateId.errors }">
-                                  <option value=""> Please Select</option>
+                                  <option value=""> Select</option>
                                   <option *ngFor="let hero of candidateList; let i = index" value={{hero.candidateId}}>
                                     {{ hero.firstName | titlecase  }}
                                     {{ hero.lastName | titlecase }}
@@ -27,7 +27,7 @@
                         <div class="col-md-6 ">
                             <div class="position-relative form-group"><label for="exampleEmail11" class="">Number of Questions</label>
                                 <select class="mb-2 form-control" formControlName="numberOfQuestion" [ngClass]="{ 'is-invalid': submitted && f.numberOfQuestion.errors }">
-                                <option value="">Please Select</option>
+                                <option value="">Select</option>
                                 <option value="5"> 5</option>
                                 <option value="7"> 7</option>
                                 <option value="9"> 9</option>
@@ -42,7 +42,7 @@
                         <div class="col-md-6">
                             <div class="position-relative form-group"><label for="exampleEmail11" class="">Test Type </label>
                                 <select class="mb-2 form-control" formControlName="testType" (change)="onChange($event.target.value)" [ngClass]="{ 'is-invalid': submitted && f.testType.errors }">
-                                <option value="">Please Select</option>
+                                <option value="">Select</option>
                                 <option value="true">Per Questions</option>
                                 <option value="false">Per Test</option>
                                 </select>
@@ -55,7 +55,7 @@
                         <div class="col-md-6" *ngIf="getShowTime()">
                             <div class="position-relative form-group"><label for="exampleEmail11" class="">Total Test Time </label>
                                 <select class="mb-2 form-control" formControlName="testTime">
-                                <option value="0">Please Select</option>
+                                <option value="0">Select</option>
                                 <option value="10">10 Minutes</option>
                                 <option value="15">15 Minutes</option>
                                 <option value="20">20 Minutes</option>

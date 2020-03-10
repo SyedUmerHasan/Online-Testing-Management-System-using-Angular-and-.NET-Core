@@ -27,14 +27,14 @@
                 <table class="mb-0 table" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
                     <thead>
                         <tr>
-                            <th>#</th>
+                            <!-- <th>#</th> -->
                             <th>Category Name</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let hero of categoryList; let i = index">
-                            <th scope="row">{{i +1}}</th>
+                            <!-- <th scope="row">{{i +1}}</th> -->
                             <td>{{hero.name}}</td>
                             <td>
                                 <button class="mb-2 mr-2 btn btn-success" [routerLink]="['/admin/category/edit',hero.categoryId ]">Edit</button>

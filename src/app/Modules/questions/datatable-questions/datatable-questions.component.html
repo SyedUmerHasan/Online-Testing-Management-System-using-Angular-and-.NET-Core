@@ -55,9 +55,10 @@
                             </td>
                             <td>
                                 <div class="btn-toolbar">
-                                    <button type="button" class="mb-2 mr-2 btn btn-success" *ngIf="role == 'admin'" [routerLink]="['/admin/questions/edit',hero.questionId]">Edit</button>
-                                    <button type="button" class="mb-2 mr-2 btn btn-success" *ngIf="role == 'contributor'" [routerLink]="['/contributor/edit',hero.questionId]">Edit</button>
-                                    <button class="mb-2 mr-2 btn btn-danger" (click)="delete(hero.questionId)">Delete</button>
+                                    <!-- <button type="button" class="mb-2 mr-2 btn btn-success" *ngIf="role == 'admin'" [routerLink]="['/admin/questions/edit',hero.questionId]">Edit</button>
+                                    <button type="button" class="mb-2 mr-2 btn btn-success" *ngIf="role == 'contributor'" [routerLink]="['/contributor/edit',hero.questionId]">Edit</button> -->
+                                    <button class="mb-2 mr-2 btn btn-success">Edit</button>
+                                    <button class="mb-2 mr-2 btn btn-danger">Delete</button>
                                 </div>
                             </td>
                         </tr>

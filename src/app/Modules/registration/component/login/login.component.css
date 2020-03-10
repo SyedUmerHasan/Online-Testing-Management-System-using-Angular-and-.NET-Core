@@ -10,7 +10,7 @@
         display: -ms-flexbox;
         display: flex;
         flex-wrap: wrap;
-        padding: 0 65px 0px !important;
+        padding: 10%;
     }
     
     @media (max-width: 576px) {

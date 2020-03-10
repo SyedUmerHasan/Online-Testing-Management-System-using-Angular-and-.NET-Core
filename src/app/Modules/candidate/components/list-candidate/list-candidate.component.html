@@ -28,7 +28,7 @@
                 <table class="row-border hover mb-0 table" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
                     <thead>
                         <tr>
-                            <th>#</th>
+                            <!-- <th>#</th> -->
                             <th>First Name</th>
                             <th>Email</th>
                             <th>Current Company</th>
@@ -37,7 +37,7 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let hero of candidateList; let i = index">
-                            <th scope="row">{{i + 1}}</th>
+                            <!-- <th scope="row">{{i + 1}}</th> -->
                             <td>{{hero.firstName}} {{hero.lastName}}</td>
                             <td>{{hero.email}}</td>
                             <td>{{hero.currentCompany}}</td>

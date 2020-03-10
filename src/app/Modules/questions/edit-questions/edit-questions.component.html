@@ -34,7 +34,7 @@
 
                             <div class="position-relative form-group "><label>Category</label>
                                 <select class="mb-2 form-control" aria-placeholder="Enter Tech Stack eg MERN/MEAN/LAMP" formControlName="CategoryId" [ngClass]="{ 'is-invalid': submitted && f.CategoryId.errors }">
-                              <option selected="selected" value="">Please Select</option>
+                              <option selected="selected" value="">Select</option>
                               <option *ngFor="let hero of categoryList;" value={{hero.categoryId}}> {{hero.name}}</option>
                               </select>
                                 <div *ngIf="submitted && f.CategoryId.errors" class="invalid-feedback">
@@ -46,7 +46,7 @@
                         <div class="col-md-6 ">
                             <div class="position-relative form-group "><label>Experience Level</label>
                                 <select class="mb-2 form-control" aria-placeholder="Enter Tech Stack eg MERN/MEAN/LAMP" formControlName="ExperienceLevelId" [ngClass]="{ 'is-invalid': submitted && f.ExperienceLevelId.errors }">
-                              <option selected="selected" value="">Please Select</option>
+                              <option selected="selected" value="">Select</option>
                               <option *ngFor="let hero of ExperienceLevelList;" value={{hero.id}}> {{hero.name}}</option>
                             </select>
                                 <div *ngIf="submitted && f.ExperienceLevelId.errors" class="invalid-feedback">
@@ -58,7 +58,7 @@
                         <div class="col-md-12 ">
                             <div class="position-relative form-group "><label>Time in Minutes Per Question</label>
                                 <select class="mb-2 form-control" formControlName="Time">
-                            <option value="0">Please Select</option>
+                            <option value="0">Select</option>
                             <option value="1">1 Minute</option>
                             <option value="2">2 Minute</option>
                             <option value="3">3 Minute</option>

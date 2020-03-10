@@ -7,7 +7,7 @@
                 <table class="mb-0 table" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
                     <thead>
                         <tr>
-                            <th>#</th>
+                            <!-- <th>#</th> -->
                             <th> Name</th>
                             <th> Category</th>
                             <th> Experience Level</th>
@@ -18,7 +18,7 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let hero of resultList; let i = index">
-                            <th scope="row">{{i +1}}</th>
+                            <!-- <th scope="row">{{i +1}}</th> -->
                             <td>{{hero.candidateName}}</td>
                             <td>{{hero.category}}</td>
                             <td>{{hero.experienceLevel}}</td>

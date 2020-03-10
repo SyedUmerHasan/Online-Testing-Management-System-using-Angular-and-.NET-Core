@@ -57,7 +57,7 @@
                         <div class="col-md-6 ">
                             <div class="position-relative form-group "><label>Role Name </label>
                                 <select class="mb-2 form-control" formControlName="roleId" [ngClass]="{ 'is-invalid': submitted && f.roleId.errors }">
-                                <option value="">Please Select</option>
+                                <option value="">Select</option>
                                 <option *ngFor="let hero of roleList;" value={{hero.id}}> {{hero.name}}</option>
                                 </select>
                                 <div *ngIf="submitted && f.roleId.errors" class="invalid-feedback">
@@ -73,7 +73,7 @@
                         <div class="col-md-6">
                             <div class="position-relative form-group "><label>Category Name</label>
                                 <select class="mb-2 form-control" aria-placeholder="Enter category Name" formControlName="categoryId" [ngClass]="{ 'is-invalid': submitted && f.categoryId.errors }">
-                                <option value="" selected>Please Select</option>
+                                <option value="" selected>Select</option>
                                 <option *ngFor="let item of categoryList" value={{item.categoryId}}>{{item.name}}</option>
                                 </select>
                                 <div *ngIf="submitted && f.categoryId.errors" class="invalid-feedback">

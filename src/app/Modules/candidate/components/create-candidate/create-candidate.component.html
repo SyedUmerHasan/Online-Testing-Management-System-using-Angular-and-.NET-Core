@@ -99,7 +99,7 @@
                         <div class="col-md-6 ">
                             <div class="position-relative form-group "><label>Experience Level</label>
                                 <select class="mb-2 form-control" aria-placeholder="Enter Tech Stack eg MERN/MEAN/LAMP" formControlName="ExperienceLevelId" [ngClass]="{ 'is-invalid': submitted && f.ExperienceLevelId.errors }">
-                                  <option value="">Please Select</option>
+                                  <option value="">Select</option>
                                   <option *ngFor="let hero of ExperienceLevelList;" value={{hero.id}}> {{hero.name}}</option>
                                 </select>
                                 <div *ngIf="submitted && f.ExperienceLevelId.errors" class="invalid-feedback">
@@ -111,7 +111,7 @@
                         <div class="col-md-6">
                             <div class="position-relative form-group "><label>Category</label>
                                 <select class="mb-2 form-control" aria-placeholder="Enter Tech Stack eg MERN/MEAN/LAMP" formControlName="CategoryId" [ngClass]="{ 'is-invalid': submitted && f.CategoryId.errors }">
-                                  <option value="">Please Select</option>
+                                  <option value="">Select</option>
                                   <option *ngFor="let hero of categoryList; let i = index" value={{hero.categoryId}}>{{hero.name}}</option>
                                 </select>
                                 <div *ngIf="submitted && f.CategoryId.errors" class="invalid-feedback">

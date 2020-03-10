@@ -30,15 +30,17 @@
                 <table class="mb-0 table" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
                     <thead>
                         <tr>
-                            <th>#</th>
+                             <!-- <th>#</th>  -->
                             <th>Question Description</th>
+                            <th>Created By</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let hero of QuestionsList; let i = index">
-                            <th scope="row">{{i +1}}</th>
-                            <td [innerHTML]="hero.question | slice:0:150"></td>
+                             <!-- <th scope="row">{{i +1}}</th> -->
+                            <td [innerHTML]="hero.question | slice:0:150" ></td>
+                            <td>{{hero.createdName}}</td>
                             <td>
                                 <button type="button" class="mb-2 mr-2 btn btn-success" *ngIf="role == 'admin'" [routerLink]="['/admin/questions/edit',hero.questionId]">Edit</button>
                                 <button type="button" class="mb-2 mr-2 btn btn-success" *ngIf="role == 'contributor'" [routerLink]="['/contributor/edit',hero.questionId]">Edit</button>

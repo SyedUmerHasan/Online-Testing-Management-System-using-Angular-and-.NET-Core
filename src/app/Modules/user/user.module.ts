@@ -10,19 +10,25 @@ import { CommonModule } from '@angular/common';
 import { CreateUserComponent } from './components/create-user/create-user.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { ListUserComponent } from './components/list-user/list-user.component';
+import { DataTablesModule } from 'angular-datatables';
+import { EditUserComponent } from './components/edit-user/edit-user.component';
 
 
 
 @NgModule({
   declarations: [
-  CreateUserComponent
+  CreateUserComponent,
+  ListUserComponent,
+  EditUserComponent
 ],
   imports: [
     RouterModule.forRoot(UserModuleRoutes),
     ReactiveFormsModule,
     FormsModule,
     CommonModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    DataTablesModule
   ],
   exports : [
     RouterModule,

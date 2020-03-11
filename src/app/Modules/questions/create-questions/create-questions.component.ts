@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { QuestionsService } from 'src/app/Services/Questions/questions.service';
 import { first } from 'rxjs/operators';
 import * as DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-create-questions',
@@ -33,11 +34,13 @@ export class CreateQuestionsComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private questionsService: QuestionsService,
               private categoryService: CategoryService,
-              private experienceLevelService: ExperienceLevelService) {}
+              private experienceLevelService: ExperienceLevelService,
+              private spinner : NgxSpinnerService) {}
   categoryList = [];
   ExperienceLevelList = [];
 
   ngOnInit() {
+    this.spinner.show();
     this.questionsForm = this.formBuilder.group({
       Description: ['', Validators.required],
       Marks: ['', Validators.required],
@@ -50,18 +53,22 @@ export class CreateQuestionsComponent implements OnInit {
         .pipe(first())
         .subscribe(
           data => {
+            this.spinner.hide();
             this.categoryList =  data.data.categories;
           },
           error => {
+            this.spinner.hide();
             this.categoryList = [];
           });
     this.experienceLevelService.getallExperienceLevels()
         .pipe(first())
         .subscribe(
           data => {
+            this.spinner.hide();
             this.ExperienceLevelList =  data.data.experiences;
           },
           error => {
+            this.spinner.hide();
             this.ExperienceLevelList = [];
           });
   }
@@ -70,9 +77,10 @@ export class CreateQuestionsComponent implements OnInit {
   get t() { return this.f.option as FormArray; }
 
   onSubmit() {
-
+    this.spinner.show();
     this.submitted = true;
     if (this.questionsForm.invalid ) {
+      this.spinner.hide();
       this.formError = true;
       return;
     }
@@ -92,6 +100,7 @@ export class CreateQuestionsComponent implements OnInit {
         .subscribe(
           data => {
             if (data.success && data.status === 200) {
+              this.spinner.hide();
               this.showSuccessStatus =  true;
               this.showSuccessMessage = 'Questions has been added successfully';
               this.showErrorStatus =  false;
@@ -100,6 +109,7 @@ export class CreateQuestionsComponent implements OnInit {
               this.clearFormArray(this.t);
               this.questionsForm.reset();
             } else {
+              this.spinner.hide();
               this.showSuccessStatus  = false;
               this.showErrorStatus  = true;
               this.showErrorMessage = 'Questions has not been added, can be seen in browser console';
@@ -107,6 +117,7 @@ export class CreateQuestionsComponent implements OnInit {
             }
           },
           error => {
+            this.spinner.hide();
               this.showSuccessStatus  = false;
               this.showErrorStatus  = true;
               this.showErrorMessage = 'Questions has not been added, can be seen in browser console';

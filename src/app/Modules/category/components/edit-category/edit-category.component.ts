@@ -70,10 +70,12 @@ export class EditCategoryComponent implements OnInit {
   }
 
   onSubmit() {
+    this.spinner.show();
     this.submitted = true;
 
     // stop here if form is invalid
     if (this.categoryForm.invalid) {
+      this.spinner.hide();
       this.formError = true;
       return;
     }
@@ -82,11 +84,13 @@ export class EditCategoryComponent implements OnInit {
         .pipe(first())
         .subscribe(
           data => {
+            this.spinner.hide();
             this.showSuccessStatus =  true;
             this.showSuccessMessage = 'Category has been Updated successfully';
             this.showErrorStatus =  false;
           },
           error => {
+              this.spinner.hide();
               this.showSuccessStatus  = false;
               this.showErrorStatus  = true;
               this.showErrorMessage = 'Category has not been Updated, can be seen in browser console';

@@ -17,6 +17,10 @@
                         </div>
                     </div>
 
+                    <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">  
+                        <p style="color: white">Please Wait. </p>  
+                        </ngx-spinner> 
+
                     <div class="form-row">
                         <div class="col-md-6">
                             <div class="position-relative form-group"><label>First Name</label><input placeholder="Enter First Name" formControlName="FirstName" type="text" class="form-control " [ngClass]="{ 'is-invalid': submitted && f.FirstName.errors }">
@@ -80,11 +84,12 @@
                     <button class="mt-2 btn btn-primary ">Submit</button>
                     <span style="padding: 2px;"></span>
                     <button class="mt-2 btn btn-danger" value="cancel" routerLink="../../">Cancel</button>
-                    <ngx-spinner></ngx-spinner>
+                    
 
                 </form>
             </div>
         </div>
 
-        </ div>
+      </div>
+    
     </div>

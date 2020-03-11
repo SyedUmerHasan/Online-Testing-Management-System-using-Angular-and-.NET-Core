@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import 'src/assets/scripts/main.js';
 import { first } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-list-candidate',
@@ -26,18 +27,23 @@ export class ListCandidateComponent implements OnInit {
   };
   dtTrigger: Subject<any> = new Subject();
 
-  constructor(private http: HttpClient, private candidateService: CandidateService) { }
+  constructor(private http: HttpClient, 
+              private candidateService: CandidateService,
+              private spinner : NgxSpinnerService) { }
 
   ngOnInit() {
+    this.spinner.show();
     this.candidateService.getallCandidate()
         .pipe(first())
         .subscribe(
           data => {
+            this.spinner.hide();
             this.candidateList =  data.data['candidates']
             this.users$ = data;
             this.dtTrigger.next();
           },
           error => {
+            this.spinner.hide();
             this.candidateList = [];
           });
     this.dtOptions = {
@@ -51,18 +57,22 @@ export class ListCandidateComponent implements OnInit {
         .pipe(first())
         .subscribe(
           data => {
+            this.spinner.show();
             if(data.data.candidate == true){
+              
               console.log("success");
 
               this.showSuccessStatus =  true;
               this.showSuccessMessage = 'Candidate has been deleted successfully';
               this.showErrorStatus =  false;
-
               this.candidateList = this.candidateList.filter((value) => {
+                this.spinner.hide();
                 return value.candidateId !== CandidateId;
+                
               });
 
             } else {
+              this.spinner.hide();
               this.showSuccessStatus  = false;
               this.showErrorStatus  = true;
               this.showErrorMessage = 'Candidate has not been deleted, can be seen in browser console';
@@ -70,6 +80,7 @@ export class ListCandidateComponent implements OnInit {
             }
           },
           error => {
+            this.spinner.hide();
             console.log(error);
           });
   }

@@ -5,6 +5,7 @@ import { QuestionsService } from 'src/app/Services/Questions/questions.service';
 import { AuthenticationService } from 'src/app/Services/Authentication/authentication.service';
 import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-datatable-questions',
@@ -29,11 +30,13 @@ export class DatatableQuestionsComponent implements OnInit {
               private experienceLevelService: ExperienceLevelService,
               private categoryService: CategoryService,
               private userService: UserService,
-              private authenticationService: AuthenticationService) {}
+              private authenticationService: AuthenticationService,
+              private spinner : NgxSpinnerService) {}
     cols = [];
     first = 0;
     colors = [];
     ngOnInit() {
+      this.spinner.show();
       if (this.authenticationService.currentUserRole === 'contributor') {
         this.cols = [
           { field: 'question', header: 'Question Description' },
@@ -44,15 +47,17 @@ export class DatatableQuestionsComponent implements OnInit {
           .pipe(first())
           .subscribe(
             data => {
+              this.spinner.hide();
               this.QuestionsList =  data.data.questions;
               console.log('DatatableQuestionsComponent -> ngOnInit -> this.QuestionsList', this.QuestionsList);
             },
             error => {
+              this.spinner.hide();
               this.QuestionsList = [];
             });
         this.role = 'contributor';
       } else {
-
+               
         this.cols = [
           { field: 'question', header: 'Question Description' },
           { field: 'category', header: 'Question category' },
@@ -65,10 +70,12 @@ export class DatatableQuestionsComponent implements OnInit {
         .pipe(first())
         .subscribe(
           data => {
+            this.spinner.hide();
             this.QuestionsList =  data.data.questions;
             console.log('DatatableQuestionsComponent -> ngOnInit -> this.QuestionsList', this.QuestionsList);
           },
           error => {
+            this.spinner.hide();
             this.QuestionsList = [];
           });
 
@@ -76,6 +83,7 @@ export class DatatableQuestionsComponent implements OnInit {
           .pipe(first())
           .subscribe(
             data => {
+              this.spinner.hide();
               this.experienceLevelList =  data.data.experiences;
               this.expList.push({ label: 'All Experience', value: null });
 
@@ -85,12 +93,14 @@ export class DatatableQuestionsComponent implements OnInit {
               });
             },
             error => {
+              this.spinner.hide();
               this.experienceLevelList = [];
             });
         this.categoryService.getallCategory()
             .pipe(first())
             .subscribe(
               data => {
+                this.spinner.hide();
                 // tslint:disable-next-line: no-string-literal
                 this.categoryList =  data.data['categories'];
                 this.mycatList.push({ label: 'All categories', value: null });
@@ -99,6 +109,7 @@ export class DatatableQuestionsComponent implements OnInit {
                 });
               },
               error => {
+                this.spinner.hide();
                 this.mycatList = [];
               });
 
@@ -106,6 +117,7 @@ export class DatatableQuestionsComponent implements OnInit {
         .pipe(first())
         .subscribe(
           data => {
+            this.spinner.hide();
             // tslint:disable-next-line: no-string-literal
             const templist =  data.data['email'];
             this.userEmail.push({ label: 'All Email', value: null });
@@ -115,6 +127,7 @@ export class DatatableQuestionsComponent implements OnInit {
 
           },
           error => {
+            this.spinner.hide();
             this.userEmail = [];
           });
 

@@ -30,6 +30,8 @@ export class EditUserComponent implements OnInit {
               private route: ActivatedRoute) {}
 
   ngOnInit() {
+     
+    this.spinner.show();
     this.userForm = this.formBuilder.group({
       Name: ['', Validators.required],
       Email: ['', Validators.required],
@@ -46,6 +48,7 @@ export class EditUserComponent implements OnInit {
       .pipe(first())
           .subscribe(
             data => {
+              this.spinner.hide();
               this.currentUser = data.data.user;
               // console.log('EditExperienceComponent -> ngOnInit -> this.currentExpLevel', this.currentExpLevel);
               if (this.currentUser == null) {
@@ -55,6 +58,7 @@ export class EditUserComponent implements OnInit {
               this.updateRecords(this.currentUser.userName, this.currentUser.email);
             },
             error => {
+              this.spinner.hide();
 
             });
 
@@ -99,14 +103,16 @@ export class EditUserComponent implements OnInit {
             this.showSuccessMessage = 'User has been Updated successfully';
             this.showErrorStatus =  false;
             console.log('I am Response ' ,data);
+            this.spinner.hide();
           },
           error => {
               this.showSuccessStatus  = false;
               this.showErrorStatus  = true;
               this.showErrorMessage = 'User has not been Updated, can be seen in browser console';
               console.log('Error in creating : ', error);
+              this.spinner.hide();
           });
-    this.spinner.hide();
+    
 
   }
   getshowSuccessStatus() {

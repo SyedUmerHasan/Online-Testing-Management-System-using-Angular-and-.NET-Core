@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
 import 'src/assets/scripts/main.js';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-create-candidate',
@@ -25,9 +26,11 @@ export class CreateCandidateComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private candidateService: CandidateService,
               private categoryService: CategoryService,
-              private experienceLevelService: ExperienceLevelService ) {}
+              private experienceLevelService: ExperienceLevelService,
+              private spinner :NgxSpinnerService ) {}
 
   ngOnInit() {
+    this.spinner.show();
     this.candidateForm = this.formBuilder.group({
       FirstName: ['', Validators.required],
       LastName: ['', Validators.required],
@@ -41,18 +44,22 @@ export class CreateCandidateComponent implements OnInit {
         .pipe(first())
         .subscribe(
           data => {
+            this.spinner.hide();
             this.categoryList =  data.data.categories;
           },
           error => {
+            this.spinner.hide();
             this.categoryList = [];
           });
     this.experienceLevelService.getallExperienceLevels()
         .pipe(first())
         .subscribe(
           data => {
+            this.spinner.hide();
             this.ExperienceLevelList =  data.data.experiences;
           },
           error => {
+            this.spinner.hide();
             this.ExperienceLevelList = [];
           });
   }
@@ -61,10 +68,12 @@ export class CreateCandidateComponent implements OnInit {
   get f() { return this.candidateForm.controls; }
 
   onSubmit() {
+    this.spinner.show();
     this.submitted = true;
 
         // stop here if form is invalid
     if (this.candidateForm.invalid) {
+          this.spinner.hide();
           this.formError = true;
           return;
         }
@@ -78,6 +87,7 @@ export class CreateCandidateComponent implements OnInit {
         .pipe(first())
         .subscribe(
           data => {
+            this.spinner.hide();
             this.showSuccessStatus =  true;
             this.showSuccessMessage = 'Candidate has been added successfully';
             this.showErrorStatus =  false;
@@ -85,6 +95,7 @@ export class CreateCandidateComponent implements OnInit {
             this.candidateForm.reset();
           },
           error => {
+            this.spinner.hide();
               this.showSuccessStatus  = false;
               this.showErrorStatus  = true;
               this.showErrorMessage = 'Candidate has not been added, can be seen in browser console';

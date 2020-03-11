@@ -36,11 +36,12 @@ export class EditCandidateComponent implements OnInit {
 
   ngOnInit() {
 
-
+          this.spinner.show();
 
     this.route.paramMap
     .subscribe(params => {
-
+      
+      //this.spinner.hide();
       // tslint:disable-next-line: no-string-literal
       this.candidateId = params['params']['id'];
 
@@ -56,20 +57,24 @@ export class EditCandidateComponent implements OnInit {
           .pipe(first())
           .subscribe(
             data => {
+              this.spinner.hide();
               this.categoryList =  data.data.categories;
               // console.log('TCL: EditCandidateComponent -> ngOnInit -> categoryList', this.categoryList);
             },
             error => {
+              this.spinner.hide();
               this.categoryList = [];
             });
       this.experienceLevelService.getallExperienceLevels()
           .pipe(first())
           .subscribe(
             data => {
+              this.spinner.hide();
               this.ExperienceLevelList =  data.data.experiences;
               // console.log('TCL: EditCandidateComponent -> ngOnInit -> this.ExperienceLevelList', this.ExperienceLevelList);
             },
             error => {
+              this.spinner.hide();
               this.ExperienceLevelList = [];
             });
 
@@ -77,6 +82,7 @@ export class EditCandidateComponent implements OnInit {
       .pipe(first())
           .subscribe(
             data => {
+              this.spinner.show();
               this.currentCandidate = data.data.candidate;
               // console.log('TCL: EditCandidateComponent -> ngOnInit -> this.currentCandidate', this.currentCandidate);
               this.updateRecords(this.currentCandidate.firstName,
@@ -86,8 +92,10 @@ export class EditCandidateComponent implements OnInit {
                 this.currentCandidate.categoryId,
                 this.currentCandidate.experienceLevelId
                 );
+                this.spinner.hide();
             },
             error => {
+              this.spinner.hide();
             });
 
     });

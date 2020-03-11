@@ -52,6 +52,7 @@ export class EditQuestionsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.spinner.show();
     this.questionsForm = this.formBuilder.group({
       Description: ['', Validators.required],
       option : new FormArray([]),
@@ -71,18 +72,22 @@ export class EditQuestionsComponent implements OnInit {
               .pipe(first())
               .subscribe(
                 data => {
+                  this.spinner.hide();
                   this.categoryList =  data.data.categories;
                 },
                 error => {
+                  this.spinner.hide();
                   this.categoryList = [];
                 });
       this.experienceLevelService.getallExperienceLevels()
               .pipe(first())
               .subscribe(
                 data => {
+                  this.spinner.hide();
                   this.ExperienceLevelList =  data.data.experiences;
                 },
                 error => {
+                  this.spinner.hide();
                   this.ExperienceLevelList = [];
                 });
       if (this.authenticationService.currentUserRole === 'contributor') {
@@ -91,16 +96,21 @@ export class EditQuestionsComponent implements OnInit {
         .pipe(first())
         .subscribe(
           data => {
+            this.spinner.hide();
             this.currentQuestion = data.data.question;
             if (this.currentQuestion == null) {
+              this.spinner.hide();
               this.routes.navigate(['login']);
             }
+            
             this.updateRecords(
+
               this.currentQuestion
             );
             // console.log('TCL: EditQuestionsComponent -> ngOnInit -> this.currentQuestion', this.currentQuestion);
           },
           error => {
+            this.spinner.hide();
           });
 
         } else {
@@ -109,8 +119,10 @@ export class EditQuestionsComponent implements OnInit {
         .pipe(first())
         .subscribe(
           data => {
+            this.spinner.hide();
             this.currentQuestion = data.data.question;
             if (this.currentQuestion == null) {
+              this.spinner.hide();
               this.routes.navigate(['login']);
             }
             this.updateRecords(
@@ -119,6 +131,7 @@ export class EditQuestionsComponent implements OnInit {
             // console.log('TCL: EditQuestionsComponent -> ngOnInit -> this.currentQuestion', this.currentQuestion);
           },
           error => {
+            this.spinner.hide();
           });
 
       }
@@ -144,6 +157,7 @@ export class EditQuestionsComponent implements OnInit {
     this.submitted = true;
 
     if (this.questionsForm.invalid ) {
+      this.spinner.hide();
       this.formError = true;
       this.spinner.hide();
 
@@ -165,10 +179,12 @@ export class EditQuestionsComponent implements OnInit {
         .subscribe(
           data => {
             if (data.success && data.status === 200) {
+              this.spinner.hide();
               this.showSuccessStatus =  true;
               this.showSuccessMessage = 'Questions has been Updated successfully';
               this.showErrorStatus =  false;
             } else {
+              this.spinner.hide();
               this.showSuccessStatus  = false;
               this.showErrorStatus  = true;
               this.showErrorMessage = 'Questions has not been Updated, can be seen in browser console';
@@ -176,6 +192,7 @@ export class EditQuestionsComponent implements OnInit {
             }
           },
           error => {
+             this.spinner.hide();
               this.showSuccessStatus  = false;
               this.showErrorStatus  = true;
               this.showErrorMessage = 'Questions has not been added, can be seen in browser console';

@@ -42,7 +42,8 @@
                             <td>{{hero.role.name}}</td>
                             <td>
                                 <button class="mb-2 mr-2 btn btn-success" [routerLink]="['/admin/userlist/edit',hero.id ]">Edit</button>
-                                <!-- <button class="mb-2 mr-2 btn btn-danger" (click)="onDelete(hero.categoryId)">Delete</button> -->
+                                 
+                                 <button class="mb-2 mr-2 btn btn-primary" *ngIf="role == 'SuperAdmin'" (click)="resetPassword(hero.email)">Reset Password</button> 
                             </td>
                         </tr>
                     </tbody>

@@ -23,7 +23,7 @@ export class ForgotPasswordComponent implements OnInit {
     // redirect to home if already logged in
     if (this.authenticationService.currentUserValue) {
       // Go to admin Routes
-      if (this.authenticationService.currentUserRole === 'SuperAdmin') {
+      if (this.authenticationService.currentUserRole === 'SuperAdmin' ||this.authenticationService.currentUserRole === 'admin' ) {
         this.router.navigate(['/admin']);
       } else if (this.authenticationService.currentUserRole === 'candidate') {
         // Go to User Routes

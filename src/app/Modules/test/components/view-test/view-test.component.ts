@@ -15,7 +15,7 @@ export class ViewTestComponent implements OnInit {
   testForm: FormGroup;
   testId = 0;
   resultTest = [];
-
+  role = "";
   constructor(private formBuilder: FormBuilder,
               private testService: TestService,
               private routes: Router,
@@ -47,6 +47,7 @@ export class ViewTestComponent implements OnInit {
 
 
         if (this.authenticationService.currentUserRole === 'verifier') {
+          this.role = 'verifier';
           this.testService.viewTestResultByRole(this.testId)
           .pipe(first())
           .subscribe(
@@ -61,6 +62,8 @@ export class ViewTestComponent implements OnInit {
               this.resultTest = [];
             });
         } else {
+          this.role = 'admin';
+
           this.testService.viewTestResult(this.testId)
           .pipe(first())
           .subscribe(

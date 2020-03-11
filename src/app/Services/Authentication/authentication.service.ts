@@ -50,8 +50,8 @@ export class AuthenticationService {
                   this.isAdminSubject.next('SuperAdmin');
 
                 } else if (decodedToken.role === 'admin') {
-                  localStorage.setItem('role', 'SuperAdmin');
-                  this.isAdminSubject.next('SuperAdmin');
+                  localStorage.setItem('role', 'admin');
+                  this.isAdminSubject.next('admin');
 
                 } else if (decodedToken.role === 'candidate') {
                   localStorage.setItem('role', 'candidate');

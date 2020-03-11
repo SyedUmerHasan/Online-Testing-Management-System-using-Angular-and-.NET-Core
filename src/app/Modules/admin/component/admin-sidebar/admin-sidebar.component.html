@@ -1,5 +1,5 @@
 <ul class="vertical-nav-menu">
-    <div *ngIf="userRole == 'SuperAdmin'">
+    <div *ngIf="userRole == 'SuperAdmin' || userRole == 'admin'">
         <li class="app-sidebar__heading">Admin Panel</li>
         <li>
             <a href="/admin" class="mm-active">

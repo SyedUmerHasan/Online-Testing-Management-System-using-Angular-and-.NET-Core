@@ -28,11 +28,7 @@
                             <div class="position-relative form-group"><label for="exampleEmail11" class="">Number of Questions</label>
                                 <select class="mb-2 form-control" formControlName="numberOfQuestion" [ngClass]="{ 'is-invalid': submitted && f.numberOfQuestion.errors }">
                                 <option value="">Select</option>
-                                <option value="5"> 5</option>
-                                <option value="7"> 7</option>
-                                <option value="9"> 9</option>
-                                <option value="11"> 11</option>
-                                <option value="13"> 13</option>
+                                <option value={{hero*5}} *ngFor="let hero of [3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20 ]; let i = index" > {{hero*5}}</option>
                                 </select>
                                 <div *ngIf="submitted && f.numberOfQuestion.errors" class="invalid-feedback">
                                     <div *ngIf="f.numberOfQuestion.errors.required">Number Of Question is required</div>

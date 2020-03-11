@@ -36,6 +36,8 @@ import { EditCategoryComponent } from '../Modules/category/components/edit-categ
 import { CreateCategoryComponent } from '../Modules/category/components/create-category/create-category.component';
 import { ListCategoryComponent } from '../Modules/category/components/list-category/list-category.component';
 import { CreateTestComponent } from '../Modules/test/components/create-test/create-test.component';
+import { ListUserComponent } from '../Modules/user/components/list-user/list-user.component';
+import { EditUserComponent } from '../Modules/user/components/edit-user/edit-user.component';
 
 // Using ForRoot
 const HomeModuleRoutes: Routes = [
@@ -74,6 +76,16 @@ const UserModuleRoutes: Routes = [
   {
     path : 'admin/createuser',
     component : CreateUserComponent,
+    canActivate : [AdminGuard]
+  },
+  {
+      path : 'admin/userlist',
+      component : ListUserComponent,
+      canActivate : [AdminGuard]
+  },
+  {
+    path : 'admin/userlist/edit/:id',
+    component : EditUserComponent,
     canActivate : [AdminGuard]
   },
   {

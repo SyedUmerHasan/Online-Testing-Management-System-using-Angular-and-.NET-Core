@@ -5,14 +5,11 @@
             <div class="card-body">
                 <div class="row" style="margin-top: 16px;margin-bottom: 16px;">
                     <div class="col-md-6">
-                        <h5 class="card-title">Questions List</h5>
+                        <h5 class="card-title">User List</h5>
                     </div>
                     <div class="col-md-6">
-                        <div class="d-flex justify-content-end" *ngIf="role == 'contributor'">
-                            <button type="button" [routerLink]="['/contributor/create']" class="btn btn-success btn-lg btn">Create</button>
-                        </div>
-                        <div class="d-flex justify-content-end" *ngIf="role == 'admin'">
-                            <button type="button" [routerLink]="['/admin/questions/create']" class="btn btn-success btn-lg btn">Create</button>
+                        <div class="d-flex justify-content-end">
+                            <button type="button" [routerLink]="['/admin/createuser']" class="btn btn-success btn-lg btn">Create</button>
                         </div>
                     </div>
                 </div>
@@ -30,21 +27,22 @@
                 <table class="mb-0 table" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
                     <thead>
                         <tr>
-                             <!-- <th>#</th>  -->
-                            <th>Question Description</th>
-                            <th>Created By</th>
+                            <!-- <th>#</th> -->
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Role</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let hero of QuestionsList; let i = index">
-                             <!-- <th scope="row">{{i +1}}</th> -->
-                            <td [innerHTML]="hero.question | slice:0:40"></td>
-                            <td>{{hero.createdName}}</td>
+                        <tr *ngFor="let hero of userList; let i = index">
+                            <!-- <th scope="row">{{i +1}}</th> -->
+                            <td>{{hero.userName}}</td>
+                            <td>{{hero.email}}</td>
+                            <td>{{hero.role.name}}</td>
                             <td>
-                                <button type="button" class="mb-2 mr-2 btn btn-success" *ngIf="role == 'admin'" [routerLink]="['/admin/questions/edit',hero.questionId]">Edit</button>
-                                <button type="button" class="mb-2 mr-2 btn btn-success" *ngIf="role == 'contributor'" [routerLink]="['/contributor/edit',hero.questionId]">Edit</button>
-                                <button class="mb-2 mr-2 btn btn-danger" (click)="delete(hero.questionId)">Delete</button>
+                                <button class="mb-2 mr-2 btn btn-success" [routerLink]="['/admin/userlist/edit',hero.id ]">Edit</button>
+                                <!-- <button class="mb-2 mr-2 btn btn-danger" (click)="onDelete(hero.categoryId)">Delete</button> -->
                             </td>
                         </tr>
                     </tbody>

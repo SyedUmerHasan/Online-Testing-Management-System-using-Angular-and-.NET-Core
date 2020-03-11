@@ -29,12 +29,13 @@ export class CreateUserComponent implements OnInit {
 
   ngOnInit() {
     this.userForm = this.formBuilder.group({
-      userName: ['', [Validators.required, UsernameValidator.cannotContainSpace]],
+      userName: ['', Validators.required],
       email: ['', Validators.required],
-      password: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(6)]],
       categoryId: ['', Validators.required],
       roleId: ['', Validators.required],
     });
+
     this.userService.listRole()
         .pipe(first())
         .subscribe(
@@ -58,6 +59,7 @@ export class CreateUserComponent implements OnInit {
   get f() { return this.userForm.controls; }
 
   onSubmit() {
+    console.log("CreateUserComponent -> ngOnInit -> f.password.errors", this.f.password.errors)
 
     this.submitted = true;
     // stop here if form is invalid
@@ -89,7 +91,7 @@ export class CreateUserComponent implements OnInit {
           error => {
               this.showSuccessStatus  = false;
               this.showErrorStatus  = true;
-              this.showErrorMessage = 'User registration has not been completed, can be seen in browser console';
+              this.showErrorMessage = 'Email Already Taken';
               console.log('Error in creating : ', error);
           });
   }

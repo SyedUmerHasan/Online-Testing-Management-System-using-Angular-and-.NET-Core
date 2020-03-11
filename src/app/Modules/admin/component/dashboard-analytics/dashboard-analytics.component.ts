@@ -1,6 +1,7 @@
 import { DashboardService } from './../../../../Services/Dashboard/dashboard.service';
 import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-dashboard-analytics',
@@ -17,10 +18,11 @@ export class DashboardAnalyticsComponent implements OnInit {
   topTenCandidates = [];
 
 
-  constructor(private dashboardService: DashboardService) { }
+  constructor(private dashboardService: DashboardService,
+              private spinner : NgxSpinnerService) { }
 
   ngOnInit() {
-
+    this.spinner.show();
     this.dashboardService.getCandidateCount()
       .pipe(first())
       .subscribe(
@@ -95,7 +97,7 @@ export class DashboardAnalyticsComponent implements OnInit {
     error => {
       this.topTenCandidates = [];
     });
-
+this.spinner.hide();
     }
 
 }

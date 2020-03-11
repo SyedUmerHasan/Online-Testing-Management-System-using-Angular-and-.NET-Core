@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { ExperienceLevelService } from './../../../../Services/ExperienceLevel/experience-level.service';
 import { QuestionsService } from 'src/app/Services/Questions/questions.service';
 import { Validators, FormBuilder, FormGroup, FormArray } from '@angular/forms';
@@ -19,9 +20,10 @@ export class ViewQuestionComponent implements OnInit {
   formError = false;
   options = 0;
   viewQuestions = [];
-
+  testId = "";
 
   constructor(private formBuilder: FormBuilder,
+              private route: ActivatedRoute,
               private questionsService: QuestionsService) {}
 
   ngOnInit() {
@@ -30,18 +32,25 @@ export class ViewQuestionComponent implements OnInit {
       correctoption : new FormArray([]),
       alloption : new FormArray([])
     });
-    this.questionsService.getAllResultQuestions(78)
-    .pipe(first())
-    .subscribe(
-      data => {
-        this.viewQuestions = data.data.result;
-        console.log("ViewQuestionComponent -> ngOnInit -> this.viewQuestions", this.viewQuestions)
-      },
-      error => {
-      console.log("ViewQuestionComponent -> ngOnInit -> error", error)
-      this.viewQuestions = [];
-      });
 
+    this.route.paramMap
+    .subscribe(params => {
+
+      // tslint:disable-next-line: no-string-literal
+      this.testId = params['params']['id'];
+
+      this.questionsService.getAllResultQuestions(this.testId)
+      .pipe(first())
+      .subscribe(
+        data => {
+          this.viewQuestions = data.data.result;
+          console.log('ViewQuestionComponent -> ngOnInit -> this.viewQuestions', this.viewQuestions);
+        },
+        error => {
+        console.log('ViewQuestionComponent -> ngOnInit -> error', error);
+        this.viewQuestions = [];
+        });
+    });
   }
 
   // convenience getter for easy access to form fields

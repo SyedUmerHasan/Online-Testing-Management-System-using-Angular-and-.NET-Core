@@ -32,12 +32,6 @@ export class DatatableResultsComponent implements OnInit {
 
   ngOnInit() {
 
-    this.cols = [
-      { field: 'candidateName', header: 'Candidate Name' },
-      { field: 'category', header: 'Category' },
-      { field: 'experienceLevel', header: 'Experience Level' },
-      { field: 'testStatus', header: 'Test Status' },
-    ];
 
 
     this.experienceLevelService.getallExperienceLevels()
@@ -70,6 +64,12 @@ export class DatatableResultsComponent implements OnInit {
 
           if (this.authenticationService.currentUserRole === 'verifier') {
             this.role = 'verifier';
+            this.cols = [
+              { field: 'candidateName', header: 'Candidate Name' },
+              { field: 'experienceLevel', header: 'Experience Level' },
+              { field: 'testStatus', header: 'Test Status' },
+            ];
+
 
             this.testService.getTestResultByRole()
             .pipe(first())
@@ -84,6 +84,14 @@ export class DatatableResultsComponent implements OnInit {
               });
           } else {
             this.role = 'admin';
+            this.cols = [
+              { field: 'candidateName', header: 'Candidate Name' },
+              { field: 'category', header: 'Category' },
+              { field: 'experienceLevel', header: 'Experience Level' },
+              { field: 'testStatus', header: 'Test Status' },
+            ];
+
+
             this.testService.getTestResult()
             .pipe(first())
             .subscribe(

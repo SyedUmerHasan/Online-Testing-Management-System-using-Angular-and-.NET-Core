@@ -233,7 +233,7 @@ const QuestionsModuleRoutes: Routes = [
   },
   {
     path : 'contributor/list',
-    component : ListQuestionsComponent,
+    component : DatatableQuestionsComponent,
     canActivate : [ContributorGuard]
   },
   {

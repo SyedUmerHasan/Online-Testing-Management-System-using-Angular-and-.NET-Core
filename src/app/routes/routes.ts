@@ -112,12 +112,12 @@ const UserModuleRoutes: Routes = [
   {
     path : 'verifier/viewresults/:id',
     component : ViewTestComponent,
-    canActivate : [AdminGuard]
+    canActivate : [VerifierGuard]
   },
   {
     path : 'verifier/viewquestions/:id',
     component : ViewQuestionComponent,
-    canActivate : [AdminGuard]
+    canActivate : [VerifierGuard]
   },
 
 ];
@@ -162,7 +162,7 @@ const CategoryModuleRoutes: Routes = [
   },
   {
     path : 'admin/category/list',
-    component : DatatableCategoryComponent,
+    component : ListCategoryComponent,
     canActivate : [AdminGuard]
   },
   {

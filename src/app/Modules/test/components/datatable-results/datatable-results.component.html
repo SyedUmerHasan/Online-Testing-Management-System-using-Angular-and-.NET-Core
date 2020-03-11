@@ -27,7 +27,9 @@
                             <!-- candidateName -->
                             <th *ngFor="let col of columns" [ngSwitch]="col.field">
                                 <input *ngSwitchCase="'candidateName'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
-                                <p-dropdown *ngSwitchCase="'category'" [options]="mycatList" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value, col.field, 'equals')"></p-dropdown>
+                                <div *ngIf="role == 'admin'">
+                                    <p-dropdown *ngSwitchCase="'category'" [options]="mycatList" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value, col.field, 'equals')"></p-dropdown>
+                                </div>
                                 <p-dropdown *ngSwitchCase="'experienceLevel'" [options]="expList" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value, col.field, 'equals')"></p-dropdown>
                                 <input *ngSwitchCase="'testStatus'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
                             </th>
@@ -48,13 +50,13 @@
                     <ng-template pTemplate="body" let-car>
                         <tr>
                             <td>{{car.candidateName}}</td>
-                            <td>{{car.category}}</td>
+                            <td *ngIf="role == 'admin'">{{car.category}}</td>
                             <td>{{car.experienceLevel}}</td>
-                            <td>{{car.testStatus}}</td>
+                            <td>{{car.candidateId}}</td>
                             <td>
                                 <div class="btn-toolbar">
                                     <button class="mb-2 mr-2 btn btn-primary" *ngIf="role == 'admin'" [routerLink]="[ '/admin/viewresults', car.candidateId ]">View</button>
-                                    <button class="mb-2 mr-2 btn btn-primary" *ngIf="role == 'verifier'" [routerLink]="[ 'verifier/viewresults', car.candidateId ]">View</button>
+                                    <button class="mb-2 mr-2 btn btn-primary" *ngIf="role == 'verifier'" [routerLink]="[ '/verifier/viewresults', car.candidateId ]">View</button>
                                 </div>
                             </td>
                         </tr>

@@ -35,7 +35,7 @@ import {MultiSelectModule} from 'primeng/multiselect';
     NgxSpinnerModule,
     DialogModule,
     MultiSelectModule,
-    DropdownModule
+    DropdownModule,
   ],
   exports: [
     RouterModule,

@@ -281,12 +281,14 @@ export class TestScreenComponent implements OnInit {
         .subscribe(
           data => {
             if (data.success && data.status === 200) {
+              this.spinner.hide();
               localStorage.setItem('flag', 'true');
               this.authenticationService.logout();
               this.router.navigate(['/thankyou']);
             }
           },
           error => {
+            this.spinner.hide();
               console.log('Error in creating : ', error);
           });
     this.spinner.show();

@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { UsernameValidator } from 'src/app/_validators/UserName.validator';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-create-user',
@@ -25,9 +26,11 @@ export class CreateUserComponent implements OnInit {
   formError = false;
 
   constructor(private formBuilder: FormBuilder,
-              private userService: UserService) {}
+              private userService: UserService,
+              private spinner :NgxSpinnerService) {}
 
   ngOnInit() {
+    this.spinner.show();
     this.userForm = this.formBuilder.group({
       userName: ['', Validators.required],
       email: ['', Validators.required],
@@ -41,29 +44,35 @@ export class CreateUserComponent implements OnInit {
         .subscribe(
           data => {
             this.roleList =  data.data.roles;
+            this.spinner.hide();
           },
           error => {
             this.roleList = [];
+            this.spinner.hide();
           });
     this.userService.listcategory()
         .pipe(first())
         .subscribe(
           data => {
             this.categoryList =  data.data.categories;
+            this.spinner.hide();
           },
           error => {
             this.categoryList = [];
+            this.spinner.hide();
           });
   }
   // convenience getter for easy access to form fields
   get f() { return this.userForm.controls; }
 
   onSubmit() {
+        this.spinner.show();
     console.log("CreateUserComponent -> ngOnInit -> f.password.errors", this.f.password.errors)
 
     this.submitted = true;
     // stop here if form is invalid
     if (this.userForm.invalid) {
+      this.spinner.hide();
       this.formError = true;
       return;
     }
@@ -76,12 +85,14 @@ export class CreateUserComponent implements OnInit {
         .subscribe(
           data => {
             if (data.success && data.status === 200) {
+              this.spinner.hide();
               this.showSuccessStatus =  true;
               this.showSuccessMessage = 'User registration has been added successfully';
               this.showErrorStatus =  false;
               this.submitted = false;
               this.userForm.reset();
             } else {
+              this.spinner.hide();
               this.showSuccessStatus  = false;
               this.showErrorStatus  = true;
               this.showErrorMessage = 'User registration has not been added, can be seen in browser console';
@@ -89,6 +100,7 @@ export class CreateUserComponent implements OnInit {
             }
           },
           error => {
+            this.spinner.hide();
               this.showSuccessStatus  = false;
               this.showErrorStatus  = true;
               this.showErrorMessage = 'Email Already Taken';

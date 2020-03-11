@@ -3,6 +3,7 @@ import { UserService } from 'src/app/Services/Users/user.service';
 import { Subject } from 'rxjs';
 import { first } from 'rxjs/operators';
 import { AuthenticationService } from 'src/app/Services/Authentication/authentication.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-list-user',
@@ -17,7 +18,8 @@ export class ListUserComponent implements OnInit {
   showErrorMessage = null;
   submitted = false;
   constructor(private userService: UserService,
-              private authenticationService: AuthenticationService) { }
+              private authenticationService: AuthenticationService,
+              private spinnerService:NgxSpinnerService) { }
   userList = [];
   role = ""
  
@@ -28,19 +30,23 @@ export class ListUserComponent implements OnInit {
   dtTrigger: Subject<any> = new Subject();
 
   ngOnInit() {
+     this.spinnerService.show();
     if (this.authenticationService.currentUserRole == 'admin' || 
         this.authenticationService.currentUserRole == 'SuperAdmin'){
     this.userService.getallUser()
         .pipe(first())
         .subscribe(
           data => {
+            
             this.userList =  data.data['users'];
             this.users$ = data;
             this.dtTrigger.next();
             this.role = this.authenticationService.currentUserRole;
+           this.spinnerService.hide();
           },
           error => {
             this.userList = [];
+            this.spinnerService.hide();
           });
     this.dtOptions = {
             pagingType: 'full_numbers',
@@ -50,6 +56,7 @@ export class ListUserComponent implements OnInit {
         }
   }
   resetPassword(email){
+    this.spinnerService.show();
     this.userService.GetResetPasswordLink(email)
         .pipe(first())
         .subscribe(
@@ -58,12 +65,14 @@ export class ListUserComponent implements OnInit {
             this.showSuccessStatus =  true;
             this.showSuccessMessage = 'Link Send to Your Email Address';
             this.showErrorStatus =  false;
+            this.spinnerService.hide();
           },
           error => {
             this.showSuccessStatus  = false;
               this.showErrorStatus  = true;
               this.showErrorMessage = 'Error Occured';
             this.userList = [];
+            this.spinnerService.hide();
           });
 
   }

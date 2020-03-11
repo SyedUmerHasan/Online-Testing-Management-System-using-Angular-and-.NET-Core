@@ -30,6 +30,7 @@ export class ListUserComponent implements OnInit {
   dtTrigger: Subject<any> = new Subject();
 
   ngOnInit() {
+    this.spinnerService.show();
     if (this.authenticationService.currentUserRole == 'admin' || this.authenticationService.currentUserRole == 'SuperAdmin'){
     this.userService.getallUser()
         .pipe(first())

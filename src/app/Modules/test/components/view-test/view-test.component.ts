@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { TestService } from 'src/app/Services/Test/test.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-view-test',
@@ -20,10 +21,11 @@ export class ViewTestComponent implements OnInit {
               private testService: TestService,
               private routes: Router,
               private route: ActivatedRoute,
-              private authenticationService: AuthenticationService) {}
+              private authenticationService: AuthenticationService,
+              private spinner : NgxSpinnerService) {}
 
     ngOnInit() {
-
+      this.spinner.show();
       this.testForm = this.formBuilder.group({
         candidateId: ['', Validators.required],
         candidateName: ['', Validators.required],
@@ -52,30 +54,37 @@ export class ViewTestComponent implements OnInit {
           .pipe(first())
           .subscribe(
             data => {
+              this.spinner.hide();
               this.resultTest =  data.data.result;
               if(this.resultTest == null){
+                this.spinner.hide();
                 this.routes.navigate(['login']);
               }
               this.updateRecords(this.resultTest);
             },
             error => {
+              this.spinner.hide();
               this.resultTest = [];
             });
         } else {
+          
           this.role = 'admin';
 
           this.testService.viewTestResult(this.testId)
           .pipe(first())
           .subscribe(
             data => {
+              this.spinner.hide();
               this.resultTest =  data.data.result;
               // console.log("ViewTestComponent -> ngOnInit -> data.data.result", data.data.result)
               if(this.resultTest == null){
+                this.spinner.hide();
                 this.routes.navigate(['login']);
               }
               this.updateRecords(this.resultTest);
             },
             error => {
+              this.spinner.hide();
               this.resultTest = [];
             });
         }

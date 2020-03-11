@@ -4,6 +4,7 @@ import { ExperienceLevelService } from './../../../../Services/ExperienceLevel/e
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { first } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-list-experience',
@@ -19,7 +20,8 @@ export class ListExperienceComponent implements OnInit, OnDestroy {
   submitted = false;
 
   constructor(private http: HttpClient,
-              private experienceLevelService: ExperienceLevelService) {
+              private experienceLevelService: ExperienceLevelService,
+              private spinner:NgxSpinnerService) {
   }
   ExperienceLevelList = [];
   users$: any[] = [];
@@ -27,15 +29,18 @@ export class ListExperienceComponent implements OnInit, OnDestroy {
   };
   dtTrigger: Subject<any> = new Subject();
   ngOnInit() {
+    this.spinner.show();
     this.experienceLevelService.getallExperienceLevels()
         .pipe(first())
         .subscribe(
           data => {
+            this.spinner.hide();
             this.ExperienceLevelList =  data.data.experiences;
             this.users$ = data;
             this.dtTrigger.next();
           },
           error => {
+            this.spinner.hide();
             this.ExperienceLevelList = [];
           });
     this.dtOptions = {

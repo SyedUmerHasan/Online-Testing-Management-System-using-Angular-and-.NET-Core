@@ -3,6 +3,7 @@ import { QuestionsService } from 'src/app/Services/Questions/questions.service';
 import { Validators, FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-view-question',
@@ -22,9 +23,11 @@ export class ViewQuestionComponent implements OnInit {
 
 
   constructor(private formBuilder: FormBuilder,
-              private questionsService: QuestionsService) {}
+              private questionsService: QuestionsService,
+              private spinner : NgxSpinnerService) {}
 
   ngOnInit() {
+    this.spinner.show();
     this.AllQuestionForm = this.formBuilder.group({
       Description: ['', Validators.required],
       correctoption : new FormArray([]),
@@ -34,10 +37,12 @@ export class ViewQuestionComponent implements OnInit {
     .pipe(first())
     .subscribe(
       data => {
+        this.spinner.hide();
         this.viewQuestions = data.data.result;
         console.log("ViewQuestionComponent -> ngOnInit -> this.viewQuestions", this.viewQuestions)
       },
       error => {
+        this.spinner.hide();
       console.log("ViewQuestionComponent -> ngOnInit -> error", error)
       this.viewQuestions = [];
       });

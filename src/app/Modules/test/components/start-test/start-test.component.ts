@@ -30,6 +30,7 @@ export class StartTestComponent implements OnInit {
   candidateList = [];
 
   ngOnInit() {
+    this.spinner.show();
     this.startTestForm = this.formBuilder.group({
       CandidateId: ['', Validators.required],
       numberOfQuestion: ['', Validators.required],
@@ -40,9 +41,11 @@ export class StartTestComponent implements OnInit {
         .pipe(first())
         .subscribe(
           data => {
+            this.spinner.hide();
             this.candidateList =  data.data.candidates;
           },
           error => {
+            this.spinner.hide();
             this.candidateList = [];
           });
   }
@@ -80,6 +83,7 @@ export class StartTestComponent implements OnInit {
         .subscribe(
           data => {
             if (data.success && data.status === 200) {
+              this.spinner.hide();
               this.showSuccessStatus =  true;
               this.showSuccessMessage = 'Candidate Test has been added successfully';
               this.showErrorStatus =  false;
@@ -105,6 +109,7 @@ export class StartTestComponent implements OnInit {
               this.authenticationService.currentUserSubject.next(data.data);
               window.location.reload();
             } else {
+              this.spinner.hide();
               this.showSuccessStatus  = false;
               this.showErrorStatus  = true;
               this.showErrorMessage = 'Candidate Test has not been added, can be seen in browser console';
@@ -112,6 +117,7 @@ export class StartTestComponent implements OnInit {
             }
           },
           error => {
+            this.spinner.hide();
               this.showSuccessStatus  = false;
               this.showErrorStatus  = true;
               this.showErrorMessage = 'Questions has not been added, can be seen in browser console';

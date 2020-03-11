@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiUrl: 'http://arpatech.test:7500/',
+  apiUrl: 'http://localhost:7500/',
 };

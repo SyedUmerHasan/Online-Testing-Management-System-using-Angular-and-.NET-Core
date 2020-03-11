@@ -20,7 +20,7 @@ export class ListUserComponent implements OnInit {
               private authenticationService: AuthenticationService) { }
   userList = [];
   role = ""
- 
+
   users$: any[] = [];
 
   dtOptions: DataTables.Settings = {
@@ -28,8 +28,7 @@ export class ListUserComponent implements OnInit {
   dtTrigger: Subject<any> = new Subject();
 
   ngOnInit() {
-    if (this.authenticationService.currentUserRole == 'admin' || 
-        this.authenticationService.currentUserRole == 'SuperAdmin'){
+    if (this.authenticationService.currentUserRole == 'admin' || this.authenticationService.currentUserRole == 'SuperAdmin'){
     this.userService.getallUser()
         .pipe(first())
         .subscribe(

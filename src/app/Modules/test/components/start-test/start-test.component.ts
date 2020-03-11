@@ -91,6 +91,9 @@ export class StartTestComponent implements OnInit {
               if (decodedToken.role === 'SuperAdmin') {
                   localStorage.setItem('role', 'SuperAdmin');
                   this.authenticationService.isAdminSubject.next('SuperAdmin');
+                } else if (decodedToken.role === 'admin') {
+                  localStorage.setItem('role', 'admin');
+                  this.authenticationService.isAdminSubject.next('admin');
                 } else if (decodedToken.role === 'candidate') {
                   localStorage.setItem('role', 'candidate');
                   localStorage.setItem('allow', 'true');

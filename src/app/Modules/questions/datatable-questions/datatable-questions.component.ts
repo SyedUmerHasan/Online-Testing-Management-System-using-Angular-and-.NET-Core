@@ -19,6 +19,12 @@ export class DatatableQuestionsComponent implements OnInit {
   userEmail = [];
   expList = [];
   role = '';
+
+  showSuccessStatus =  null;
+  showErrorStatus = null;
+  showSuccessMessage =  null;
+  showErrorMessage = null;
+
   constructor(private questionsService: QuestionsService,
               private experienceLevelService: ExperienceLevelService,
               private categoryService: CategoryService,
@@ -115,4 +121,32 @@ export class DatatableQuestionsComponent implements OnInit {
       }
 
     }
+
+
+
+  delete(questionId) {
+    this.questionsService.deleteQuestion(questionId)
+        .pipe(first())
+        .subscribe(
+          data => {
+            if (data.data.question === true) {
+              console.log('Data Deleted');
+              this.showSuccessStatus =  true;
+              this.showSuccessMessage = 'Questions has been deleted successfully';
+              this.showErrorStatus =  false;
+
+              this.QuestionsList = this.QuestionsList.filter((value) => {
+                return value.questionId !== questionId;
+              });
+            } else {
+              this.showSuccessStatus  = false;
+              this.showErrorStatus  = true;
+              this.showErrorMessage = 'Questions has not been deleted, can be seen in browser console';
+              console.log('Error in creating Question');
+            }
+          },
+          error => {
+            console.log(error);
+          });
+  }
 }

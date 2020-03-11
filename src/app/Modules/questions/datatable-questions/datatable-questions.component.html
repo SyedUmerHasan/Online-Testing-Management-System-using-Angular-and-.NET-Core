@@ -5,25 +5,25 @@
             <div class="card-body">
                 <div class="row" style="margin-top: 16px;margin-bottom: 16px;">
                     <div class="col-md-6">
-                        <h5 class="card-title">Category List</h5>
+                        <h5 class="card-title">Questions List</h5>
                     </div>
                     <div class="col-md-6">
                         <div class="d-flex justify-content-end">
-                            <button type="button" [routerLink]="['/admin/category/create']" class="btn btn-success btn-lg btn">Create</button>
+                            <button type="button" [routerLink]="['/admin/questions/create']" class="btn btn-success btn-lg btn">Create</button>
                         </div>
                     </div>
                 </div>
-                <!-- <div *ngIf="showSuccessStatus && showSuccessStatus == true">
-                  <div class="alert alert-danger" role="alert">
-                      <strong>{{showSuccessMessage}}</strong>
-                  </div>
-              </div>
+                <div *ngIf="showSuccessStatus && showSuccessStatus == true">
+                    <div class="alert alert-danger" role="alert">
+                        <strong>{{showSuccessMessage}}</strong>
+                    </div>
+                </div>
 
-              <div *ngIf="showErrorStatus && showErrorStatus == true">
-                  <div class="alert alert-warning" role="alert">
-                      <strong>{{showErrorMessage}}</strong>
-                  </div>
-              </div> -->
+                <div *ngIf="showErrorStatus && showErrorStatus == true">
+                    <div class="alert alert-warning" role="alert">
+                        <strong>{{showErrorMessage}}</strong>
+                    </div>
+                </div>
                 <p-table #dt [columns]="cols" [value]="QuestionsList" [paginator]="true" [rows]="10">
                     <ng-template pTemplate="caption">
                         <div style="text-align: right">
@@ -42,9 +42,13 @@
                         <tr>
                             <th *ngFor="let col of columns" [ngSwitch]="col.field">
                                 <input *ngSwitchCase="'question'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
-                                <p-dropdown *ngSwitchCase="'category'" [options]="mycatList" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value, col.field, 'equals')"></p-dropdown>
+                                <div *ngIf="role=='admin'">
+                                    <p-dropdown *ngSwitchCase="'category'" [options]="mycatList" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value, col.field, 'equals')"></p-dropdown>
+                                </div>
                                 <p-dropdown *ngSwitchCase="'experienceLevel'" [options]="expList" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value, col.field, 'equals')"></p-dropdown>
-                                <p-dropdown *ngSwitchCase="'createdName'" [options]="userEmail" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value, col.field, 'equals')"></p-dropdown>
+                                <div *ngIf="role=='admin'">
+                                    <p-dropdown *ngSwitchCase="'createdName'" [options]="userEmail" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value, col.field, 'equals')"></p-dropdown>
+                                </div>
 
                             </th>
                         </tr>

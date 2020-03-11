@@ -28,15 +28,13 @@ export class DatatableQuestionsComponent implements OnInit {
     first = 0;
     colors = [];
     ngOnInit() {
-      this.cols = [
-        { field: 'question', header: 'Question Description' },
-        { field: 'category', header: 'Question category' },
-        { field: 'experienceLevel', header: 'Experience Level' },
-        { field: 'createdName', header: 'Created By' },
-        // createdName
-      ];
       if (this.authenticationService.currentUserRole === 'contributor') {
-      this.questionsService.getallQuestionsUsingContributor()
+        this.cols = [
+          { field: 'question', header: 'Question Description' },
+          { field: 'experienceLevel', header: 'Experience Level' },
+        ];
+
+        this.questionsService.getallQuestionsUsingContributor()
           .pipe(first())
           .subscribe(
             data => {
@@ -46,8 +44,16 @@ export class DatatableQuestionsComponent implements OnInit {
             error => {
               this.QuestionsList = [];
             });
-      this.role = 'contributor';
+        this.role = 'contributor';
       } else {
+
+        this.cols = [
+          { field: 'question', header: 'Question Description' },
+          { field: 'category', header: 'Question category' },
+          { field: 'experienceLevel', header: 'Experience Level' },
+          { field: 'createdName', header: 'Created By' },
+        ];
+
         this.role = 'admin';
         this.questionsService.getallQuestions()
         .pipe(first())
@@ -65,7 +71,7 @@ export class DatatableQuestionsComponent implements OnInit {
           .subscribe(
             data => {
               this.experienceLevelList =  data.data.experiences;
-              this.expList.push({ label: "All Experience", value: null });
+              this.expList.push({ label: 'All Experience', value: null });
 
               console.log('DatatableQuestionsComponent -> ngOnInit -> this.experienceLevelList', this.experienceLevelList);
               this.experienceLevelList.map(x => {
@@ -81,7 +87,7 @@ export class DatatableQuestionsComponent implements OnInit {
               data => {
                 // tslint:disable-next-line: no-string-literal
                 this.categoryList =  data.data['categories'];
-                this.mycatList.push({ label: "All categories", value: null });
+                this.mycatList.push({ label: 'All categories', value: null });
                 this.categoryList.map(x => {
                   this.mycatList.push({ label: x.name, value: x.name });
                 });
@@ -96,7 +102,7 @@ export class DatatableQuestionsComponent implements OnInit {
           data => {
             // tslint:disable-next-line: no-string-literal
             const templist =  data.data['email'];
-            this.userEmail.push({ label: "All Email", value: null });
+            this.userEmail.push({ label: 'All Email', value: null });
             templist.map(x => {
               this.userEmail.push({ label: x, value: x });
             });

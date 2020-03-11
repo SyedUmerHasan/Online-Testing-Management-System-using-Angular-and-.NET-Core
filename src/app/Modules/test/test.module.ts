@@ -1,3 +1,8 @@
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { TableModule } from 'primeng/table';
+import { DialogModule } from 'primeng/dialog';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { DropdownModule } from 'primeng/dropdown';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { DataTablesModule } from 'angular-datatables';
 import { UserService } from './../../Services/Users/user.service';
@@ -17,6 +22,7 @@ import { ListTestComponent } from './components/list-test/list-test.component';
 import { ThankyouPageComponent } from './components/thankyou-page/thankyou-page.component';
 import { ViewTestComponent } from './components/view-test/view-test.component';
 import { ViewQuestionComponent } from './components/view-question/view-question.component';
+import { DatatableResultsComponent } from './components/datatable-results/datatable-results.component';
 
 
 
@@ -28,7 +34,8 @@ import { ViewQuestionComponent } from './components/view-question/view-question.
     ListTestComponent,
     ThankyouPageComponent,
     ViewTestComponent,
-    ViewQuestionComponent
+    ViewQuestionComponent,
+    DatatableResultsComponent
   ],
   imports: [
     RouterModule.forRoot(TestModuleRoutes),
@@ -37,7 +44,11 @@ import { ViewQuestionComponent } from './components/view-question/view-question.
     FormsModule,
     CommonModule,
     DataTablesModule,
-    NgxSpinnerModule
+    CKEditorModule,
+    TableModule,
+    DialogModule,
+    MultiSelectModule,
+    DropdownModule
   ],
   exports : [
     RouterModule,

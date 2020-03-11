@@ -20,7 +20,7 @@ export class StartTestComponent implements OnInit {
   submitted = false;
   helper = new JwtHelperService();
   formError = false;
-  showTime = true;
+  showTime = false;
 
 
   constructor(private formBuilder: FormBuilder,
@@ -91,6 +91,9 @@ export class StartTestComponent implements OnInit {
               if (decodedToken.role === 'SuperAdmin') {
                   localStorage.setItem('role', 'SuperAdmin');
                   this.authenticationService.isAdminSubject.next('SuperAdmin');
+                } else if (decodedToken.role === 'admin') {
+                  localStorage.setItem('role', 'admin');
+                  this.authenticationService.isAdminSubject.next('admin');
                 } else if (decodedToken.role === 'candidate') {
                   localStorage.setItem('role', 'candidate');
                   localStorage.setItem('allow', 'true');
@@ -125,8 +128,12 @@ export class StartTestComponent implements OnInit {
   }
 
   onChange(event) {
-    // console.log(event);
-    this.showTime = event;
+    if(event == true || event == "true" ){
+      this.showTime = true;
+    } else {
+      this.showTime = false;
+    }
+    console.log("StartTestComponent -> onChange -> event", event)
   }
   getShowTime() {
     return this.showTime;

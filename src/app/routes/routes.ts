@@ -1,3 +1,4 @@
+import { DatatableResultsComponent } from './../Modules/test/components/datatable-results/datatable-results.component';
 import { DatatableQuestionsComponent } from './../Modules/questions/datatable-questions/datatable-questions.component';
 import { DatatableCategoryComponent } from './../Modules/category/components/datatable-category/datatable-category.component';
 import { ViewQuestionComponent } from './../Modules/test/components/view-question/view-question.component';
@@ -90,7 +91,7 @@ const UserModuleRoutes: Routes = [
   },
   {
     path : 'admin/listresults',
-    component : ListTestComponent,
+    component : DatatableResultsComponent,
     canActivate : [AdminGuard]
   },
   {
@@ -105,7 +106,7 @@ const UserModuleRoutes: Routes = [
   },
   {
     path : 'verifier',
-    component : ListTestComponent,
+    component : DatatableResultsComponent,
     canActivate : [VerifierGuard]
   },
   {
@@ -233,7 +234,7 @@ const QuestionsModuleRoutes: Routes = [
   },
   {
     path : 'contributor/list',
-    component : ListQuestionsComponent,
+    component : DatatableQuestionsComponent,
     canActivate : [ContributorGuard]
   },
   {

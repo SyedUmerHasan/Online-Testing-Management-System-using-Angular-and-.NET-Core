@@ -27,8 +27,8 @@ import { ResetPasswordComponent } from './component/reset-password/reset-passwor
   imports: [
     RouterModule.forRoot(RegistrationModuleRoutes),
     BrowserModule,
-    ReactiveFormsModule,
     FormsModule,
+    ReactiveFormsModule,
     CommonModule,
     NgxSpinnerModule
   ],

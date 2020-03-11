@@ -11,7 +11,8 @@
                         </div>
                         <div class="col-md-6">
                             <div class="float-right">
-                                <button class="btn btn-primary" [routerLink]="['/admin/viewquestions/',10]" routerLinkActive="router-link-active" type="button">View Questions</button>
+                                <button class="btn btn-primary" [routerLink]="['/admin/viewquestions/',10]" *ngIf="role == 'admin'" routerLinkActive="router-link-active" type="button">View Questions</button>
+                                <button class="btn btn-primary" [routerLink]="['/verifier/viewquestions/',10]" *ngIf="role == 'verifier'" routerLinkActive="router-link-active" type="button">View Questions</button>
                             </div>
                         </div>
 

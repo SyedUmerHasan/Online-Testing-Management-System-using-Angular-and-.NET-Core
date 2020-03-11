@@ -31,7 +31,7 @@ export class ResetPasswordComponent implements OnInit {
     // redirect to home if already logged in
     if (this.authenticationService.currentUserValue) {
       // Go to admin Routes
-      if (this.authenticationService.currentUserRole === 'SuperAdmin') {
+      if (this.authenticationService.currentUserRole === 'SuperAdmin' || this.authenticationService.currentUserRole === 'admin') {
         this.router.navigate(['/admin']);
       } else if (this.authenticationService.currentUserRole === 'candidate') {
         // Go to User Routes
@@ -42,26 +42,23 @@ export class ResetPasswordComponent implements OnInit {
     }
   }
 
-
-
-
   ngOnInit() {
     this.resetpasswordForm = this.formBuilder.group({
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
-    },{validator: this.passwordMatchValidator});
+    }, {validator: this.passwordMatchValidator});
     this.route.queryParams
     .subscribe(params => {
       if (params.email && params.token) {
         this.email = params.email;
         this.token = params.token;
       } else {
-        this.router.navigate(['forgotpassword']);
+        this.router.navigate(['login']);
       }
     });
 
     this.resetpasswordForm.valueChanges.subscribe(() => {
-      if(this.f.password.value == this.f.confirmPassword.value){
+      if (this.f.password.value === this.f.confirmPassword.value) {
         this.error = false;
       }
     });
@@ -70,28 +67,24 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   passwordMatchValidator(frm: FormGroup) {
-    return frm.controls['password'].value === frm.controls['confirmPassword'].value ? null : {'mismatch': true};
+    return frm.controls.password.value === frm.controls.confirmPassword.value ? null : {mismatch: true};
   }
 
   get f() { return this.resetpasswordForm.controls; }
 
-
   onSubmit() {
     this.spinner.show();
     this.submitted = true;
-    // console.log("this.submitted" + this.submitted)
-    // console.log("ResetPasswordComponent -> onSubmit -> this.f", this.f.password)
-    // console.log("ResetPasswordComponent -> onSubmit -> this.f", this.f.confirmPassword)
-    // stop here if form is invalid
 
+    // stop here if form is invalid
     if (this.resetpasswordForm.invalid) {
       // this.spinner.hide();
-      if(this.f.password.value != this.f.confirmPassword.value){
+      if (this.f.password.value !== this.f.confirmPassword.value) {
         this.error = true;
         return;
       }
 
-        return;
+      return;
     }
 
     // this.loading = true;

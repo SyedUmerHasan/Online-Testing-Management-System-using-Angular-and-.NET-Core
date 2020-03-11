@@ -18,8 +18,11 @@ export class AppComponent implements OnInit  {
     private router: Router,
     ) {
       if (this.authenticationService.currentUser != null) {
-        if (this.authenticationService.currentUserRole === 'SuperAdmin' || this.authenticationService.currentUserRole === 'admin' ) {
+        if (this.authenticationService.currentUserRole === 'SuperAdmin' ) {
           this.login = 'SuperAdmin';
+          // this.router.navigate(['/admin']);
+        } else if (this.authenticationService.currentUserRole === 'admin' ) {
+          this.login = 'admin';
           // this.router.navigate(['/admin']);
         } else if (this.authenticationService.currentUserRole === 'candidate') {
           this.login = 'candidate';

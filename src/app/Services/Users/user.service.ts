@@ -99,7 +99,22 @@ export class UserService {
           return user;
         }));
   }
+  
+  GetResetPasswordLink(email) {
+    // http://localhost:55377/user/getbyid?id=21
+    return this.http.post<any>(environment.apiUrl + `user/forgotpasswordadmin?email=${email}`, {})
+        .pipe(map(user => {
+            // login successful if there's a jwt token in the response
+          if (user.success && user.status === 200) {
+              // store user details and jwt token in local storage to keep user logged in between page refreshes
+               console.log('i am the respoone ' , user);
+            }
+          return user;
+        }));
+  }
 
+
+  
 
 
 }

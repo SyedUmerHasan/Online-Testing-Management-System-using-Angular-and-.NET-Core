@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/Services/Users/user.service';
 import { Subject } from 'rxjs';
 import { first } from 'rxjs/operators';
+import { AuthenticationService } from 'src/app/Services/Authentication/authentication.service';
 
 @Component({
   selector: 'app-list-user',
@@ -15,9 +16,11 @@ export class ListUserComponent implements OnInit {
   showSuccessMessage =  null;
   showErrorMessage = null;
   submitted = false;
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService,
+              private authenticationService: AuthenticationService) { }
   userList = [];
-
+  role = ""
+ 
   users$: any[] = [];
 
   dtOptions: DataTables.Settings = {
@@ -25,6 +28,8 @@ export class ListUserComponent implements OnInit {
   dtTrigger: Subject<any> = new Subject();
 
   ngOnInit() {
+    if (this.authenticationService.currentUserRole == 'admin' || 
+        this.authenticationService.currentUserRole == 'SuperAdmin'){
     this.userService.getallUser()
         .pipe(first())
         .subscribe(
@@ -32,6 +37,7 @@ export class ListUserComponent implements OnInit {
             this.userList =  data.data['users'];
             this.users$ = data;
             this.dtTrigger.next();
+            this.role = this.authenticationService.currentUserRole;
           },
           error => {
             this.userList = [];
@@ -41,33 +47,26 @@ export class ListUserComponent implements OnInit {
             pageLength: 10,
             processing: true
           };
+        }
   }
+  resetPassword(email){
+    this.userService.GetResetPasswordLink(email)
+        .pipe(first())
+        .subscribe(
+          data => {
+            console.log('I am Respose',data);
+            this.showSuccessStatus =  true;
+            this.showSuccessMessage = 'Link Send to Your Email Address';
+            this.showErrorStatus =  false;
+          },
+          error => {
+            this.showSuccessStatus  = false;
+              this.showErrorStatus  = true;
+              this.showErrorMessage = 'Error Occured';
+            this.userList = [];
+          });
 
-  // onDelete(CategoryId){
-  //   this.categoryService.deletecategory(CategoryId)
-  //       .pipe(first())
-  //       .subscribe(
-  //         data => {
-  //           if(data.data.category == true){
-  //             this.showSuccessStatus =  true;
-  //             this.showSuccessMessage = 'Category has been deleted successfully';
-  //             this.showErrorStatus =  false;
-
-  //             this.categoryList = this.categoryList.filter((value) => {
-  //               return value.categoryId !== CategoryId;
-  //             });
-
-  //           } else {
-  //             this.showSuccessStatus  = false;
-  //             this.showErrorStatus  = true;
-  //             this.showErrorMessage = 'Category has not been deleted, can be seen in browser console';
-  //             console.log('Error in Deleting Category');
-  //           }
-  //         },
-  //         error => {
-  //           console.log(error);
-  //         });
-  // }
+  }
 
 
 }

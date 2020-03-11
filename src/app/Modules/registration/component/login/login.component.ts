@@ -18,6 +18,8 @@ export class LoginComponent implements OnInit {
   submitted = false;
   returnUrl: string;
   loginerror = false;
+  usererror = false;
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -49,7 +51,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-        username: ['', Validators.required],
+        username: ['', [Validators.required,Validators.email]],
         password: ['', Validators.required]
     });
 
@@ -62,10 +64,11 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-
+    this.usererror = false;
+    this.loginerror = false;
     // stop here if form is invalid
     if (this.loginForm.invalid) {
-        this.loginerror = false;
+        console.log("LoginComponent -> onSubmit -> this.loginForm.invalid", this.loginForm.invalid)
         return;
     }
 
@@ -74,15 +77,26 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          window.location.reload();
+          if(data.status == 400 && data.success == false ){
+            console.log("LoginComponent -> onSubmit -> data", data)
+            this.loginerror = true;
+            this.loading = false;
+          } else
+          if(data.status == 502 && data.success == false ){
+            this.loginerror = true;
+            this.loading = false;
+          }
+          else {
+            window.location.reload();
+          }
         },
         error => {
             console.log('Not Successfully logged in', error);
-            this.loginerror = true;
+            this.usererror = true;
             this.loading = false;
         });
   }
-  geterror(){
+  geterror() {
     return this.loginerror;
   }
 }

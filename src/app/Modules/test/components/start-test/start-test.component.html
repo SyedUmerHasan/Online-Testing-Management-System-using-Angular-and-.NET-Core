@@ -39,8 +39,8 @@
                             <div class="position-relative form-group"><label for="exampleEmail11" class="">Test Type </label>
                                 <select class="mb-2 form-control" formControlName="testType" (change)="onChange($event.target.value)" [ngClass]="{ 'is-invalid': submitted && f.testType.errors }">
                                 <option value="">Select</option>
-                                <option value="true">Per Questions</option>
-                                <option value="false">Per Test</option>
+                                <option value="false">Per Questions</option>
+                                <option value="true">Per Test</option>
                                 </select>
                                 <div *ngIf="submitted && f.testType.errors" class="invalid-feedback">
                                     <div *ngIf="f.testType.errors.required">Number Of Question is required</div>
@@ -48,7 +48,7 @@
 
                             </div>
                         </div>
-                        <div class="col-md-6" *ngIf="getShowTime()">
+                        <div class="col-md-6" *ngIf="showTime">
                             <div class="position-relative form-group"><label for="exampleEmail11" class="">Total Test Time </label>
                                 <select class="mb-2 form-control" formControlName="testTime">
                                 <option value="0">Select</option>

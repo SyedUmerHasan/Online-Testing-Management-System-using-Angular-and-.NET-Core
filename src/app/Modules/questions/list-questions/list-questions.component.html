@@ -26,11 +26,11 @@
                     <div class="alert alert-warning" role="alert">
                         <strong>{{showErrorMessage}}</strong>
                     </div>
-                    
-                    <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">  
-                        <p style="color: white">Please Wait. </p>  
-                        </ngx-spinner>
-                   
+
+                    <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">
+                        <p style="color: white">Please Wait. </p>
+                    </ngx-spinner>
+
 
                 </div>
                 <table class="mb-0 table" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
@@ -50,7 +50,7 @@
                             <td>
                                 <button type="button" class="mb-2 mr-2 btn btn-success" *ngIf="role == 'admin'" [routerLink]="['/admin/questions/edit',hero.questionId]">Edit</button>
                                 <button type="button" class="mb-2 mr-2 btn btn-success" *ngIf="role == 'contributor'" [routerLink]="['/contributor/edit',hero.questionId]">Edit</button>
-                                <button class="mb-2 mr-2 btn btn-danger" (click)="delete(hero.questionId)">Delete</button>
+                                <!-- <button class="mb-2 mr-2 btn btn-danger" (click)="delete(hero.questionId)">Delete</button> -->
                             </td>
                         </tr>
                     </tbody>

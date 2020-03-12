@@ -17,8 +17,8 @@
                     </div>
                 </div>
 
-                <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">  
-                    <p style="color: white">Please Wait. </p>  
+                <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">
+                    <p style="color: white">Please Wait. </p>
                 </ngx-spinner>
 
 
@@ -65,16 +65,13 @@
                         <div class="col-md-12 ">
                             <div class="position-relative form-group "><label>Time in Minutes Per Question</label>
                                 <select class="mb-2 form-control" formControlName="Time">
-                            <option value="0">Select</option>
-                            <option value="1">1 Minute</option>
-                            <option value="2">2 Minute</option>
-                            <option value="3">3 Minute</option>
-                            <option value="4">4 Minute</option>
-                            <option value="5">5 Minute</option>
-                            <option value="6">6 Minute</option>
-                            <option value="7">7 Minute</option>
-                            <option value="8">8 Minute</option>
-                        </select>
+                                  <option value="0">Select</option>
+                                  <option value="2">2 Minute</option>
+                                  <option value="4">4 Minute</option>
+                                  <option value="6">6 Minute</option>
+                                  <option value="8">8 Minute</option>
+                                  <option value="10">10 Minute</option>
+                                </select>
 
                                 <div *ngIf="submitted && f.ExperienceLevelId.errors" class="invalid-feedback">
                                     <div *ngIf="f.ExperienceLevelId.errors.required">Experience Level is required</div>
@@ -108,7 +105,7 @@
                     <button class="mt-2 btn btn-primary ">Submit</button>
                     <span style="padding: 2px;"></span>
                     <button class="mt-2 btn btn-danger" value="cancel" routerLink="../../">Cancel</button>
-                   
+
                 </form>
             </div>
         </div>

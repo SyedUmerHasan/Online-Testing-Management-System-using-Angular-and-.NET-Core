@@ -52,7 +52,7 @@
                             <td>{{car.candidateName}}</td>
                             <td *ngIf="role == 'admin'">{{car.category}}</td>
                             <td>{{car.experienceLevel}}</td>
-                            <td>{{car.candidateId}}</td>
+                            <td>{{car.testStatus}}</td>
                             <td>
                                 <div class="btn-toolbar">
                                     <button class="mb-2 mr-2 btn btn-primary" *ngIf="role == 'admin'" [routerLink]="[ '/admin/viewresults', car.candidateId ]">View</button>

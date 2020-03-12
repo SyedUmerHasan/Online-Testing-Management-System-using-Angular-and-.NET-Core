@@ -43,6 +43,7 @@ export class StartTestComponent implements OnInit {
           data => {
             this.spinner.hide();
             this.candidateList =  data.data.candidates;
+            console.log("StartTestComponent -> ngOnInit -> candidateList", this.candidateList)
           },
           error => {
             this.spinner.hide();

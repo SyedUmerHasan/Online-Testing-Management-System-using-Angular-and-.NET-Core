@@ -68,6 +68,7 @@ export class DatatableResultsComponent implements OnInit {
               { field: 'candidateName', header: 'Candidate Name' },
               { field: 'experienceLevel', header: 'Experience Level' },
               { field: 'testStatus', header: 'Test Status' },
+              { field: 'testDate', header: 'Test Date' }
             ];
 
 
@@ -89,6 +90,7 @@ export class DatatableResultsComponent implements OnInit {
               { field: 'category', header: 'Category' },
               { field: 'experienceLevel', header: 'Experience Level' },
               { field: 'testStatus', header: 'Test Status' },
+              { field: 'testDate', header: 'Test Date' }
             ];
 
 
@@ -96,6 +98,7 @@ export class DatatableResultsComponent implements OnInit {
             .pipe(first())
             .subscribe(
             data => {
+
               this.resultList =  data.data.result;
               console.log('DatatableResultsComponent -> ngOnInit -> this.resultList', this.resultList);
             },

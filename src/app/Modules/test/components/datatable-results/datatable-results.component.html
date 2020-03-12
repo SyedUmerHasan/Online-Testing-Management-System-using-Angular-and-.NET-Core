@@ -1,6 +1,6 @@
 <div class="app-main__inner" style="height: 100% !important;">
 
-    <div class="row" style="width: 100% !important;">
+    <div class="row" style="width: 120% !important;">
         <div class="main-card mb-3 card" style="width: 100% !important; min-height: 100% !important;">
             <div class="card-body">
                 <div class="row" style="margin-top: 16px;margin-bottom: 16px;">
@@ -36,18 +36,6 @@
                             </th>
                         </tr>
                     </ng-template>
-                    <!-- <ng-template pTemplate="body" let-rowData let-columns="columns">
-                      <tr>
-                          <td *ngFor="let col of columns" [innerHTML]="rowData[col.field]| slice:0:100">
-                          </td>
-                          <td>
-                              <div class="btn-toolbar">
-                                  <button class="mb-2 mr-2 btn btn-success">Edit</button>
-                                  <button class="mb-2 mr-2 btn btn-danger">Delete</button>
-                              </div>
-                          </td>
-                      </tr>
-                  </ng-template> -->
                     <ng-template pTemplate="body" let-car>
                         <tr>
                             <td>{{car.candidateName}}</td>
@@ -64,8 +52,7 @@
                         </tr>
                     </ng-template>
                 </p-table>
-                <!-- const birthday = new Date('2020-03-10T00:00:00');
-                const date2 = birthday.toLocaleString() -->
+
             </div>
         </div>
     </div>

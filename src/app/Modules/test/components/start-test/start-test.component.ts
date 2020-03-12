@@ -37,12 +37,12 @@ export class StartTestComponent implements OnInit {
       testTime: [0],
       testType: ['', Validators.required],
     });
-    this.candidateService.getallCandidate()
+    this.candidateService.getallCandidateWithcategory()
         .pipe(first())
         .subscribe(
           data => {
             this.spinner.hide();
-            this.candidateList =  data.data.candidates;
+            this.candidateList =  data.data.name;
             console.log("StartTestComponent -> ngOnInit -> candidateList", this.candidateList)
           },
           error => {
@@ -69,7 +69,7 @@ export class StartTestComponent implements OnInit {
       return;
     }
     let tempTestNumber = 0;
-    if (this.startTestForm.value.testType == true || this.startTestForm.value.testType == 'true') {
+    if (this.startTestForm.value.testType == false || this.startTestForm.value.testType == 'false') {
       tempTestNumber = 0;
     } else {
       tempTestNumber = this.startTestForm.value.testTime;

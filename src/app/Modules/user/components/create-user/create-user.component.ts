@@ -1,11 +1,7 @@
 import { UserService } from './../../../../Services/Users/user.service';
-import { ExperienceLevelService } from './../../../../Services/ExperienceLevel/experience-level.service';
-import { CategoryService } from './../../../../Services/Category/category.service';
-import { QuestionsService } from './../../../../Services/Questions/questions.service';
 import { Component, OnInit } from '@angular/core';
-import { FormArray, Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { first } from 'rxjs/operators';
-import { UsernameValidator } from 'src/app/_validators/UserName.validator';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
@@ -24,18 +20,19 @@ export class CreateUserComponent implements OnInit {
   categoryList = [];
   roleList = [];
   formError = false;
+  showCategory = false;
 
   constructor(private formBuilder: FormBuilder,
               private userService: UserService,
-              private spinner :NgxSpinnerService) {}
+              private spinner: NgxSpinnerService) {}
 
   ngOnInit() {
     this.spinner.show();
     this.userForm = this.formBuilder.group({
       userName: ['', Validators.required],
-      email: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      categoryId: ['', Validators.required],
+      categoryId: [''],
       roleId: ['', Validators.required],
     });
 
@@ -65,18 +62,25 @@ export class CreateUserComponent implements OnInit {
   // convenience getter for easy access to form fields
   get f() { return this.userForm.controls; }
 
+  onChange(event) {
+    if(event == "3351c29f-5c30-4d70-b02e-58bb1b8e1a5c" ){
+      this.showCategory = true;
+    } else {
+      this.showCategory = false;
+    }
+  }
   onSubmit() {
         this.spinner.show();
-    console.log("CreateUserComponent -> ngOnInit -> f.password.errors", this.f.password.errors)
+        console.log('CreateUserComponent -> ngOnInit -> f.password.errors', this.f.password.errors);
 
-    this.submitted = true;
+        this.submitted = true;
     // stop here if form is invalid
-    if (this.userForm.invalid) {
+        if (this.userForm.invalid) {
       this.spinner.hide();
       this.formError = true;
       return;
     }
-    this.userService.createRole(this.userForm.value.userName,
+        this.userService.createRole(this.userForm.value.userName,
                                 this.userForm.value.email,
                                 this.userForm.value.password,
                                 this.userForm.value.categoryId,
@@ -101,10 +105,10 @@ export class CreateUserComponent implements OnInit {
           },
           error => {
             this.spinner.hide();
-              this.showSuccessStatus  = false;
-              this.showErrorStatus  = true;
-              this.showErrorMessage = 'Email Already Taken';
-              console.log('Error in creating : ', error);
+            this.showSuccessStatus  = false;
+            this.showErrorStatus  = true;
+            this.showErrorMessage = 'Email Already Taken';
+            console.log('Error in creating : ', error);
           });
   }
   getshowSuccessStatus() {

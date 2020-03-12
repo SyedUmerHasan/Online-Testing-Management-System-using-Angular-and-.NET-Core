@@ -65,10 +65,10 @@ export class DatatableResultsComponent implements OnInit {
           if (this.authenticationService.currentUserRole === 'verifier') {
             this.role = 'verifier';
             this.cols = [
-              { field: 'candidateName', header: 'Candidate Name' },
-              { field: 'experienceLevel', header: 'Experience Level' },
-              { field: 'testStatus', header: 'Test Status' },
-              { field: 'testDate', header: 'Test Date' }
+              { field: 'candidateName', header: 'Candidate Name', width: '25%'},
+              { field: 'experienceLevel', header: 'Experience Level' , width: '25%'},
+              { field: 'testStatus', header: 'Test Status' , width: '25%'},
+              { field: 'testDate', header: 'Test Date' , width: '25%'}
             ];
 
 
@@ -86,11 +86,11 @@ export class DatatableResultsComponent implements OnInit {
           } else {
             this.role = 'admin';
             this.cols = [
-              { field: 'candidateName', header: 'Candidate Name' },
-              { field: 'category', header: 'Category' },
-              { field: 'experienceLevel', header: 'Experience Level' },
-              { field: 'testStatus', header: 'Test Status' },
-              { field: 'testDate', header: 'Test Date' }
+              { field: 'candidateName', header: 'Candidate Name' , width: '30%'},
+              { field: 'category', header: 'Category' , width: '35%'},
+              { field: 'experienceLevel', header: 'Experience Level' , width: '25%'},
+              { field: 'testStatus', header: 'Test Status' , width: '25%'},
+              { field: 'testDate', header: 'Test Date' , width: '25%'},
             ];
 
 

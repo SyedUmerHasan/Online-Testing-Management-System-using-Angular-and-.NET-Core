@@ -1,14 +1,14 @@
-<div class="app-main__inner" style="height: 100% !important;">
+<div class="app-main__inner" style="height: 100% !important; ">
 
-    <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">  
-        <p style="color: white">Please Wait. </p>  
+    <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">
+        <p style="color: white">Please Wait. </p>
     </ngx-spinner>
 
 
     <div class="row" style="width: 100% !important;">
         <div class="main-card mb-3 card" style="width: 100% !important;">
             <div class="card-body">
-                <h5 class="card-title">Create Test</h5>
+                <h5 class="card-title">Assign Test</h5>
 
                 <form class="" [formGroup]="startTestForm" (ngSubmit)="onSubmit()">
 
@@ -18,9 +18,8 @@
                                 <label for="exampleEmail11" class="">Candidate Name</label>
                                 <select class="mb-2 form-control" formControlName="CandidateId" [ngClass]="{ 'is-invalid': submitted && f.CandidateId.errors }">
                                   <option value=""> Select</option>
-                                  <option *ngFor="let hero of candidateList; let i = index" value={{hero.candidateId}}>
-                                    {{ hero.firstName | titlecase  }}
-                                    {{ hero.lastName | titlecase }}
+                                  <option *ngFor="let hero of candidateList; let i = index" value={{hero.id}}>
+                                    {{ hero.nameFormat | titlecase  }}
                                   </option>
                                   <div *ngIf="submitted && f.CandidateId.errors" class="invalid-feedback">
                                     <div *ngIf="f.CandidateId.errors.required">Candidate Name is required</div>
@@ -74,7 +73,7 @@
                     <button class="mt-2 btn btn-primary ">Submit</button>
                     <span style="padding: 2px;"></span>
                     <button class="mt-2 btn btn-danger " routerLink="../">Cancel</button>
-                    
+
 
                 </form>
             </div>

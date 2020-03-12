@@ -21,7 +21,8 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label for="">Question Description</label>
-                                    <textarea class="form-control" rows="3" disabled>{{eachQuetion.description}}</textarea>
+                                    <!-- eachQuetion.description -->
+                                    <textarea class="form-control" rows="3" disabled [innerHTML]="eachQuetion.description"></textarea>
                                 </div>
                             </div>
 

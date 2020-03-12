@@ -5,7 +5,7 @@
             <div class="card-body">
                 <div class="row" style="margin-top: 16px;margin-bottom: 16px;">
                     <div class="col-md-6">
-                        <h5 class="card-title">Candidate List</h5>
+                        <h5 class="card-title">Candidate</h5>
                     </div>
                     <div class="col-md-6">
                         <div class="d-flex justify-content-end">
@@ -46,9 +46,9 @@
                     <tbody>
                         <tr *ngFor="let hero of candidateList; let i = index">
                             <!-- <th scope="row">{{i + 1}}</th> -->
-                            <td>{{hero.firstName}} {{hero.lastName}}</td>
-                            <td>{{hero.email}}</td>
-                            <td>{{hero.currentCompany}}</td>
+                            <td>{{hero.firstName | titlecase}} {{hero.lastName | titlecase}}</td>
+                            <td>{{hero.email | lowercase}}</td>
+                            <td>{{hero.currentCompany | titlecase}}</td>
                             <td>
                                 <button class="mb-2 mr-2 btn btn-success" [routerLink]="['/admin/candidate/edit',hero.candidateId ]" routerLinkActive="router-link-active" style="color: white !important;">Edit</button>
                                 <!-- <button class="mb-2 mr-2 btn btn-danger" (click)="onDelete(hero.candidateId)">Delete</button> -->

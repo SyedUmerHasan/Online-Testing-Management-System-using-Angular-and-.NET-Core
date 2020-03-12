@@ -32,6 +32,7 @@
                                 </div>
                                 <p-dropdown *ngSwitchCase="'experienceLevel'" [options]="expList" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value, col.field, 'equals')"></p-dropdown>
                                 <input *ngSwitchCase="'testStatus'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
+                                <input *ngSwitchCase="'testDate'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
                             </th>
                         </tr>
                     </ng-template>
@@ -53,6 +54,7 @@
                             <td *ngIf="role == 'admin'">{{car.category}}</td>
                             <td>{{car.experienceLevel}}</td>
                             <td>{{car.testStatus}}</td>
+                            <td>{{car.testDate }}</td>
                             <td>
                                 <div class="btn-toolbar">
                                     <button class="mb-2 mr-2 btn btn-primary" *ngIf="role == 'admin'" [routerLink]="[ '/admin/viewresults', car.candidateId ]">View</button>
@@ -62,7 +64,8 @@
                         </tr>
                     </ng-template>
                 </p-table>
-
+                <!-- const birthday = new Date('2020-03-10T00:00:00');
+                const date2 = birthday.toLocaleString() -->
             </div>
         </div>
     </div>

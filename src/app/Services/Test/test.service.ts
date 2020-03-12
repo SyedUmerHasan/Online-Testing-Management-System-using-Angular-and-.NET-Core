@@ -15,8 +15,15 @@ export class TestService {
         .pipe(map(user => {
             // login successful if there's a jwt token in the response
           if (user.success && user.status === 200) {
-              // store user details and jwt token in local storage to keep user logged in between page refreshes
-              // console.log('i am the respoone ' , user);
+              
+               user.data.result.filter((item) => {
+               
+                const event = new Date(item.testDate); 
+                const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                item["testDate"] = event.toLocaleDateString(undefined, options)
+               
+                 return item
+                })
             }
           return user;
         }));
@@ -25,10 +32,16 @@ export class TestService {
     // http://localhost:55377/testresult/getall
     return this.http.get<any>(environment.apiUrl + `testresult/getall`, { })
         .pipe(map(user => {
-            // login successful if there's a jwt token in the response
+           
           if (user.success && user.status === 200) {
-              // store user details and jwt token in local storage to keep user logged in between page refreshes
-              // console.log('i am the respoone ' , user);
+            user.data.result.filter((item) => {
+            
+              const event = new Date(item.testDate); 
+              const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+              item["testDate"] = event.toLocaleDateString(undefined, options)
+              
+               return item
+              })
             }
           return user;
         }));
@@ -38,8 +51,10 @@ export class TestService {
         .pipe(map(user => {
             // login successful if there's a jwt token in the response
           if (user.success && user.status === 200) {
-              // store user details and jwt token in local storage to keep user logged in between page refreshes
-              // console.log('i am the respoone ' , user);
+              // const event = new Date(Date.UTC(2012, 11, 20, 3, 0, 0));
+              const event = new Date(user.data.result.testDate);
+              const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+              user.data.result["testDate"] = event.toLocaleDateString(undefined, options)
             }
           return user;
         }));
@@ -51,8 +66,9 @@ export class TestService {
         .pipe(map(user => {
             // login successful if there's a jwt token in the response
           if (user.success && user.status === 200) {
-              // store user details and jwt token in local storage to keep user logged in between page refreshes
-              // console.log('i am the respoone ' , user);
+            const event = new Date(user.data.result.testDate);
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            user.data.result["testDate"] = event.toLocaleDateString(undefined, options)
             }
           return user;
         }));

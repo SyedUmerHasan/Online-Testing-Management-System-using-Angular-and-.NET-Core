@@ -63,5 +63,7 @@ export class ViewQuestionComponent implements OnInit {
   get t() { return this.f.correctoption as FormArray; }
   get u() { return this.f.alloption as FormArray; }
 
-
+  cleanText(strInputCode){
+    return strInputCode.replace(/<\/?[^>]+(>|$)/g, "");
+  }
 }

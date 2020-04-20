@@ -1,4 +1,4 @@
-import { environment } from './../../environments/environment.dev';
+import { environments } from './../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
@@ -12,7 +12,7 @@ export class DashboardService {
   constructor(private http: HttpClient) { }
 
   getPassCandidatesCount() {
-    return this.http.get<any>(environment.apiUrl + `test/passcandidatecount`, {})
+    return this.http.get<any>(environments.apiUrl + `test/passcandidatecount`, {})
         .pipe(map(user => {
             // login successful if there's a jwt token in the response
           if (user.success && user.status === 200) {
@@ -24,7 +24,7 @@ export class DashboardService {
   }
 
   getFailCandidatesCount() {
-    return this.http.get<any>(environment.apiUrl + `test/failcandidatecount`, {})
+    return this.http.get<any>(environments.apiUrl + `test/failcandidatecount`, {})
         .pipe(map(user => {
             // login successful if there's a jwt token in the response
           if (user.success && user.status === 200) {
@@ -36,7 +36,7 @@ export class DashboardService {
   }
 
   getTestCount() {
-    return this.http.get<any>(environment.apiUrl + `test/testcount`, {})
+    return this.http.get<any>(environments.apiUrl + `test/testcount`, {})
         .pipe(map(user => {
             // login successful if there's a jwt token in the response
           if (user.success && user.status === 200) {
@@ -49,7 +49,7 @@ export class DashboardService {
 
 
   getUserCount() {
-    return this.http.get<any>(environment.apiUrl + `user/noofuser`, {})
+    return this.http.get<any>(environments.apiUrl + `user/noofuser`, {})
         .pipe(map(user => {
             // login successful if there's a jwt token in the response
           if (user.success && user.status === 200) {
@@ -61,7 +61,7 @@ export class DashboardService {
   }
 
   getQuestionCount() {
-    return this.http.get<any>(environment.apiUrl + `question/questioncount`, {})
+    return this.http.get<any>(environments.apiUrl + `question/questioncount`, {})
         .pipe(map(user => {
             // login successful if there's a jwt token in the response
           if (user.success && user.status === 200) {
@@ -73,7 +73,7 @@ export class DashboardService {
   }
   // http://localhost:55377/candidate/noofcandidate
   getCandidateCount() {
-    return this.http.get<any>(environment.apiUrl + `candidate/candidatecount`, {})
+    return this.http.get<any>(environments.apiUrl + `candidate/candidatecount`, {})
         .pipe(map(user => {
             // login successful if there's a jwt token in the response
           if (user.success && user.status === 200) {
@@ -85,7 +85,7 @@ export class DashboardService {
   }
   // http://localhost:55377/test/top10per
   getTopTenCandidates() {
-    return this.http.get<any>(environment.apiUrl + `test/top10per`, {})
+    return this.http.get<any>(environments.apiUrl + `test/top10per`, {})
         .pipe(map(user => {
             // login successful if there's a jwt token in the response
           if (user.success && user.status === 200) {

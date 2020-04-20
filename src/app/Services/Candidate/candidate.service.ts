@@ -1,6 +1,6 @@
+import { environments } from './../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from './../../environments/environment';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -11,7 +11,7 @@ export class CandidateService {
   constructor(private http: HttpClient) { }
 
   createCandidate(FirstName, LastName, email, CurrentCompany, CategoryId, ExperienceLevelId) {
-    return this.http.post<any>(environment.apiUrl + `candidate/create`,
+    return this.http.post<any>(environments.apiUrl + `candidate/create`,
       {FirstName,
         LastName,
         email,
@@ -28,7 +28,7 @@ export class CandidateService {
         }));
   }
   getallCandidate() {
-    return this.http.get<any>(environment.apiUrl + `candidate/getall`, {})
+    return this.http.get<any>(environments.apiUrl + `candidate/getall`, {})
         .pipe(map(user => {
             // login successful if there's a jwt token in the response
           if (user.success && user.status === 200) {
@@ -42,7 +42,7 @@ export class CandidateService {
 
   getallCandidateWithcategory() {
     // http://localhost:55377/candidate/getcandidatename
-    return this.http.get<any>(environment.apiUrl + `candidate/getcandidatename`, {})
+    return this.http.get<any>(environments.apiUrl + `candidate/getcandidatename`, {})
         .pipe(map(user => {
             // login successful if there's a jwt token in the response
           if (user.success && user.status === 200) {
@@ -54,7 +54,7 @@ export class CandidateService {
   }
 
   createtest(CandidateId, numberOfQuestion, time) {
-    return this.http.post<any>(environment.apiUrl +
+    return this.http.post<any>(environments.apiUrl +
        `candidate/generatetest?candidateId=${CandidateId}&numberOfQuestion=${numberOfQuestion}&time=${time}` , {})
         .pipe(map(user => {
             // login successful if there's a jwt token in the response
@@ -66,7 +66,7 @@ export class CandidateService {
         }));
   }
   deletecandidate(candidateId) {
-    return this.http.delete<any>(environment.apiUrl +
+    return this.http.delete<any>(environments.apiUrl +
       `candidate/delete?id=${candidateId}` , {})
        .pipe(map(user => {
            // login successful if there's a jwt token in the response
@@ -78,7 +78,7 @@ export class CandidateService {
   }
 
   updateCandidate(candidateId,FirstName, LastName, email, CurrentCompany, CategoryId, ExperienceLevelId) {
-    return this.http.put<any>(environment.apiUrl + `candidate/update?id=${candidateId}` ,
+    return this.http.put<any>(environments.apiUrl + `candidate/update?id=${candidateId}` ,
      {FirstName, LastName, email, CurrentCompany, CategoryId, ExperienceLevelId})
        .pipe(map(user => {
            // login successful if there's a jwt token in the response
@@ -92,7 +92,7 @@ export class CandidateService {
 
 
   getCandidateById(candidateId) {
-    return this.http.get<any>(environment.apiUrl + `candidate/getbyid?id=${candidateId}` , {})
+    return this.http.get<any>(environments.apiUrl + `candidate/getbyid?id=${candidateId}` , {})
        .pipe(map(user => {
            // login successful if there's a jwt token in the response
          if (user.success && user.status === 200) {

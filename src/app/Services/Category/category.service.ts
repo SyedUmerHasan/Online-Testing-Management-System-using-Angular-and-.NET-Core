@@ -1,6 +1,6 @@
+import { environments } from './../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from './../../environments/environment';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -11,7 +11,7 @@ export class CategoryService {
   constructor(private http: HttpClient) { }
 
   createCategory(Name) {
-    return this.http.post<any>(environment.apiUrl + `category/create`, { Name })
+    return this.http.post<any>(environments.apiUrl + `category/create`, { Name })
         .pipe(map(user => {
             // login successful if there's a jwt token in the response
           if (user.success && user.status === 200) {
@@ -22,7 +22,7 @@ export class CategoryService {
         }));
   }
   getallCategory() {
-    return this.http.get<any>(environment.apiUrl + `category/getall`, {})
+    return this.http.get<any>(environments.apiUrl + `category/getall`, {})
         .pipe(map(user => {
             // login successful if there's a jwt token in the response
           if (user.success && user.status === 200) {
@@ -34,7 +34,7 @@ export class CategoryService {
   }
 
   deletecategory(categoryId) {
-    return this.http.delete<any>(environment.apiUrl +
+    return this.http.delete<any>(environments.apiUrl +
       `category/delete?id=${categoryId}` , {})
        .pipe(map(user => {
            // login successful if there's a jwt token in the response
@@ -47,7 +47,7 @@ export class CategoryService {
   }
 
   updateCategory(candidateId, Name) {
-    return this.http.put<any>(environment.apiUrl + `category/update?id=${candidateId}` , {Name})
+    return this.http.put<any>(environments.apiUrl + `category/update?id=${candidateId}` , {Name})
        .pipe(map(user => {
            // login successful if there's a jwt token in the response
          if (user.success && user.status === 200) {
@@ -58,7 +58,7 @@ export class CategoryService {
   }
 
   getCategoryById(categoryId) {
-    return this.http.get<any>(environment.apiUrl + `category/getbyid?id=${categoryId}` , {})
+    return this.http.get<any>(environments.apiUrl + `category/getbyid?id=${categoryId}` , {})
        .pipe(map(user => {
            // login successful if there's a jwt token in the response
          if (user.success && user.status === 200) {

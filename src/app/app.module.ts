@@ -1,3 +1,5 @@
+import { TemplateModule } from './Template/template.module';
+import { IndexComponent } from './Modules/home/component/index/index.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { DashboardService } from './Services/Dashboard/dashboard.service';
 import { QuestionsService } from 'src/app/Services/Questions/questions.service';
@@ -7,14 +9,12 @@ import { AdminSidebarComponent } from './Modules/admin/component/admin-sidebar/a
 import { AdminNavbarComponent } from './Modules/admin/component/admin-navbar/admin-navbar.component';
 import { AdminFooterComponent } from './Modules/admin/component/admin-footer/admin-footer.component';
 import { AdminBodyComponent } from './Modules/admin/component/admin-body/admin-body.component';
-import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { AdminGuard } from './Guards/Admin.guard';
 import { AuthGuard } from './Guards/auth.guard';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatSliderModule } from '@angular/material/slider';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NzIconModule } from 'ng-zorro-antd/icon';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 
@@ -41,10 +41,7 @@ import { DataTablesModule } from 'angular-datatables';
     RegistrationTemplateComponent,
     AdminPanelTemplateComponent,
     // Adding Components
-    AdminBodyComponent,
-    AdminFooterComponent,
-    AdminNavbarComponent,
-    AdminSidebarComponent,
+    IndexComponent,
 
   ],
   imports: [
@@ -57,11 +54,9 @@ import { DataTablesModule } from 'angular-datatables';
     HttpClientModule,
     // Import Customized Modules here
     AppRoutingModule,
-    NzIconModule,
-    NgZorroAntdModule,
     ScrollingModule,
-    NgxSpinnerModule
-
+    NgxSpinnerModule,
+    TemplateModule
     // Store Modules
     // StoreModule.forRoot({
     //   message: simpleReducer,

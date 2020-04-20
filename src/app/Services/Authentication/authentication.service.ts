@@ -1,5 +1,5 @@
+import { environments } from './../../../environments/environment';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { environment } from './../../environments/environment';
 import { User } from './../../_model/User';
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject, Subject } from 'rxjs';
@@ -38,7 +38,7 @@ export class AuthenticationService {
   }
 
   login(username: string, password: string) {
-    return this.http.post<any>(environment.apiUrl + `user/login`, { username, password })
+    return this.http.post<any>(environments.apiUrl + `user/login`, { username, password })
         .pipe(map(user => {
             // login successful if there's a jwt token in the response
           if (user.success && user.status === 200) {
@@ -85,7 +85,7 @@ export class AuthenticationService {
 
   forgotpassword(email) {
     // http://localhost:55377/user/forgotpassword
-    return this.http.post<any>(environment.apiUrl + `user/forgotpassword`, { email})
+    return this.http.post<any>(environments.apiUrl + `user/forgotpassword`, { email})
     .pipe(map(user => {
         // login successful if there's a jwt token in the response
       if (user.success && user.status === 200) {
@@ -96,7 +96,7 @@ export class AuthenticationService {
 
   resetpassword(email, token, password, confirmPassword) {
     // http://localhost:55377/user/forgotpassword
-    return this.http.post<any>(environment.apiUrl + `resetpassword?email=${email}&token=${token}`, {password, confirmPassword} )
+    return this.http.post<any>(environments.apiUrl + `resetpassword?email=${email}&token=${token}`, {password, confirmPassword} )
     .pipe(map(user => {
         // login successful if there's a jwt token in the response
       if (user.success && user.status === 200) {

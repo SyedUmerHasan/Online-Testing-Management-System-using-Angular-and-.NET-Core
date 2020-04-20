@@ -1,7 +1,7 @@
+import { environments } from './../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { environment } from './../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,17 +11,17 @@ export class TestService {
   constructor(private http: HttpClient) { }
 
   getTestResult() {
-    return this.http.get<any>(environment.apiUrl + `test/getall`, { })
+    return this.http.get<any>(environments.apiUrl + `test/getall`, { })
         .pipe(map(user => {
             // login successful if there's a jwt token in the response
           if (user.success && user.status === 200) {
-              
+
                user.data.result.filter((item) => {
-               
-                const event = new Date(item.testDate); 
+
+                const event = new Date(item.testDate);
                 const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
                 item["testDate"] = event.toLocaleDateString(undefined, options)
-               
+
                  return item
                 })
             }
@@ -30,16 +30,16 @@ export class TestService {
   }
   getTestResultByRole() {
     // http://localhost:55377/testresult/getall
-    return this.http.get<any>(environment.apiUrl + `testresult/getall`, { })
+    return this.http.get<any>(environments.apiUrl + `testresult/getall`, { })
         .pipe(map(user => {
-           
+
           if (user.success && user.status === 200) {
             user.data.result.filter((item) => {
-            
-              const event = new Date(item.testDate); 
+
+              const event = new Date(item.testDate);
               const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
               item["testDate"] = event.toLocaleDateString(undefined, options)
-              
+
                return item
               })
             }
@@ -47,7 +47,7 @@ export class TestService {
         }));
   }
   viewTestResult(candidateId){
-    return this.http.get<any>(environment.apiUrl + `test/getbyId?candidateId=${candidateId}`, { })
+    return this.http.get<any>(environments.apiUrl + `test/getbyId?candidateId=${candidateId}`, { })
         .pipe(map(user => {
             // login successful if there's a jwt token in the response
           if (user.success && user.status === 200) {
@@ -62,7 +62,7 @@ export class TestService {
 
   viewTestResultByRole(candidateId) {
     // http://localhost:55377/testresult/getbyid?candidateId=64
-    return this.http.get<any>(environment.apiUrl + `testresult/getbyid?candidateId=${candidateId}`, { })
+    return this.http.get<any>(environments.apiUrl + `testresult/getbyid?candidateId=${candidateId}`, { })
         .pipe(map(user => {
             // login successful if there's a jwt token in the response
           if (user.success && user.status === 200) {
